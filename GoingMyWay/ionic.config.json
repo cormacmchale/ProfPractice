@@ -1,0 +1,7 @@
+{
+  "name": "GoingMyWay",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

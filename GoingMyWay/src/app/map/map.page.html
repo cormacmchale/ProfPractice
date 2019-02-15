@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>map</ion-title>
+    <br>
+    <ion-button (click)="checkStack()">Navigate</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Sucessful Navigation</h1>
+  <ion-button (click)="addMarker()">Add Marker</ion-button>
+  <br>
+  <ion-button (click)="showJournies()">Show Markers</ion-button>
+  <br>
+  <ion-button (click)="refresh()">Refresh</ion-button>
+  <div id="Gmap"></div>
+</ion-content>
