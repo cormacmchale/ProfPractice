@@ -15,6 +15,10 @@ export class JourneyPlannerPage implements OnInit {
   }
   planJourney(){
     console.log("clicked!");
+    //when this function is used
+    //console.log co-ordinates of marker and marker b
+    //also a name-- 
+    //these are for database
   }
 
 }
