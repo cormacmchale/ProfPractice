@@ -13,5 +13,8 @@ export class JourneyPlannerPage implements OnInit {
   ngOnInit() {
     this.map = GoogleMaps.create('myMap');
   }
+  planJourney(){
+    console.log("clicked!");
+  }
 
 }
