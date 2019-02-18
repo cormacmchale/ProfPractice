@@ -27,7 +27,7 @@ export class DatabasePage implements OnInit {
 
   displayDocuments()
   {
-      this.loadDocuments();
+      //this.loadDocuments();
       console.log(this.getData);     
   }
 

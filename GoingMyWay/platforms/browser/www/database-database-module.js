@@ -111,7 +111,7 @@ var DatabasePage = /** @class */ (function () {
         this.loadDocuments();
     };
     DatabasePage.prototype.displayDocuments = function () {
-        this.loadDocuments();
+        //this.loadDocuments();
         console.log(this.getData);
     };
     DatabasePage.prototype.testSend = function () {
