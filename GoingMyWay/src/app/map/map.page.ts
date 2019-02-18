@@ -30,6 +30,7 @@ export class MapPage implements OnInit {
   markersToShow:any[];
 
   ngOnInit() {
+    this.loadDocuments();
     this.map = GoogleMaps.create('Gmap');
   }
   addMarker()
@@ -55,20 +56,23 @@ export class MapPage implements OnInit {
   }
   showJournies()
   {
-    this.journies.getJourney().subscribe(res=>
+    this.loadDocuments();
+    if(this.markersToShow!=null)
+    { 
+      console.log(this.markersToShow);
+      for (let info of this.markersToShow)
       {
-        this.markersToShow=res;
-      });
-      
-    console.log(this.markersToShow);
-    for (let info of this.markersToShow)
+        //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
+        //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
+        this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue,info.payload.doc._document.proto.fields.long.stringValue,info.payload.doc._document.proto.fields.name.stringValue)
+        //console.log("hello");
+        //console.log(info.payload.doc._document.proto.fields.long.stringValue);
+      } 
+    }
+    else
     {
-      //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
-      //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
-      this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue,info.payload.doc._document.proto.fields.long.stringValue,info.payload.doc._document.proto.fields.name.stringValue)
-      //console.log("hello");
-      //console.log(info.payload.doc._document.proto.fields.long.stringValue);
-    }   
+      console.log("No Data");
+    }
   }
   //add markers from database
   addMarkerFromDatabase(x:number,y:number, title:string)
@@ -89,8 +93,11 @@ export class MapPage implements OnInit {
   {
     this.router.navigate(['database']);
   }
-  refresh(){
-    this.ngOnInit();
+  loadDocuments()
+  {
+    this.journies.getJourney().subscribe(res=>
+      {
+        this.markersToShow=res;
+      });
   }
-
 }

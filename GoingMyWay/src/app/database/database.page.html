@@ -23,17 +23,18 @@
     <ion-input [(ngModel)] = "name" ></ion-input>
   </ion-item>
 
-  <ion-button (click)="displayPosition()">Show Database</ion-button>
+  <ion-button (click)="testSend()">Send to Database</ion-button>
   <br>
   <br>
-  <ion-button (click)="testSend()">Test</ion-button>
+  <ion-button (click)="displayDocuments()">Log Documents</ion-button>
   <br>
   <br>
 
-  <ion-item  *ngFor ="let data of getData" >
+
+  <!-- <ion-item  *ngFor ="let data of getData" >
   {{data.payload.doc._document.proto.fields.lat.stringValue}} 
   {{data.payload.doc._document.proto.fields.long.stringValue}}
   {{data.payload.doc._document.proto.fields.name.stringValue}}
-  </ion-item> 
+  </ion-item>  -->
 
 </ion-content>

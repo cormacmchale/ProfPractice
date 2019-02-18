@@ -62,7 +62,7 @@ var JourneyPlannerPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>journeyPlanner</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n<p> Please select point A</p>\r\n<p> Please select point B</p>\r\n<div id=\"myMap\"></div>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>journeyPlanner</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n<p> Please select point A</p>\r\n<p> Please select point B</p>\r\n<div id=\"myMap\"></div>\r\n<ion-button (click)=\"planJourney()\"> Plan journey</ion-button>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>journeyPlann
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#myMap {\n  height: 90%;\n  margin: 15%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxccHJvZnByYWN0aWNlXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXGpvdXJuZXktcGxhbm5lclxcam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVc7RUFDWCxXQUFXO0VBQ1gsaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9qb3VybmV5LXBsYW5uZXIvam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNteU1hcFxyXG57XHJcbiAgICBoZWlnaHQ6IDkwJTtcclxuICAgIG1hcmdpbjogMTUlO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNSU7XHJcbn0iXX0= */"
+module.exports = "#myMap {\n  height: 90%;\n  margin: 15%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXGpvdXJuZXktcGxhbm5lclxcam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVc7RUFDWCxXQUFXO0VBQ1gsaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9qb3VybmV5LXBsYW5uZXIvam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNteU1hcFxyXG57XHJcbiAgICBoZWlnaHQ6IDkwJTtcclxuICAgIG1hcmdpbjogMTUlO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNSU7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -105,6 +105,13 @@ var JourneyPlannerPage = /** @class */ (function () {
     }
     JourneyPlannerPage.prototype.ngOnInit = function () {
         this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('myMap');
+    };
+    JourneyPlannerPage.prototype.planJourney = function () {
+        console.log("clicked!");
+        //when this function is used
+        //console.log co-ordinates of marker and marker b
+        //also a name-- 
+        //these are for database
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

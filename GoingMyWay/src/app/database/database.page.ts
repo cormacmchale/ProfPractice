@@ -13,41 +13,38 @@ export class DatabasePage implements OnInit {
   getData:any[];
   ngOnInit()
   {
-    this.data.getJourney().subscribe(res=>
-    {
-      this.getData=res;
-    })
+    this.loadDocuments();
   }
 
   //variables on Page
-  Long;
-  Lat;
-  name;
+  Long:number;
+  Lat:number;
+  name:string;
   displayData:string;
 
   //display this
   answer:string;
 
-  displayPosition()
+  displayDocuments()
   {
-    //display this on page
-    //this.answer = this.Long+this.Lat+" "+this.name;
-      this.data.getJourney().subscribe(res=>
-      {
-        this.getData=res;
-      })
-
-      console.log(this.getData);      
+      this.loadDocuments();
+      console.log(this.getData);     
   }
 
   testSend()
   {
     this.data.sendJourney(this.Long,this.Lat,this.name);
-    this.ngOnInit();
   }
   checkStack()
   {
     this.router.navigate(['map']);
+  }
+  loadDocuments()
+  {
+    this.data.getJourney().subscribe(res=>
+      {
+        this.getData=res;
+      });
   }
 
 }

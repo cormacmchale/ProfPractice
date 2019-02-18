@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>map</ion-title>\r\n    <br>\r\n    <ion-button (click)=\"checkStack()\">Navigate</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <h1>Sucessful Navigation</h1>\r\n  <ion-button (click)=\"addMarker()\">Add Marker</ion-button>\r\n  <br>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <ion-button (click)=\"refresh()\">Refresh</ion-button>\r\n  <div id=\"Gmap\"></div>\r\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>map</ion-title>\n    <br>\n    <ion-button (click)=\"checkStack()\">Navigate</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <h1>Sucessful Navigation</h1>\n  <ion-button (click)=\"addMarker()\">Add Marker</ion-button>\n  <br>\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\n  <br>\n  <div id=\"Gmap\"></div>\n</ion-content>"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>map</ion-tit
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxccHJvZnByYWN0aWNlXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI0dtYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbn0iXX0= */"
+module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI0dtYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -118,6 +118,7 @@ var MapPage = /** @class */ (function () {
         };
     }
     MapPage.prototype.ngOnInit = function () {
+        this.loadDocuments();
         this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('Gmap');
     };
     MapPage.prototype.addMarker = function () {
@@ -135,18 +136,20 @@ var MapPage = /** @class */ (function () {
         console.log("marker added");
     };
     MapPage.prototype.showJournies = function () {
-        var _this = this;
-        this.journies.getJourney().subscribe(function (res) {
-            _this.markersToShow = res;
-        });
-        console.log(this.markersToShow);
-        for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
-            var info = _a[_i];
-            //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
-            //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
-            this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue, info.payload.doc._document.proto.fields.long.stringValue, info.payload.doc._document.proto.fields.name.stringValue);
-            //console.log("hello");
-            //console.log(info.payload.doc._document.proto.fields.long.stringValue);
+        this.loadDocuments();
+        if (this.markersToShow != null) {
+            console.log(this.markersToShow);
+            for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
+                var info = _a[_i];
+                //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
+                //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
+                this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue, info.payload.doc._document.proto.fields.long.stringValue, info.payload.doc._document.proto.fields.name.stringValue);
+                //console.log("hello");
+                //console.log(info.payload.doc._document.proto.fields.long.stringValue);
+            }
+        }
+        else {
+            console.log("No Data");
         }
     };
     //add markers from database
@@ -164,8 +167,11 @@ var MapPage = /** @class */ (function () {
     MapPage.prototype.checkStack = function () {
         this.router.navigate(['database']);
     };
-    MapPage.prototype.refresh = function () {
-        this.ngOnInit();
+    MapPage.prototype.loadDocuments = function () {
+        var _this = this;
+        this.journies.getJourney().subscribe(function (res) {
+            _this.markersToShow = res;
+        });
     };
     MapPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
