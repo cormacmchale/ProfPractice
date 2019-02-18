@@ -19,4 +19,8 @@ export class HomePage {
      this.router.navigate(['database']);
    }
 
+   navigateJourneyPlanner(){
+    this.router.navigate(['journey-planner']);
+   }
+
 }

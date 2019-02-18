@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>map</ion-title>\n    <br>\n    <ion-button (click)=\"checkStack()\">Navigate</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <h1>Sucessful Navigation</h1>\n  <ion-button (click)=\"addMarker()\">Add Marker</ion-button>\n  <br>\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\n  <br>\n  <ion-button (click)=\"refresh()\">Refresh</ion-button>\n  <div id=\"Gmap\"></div>\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>map</ion-title>\r\n    <br>\r\n    <ion-button (click)=\"checkStack()\">Navigate</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <h1>Sucessful Navigation</h1>\r\n  <ion-button (click)=\"addMarker()\">Add Marker</ion-button>\r\n  <br>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <ion-button (click)=\"refresh()\">Refresh</ion-button>\r\n  <div id=\"Gmap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>map</ion-title>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxmcmVzaFN0YXJ0XFxHb2luZ015V2F5L3NyY1xcYXBwXFxtYXBcXG1hcC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9tYXAvbWFwLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNHbWFwXHJcbntcclxuICAgIGhlaWdodDogOTAlO1xyXG59Il19 */"
+module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxccHJvZnByYWN0aWNlXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI0dtYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbn0iXX0= */"
 
 /***/ }),
 

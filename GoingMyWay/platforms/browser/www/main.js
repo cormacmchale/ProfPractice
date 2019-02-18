@@ -846,6 +846,10 @@ var map = {
 		"./src/app/home/home.module.ts",
 		"home-home-module"
 	],
+	"./journey-planner/journey-planner.module": [
+		"./src/app/journey-planner/journey-planner.module.ts",
+		"journey-planner-journey-planner-module"
+	],
 	"./map/map.module": [
 		"./src/app/map/map.module.ts",
 		"common",
@@ -899,6 +903,7 @@ var routes = [
     { path: 'home', loadChildren: './home/home.module#HomePageModule' },
     { path: 'map', loadChildren: './map/map.module#MapPageModule' },
     { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
+    { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -923,7 +928,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n"
 
 /***/ }),
 
@@ -1120,7 +1125,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Cormac\Desktop\freshStart\GoingMyWay\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Lena\Desktop\profpractice\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
 
 
 /***/ })
