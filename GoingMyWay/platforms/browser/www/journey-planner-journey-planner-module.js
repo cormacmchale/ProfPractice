@@ -1966,7 +1966,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>journeyPlann
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#myMap {\n  height: 90%;\n  margin: 15%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxqb3VybmV5LXBsYW5uZXJcXGpvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXO0VBQ1gsV0FBVztFQUNYLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvam91cm5leS1wbGFubmVyL2pvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbXlNYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbiAgICBtYXJnaW46IDE1JTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUlO1xyXG59Il19 */"
+module.exports = "#myMap {\n  height: 90%;\n  margin: 2%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxqb3VybmV5LXBsYW5uZXJcXGpvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXO0VBQ1gsVUFBUztFQUNULGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvam91cm5leS1wbGFubmVyL2pvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbXlNYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbiAgICBtYXJnaW46MiU7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1JTtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -2008,13 +2008,12 @@ var JourneyPlannerPage = /** @class */ (function () {
         this.loadMap();
     };
     JourneyPlannerPage.prototype.loadMap = function () {
+        var _this = this;
         // This code is necessary for browser
         // Environment.setEnv({
         //   'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDQUaBvR0ZXMXsn-sPP6qhPw-qGFYmsTMs',
         //   'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDQUaBvR0ZXMXsn-sPP6qhPw-qGFYmsTMs'
         // });
-        var _this = this;
-        // default one
         var mapOptions = {
             camera: {
                 target: {
@@ -2039,23 +2038,13 @@ var JourneyPlannerPage = /** @class */ (function () {
             draggable: true,
         });
         marker.on(_ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__["GoogleMapsEvent"].MARKER_CLICK).subscribe(function () {
-            _this.destination = marker.getPosition();
-            _this.showPosition(_this.destination.lat, _this.destination.lng);
-        });
-        marker2.one(_ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__["GoogleMapsEvent"].MARKER_CLICK).then(function () {
-            alert('B clicked' + marker2.getPosition);
+            _this.source = marker.getPosition();
+            _this.target = marker.getPosition();
+            _this.showPosition(_this.source.lat, _this.source.lng, _this.target.lat, _this.target.lng);
         });
     }; //loadMap()
-    JourneyPlannerPage.prototype.planJourney = function () {
-        //destination = marker.getPosition();
-        //     console.log("clicked!");
-        //     //when this function is used
-        //     //console.log co-ordinates of marker and marker b
-        //     //also a name-- 
-        //     //these are for database
-    };
-    JourneyPlannerPage.prototype.showPosition = function (x, y) {
-        console.log(x + " " + y);
+    JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2) {
+        console.log("marker A: " + x1 + " " + y1 + " marker B " + x2 + " " + y2);
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

@@ -72,7 +72,7 @@ export class JourneyPlannerPage implements OnInit {
 
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       this.source = marker.getPosition();
-      this.target = marker.getPosition();
+      this.target = marker2.getPosition();
       this.showPosition(this.source.lat, this.source.lng, this.target.lat, this.target.lng)
     });
   }//loadMap()
