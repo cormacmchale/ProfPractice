@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>map</ion-title>\n    <br>\n    <ion-button (click)=\"checkStack()\">Navigate</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <h1>Sucessful Navigation</h1>\n  <ion-button (click)=\"addMarker()\">Add Marker</ion-button>\n  <br>\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\n  <br>\n  <div id=\"Gmap\"></div>\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <div id=\"Gmap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -143,9 +143,12 @@ var MapPage = /** @class */ (function () {
                 var info = _a[_i];
                 //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
                 //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
-                this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue, info.payload.doc._document.proto.fields.long.stringValue, info.payload.doc._document.proto.fields.name.stringValue);
+                this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
                 //console.log("hello");
-                //console.log(info.payload.doc._document.proto.fields.long.stringValue);
+                console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
+                console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
+                console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
+                console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
             }
         }
         else {
@@ -153,9 +156,9 @@ var MapPage = /** @class */ (function () {
         }
     };
     //add markers from database
-    MapPage.prototype.addMarkerFromDatabase = function (x, y, title) {
+    MapPage.prototype.addMarkerFromDatabase = function (x, y, x1, y1, title) {
         this.map.addMarker({
-            title: title,
+            title: title + " End",
             icon: 'Blue',
             animation: 'Drop',
             position: {
@@ -163,9 +166,21 @@ var MapPage = /** @class */ (function () {
                 lng: y
             }
         });
+        this.map.addMarker({
+            title: title + " Start",
+            icon: 'Red',
+            animation: 'Drop',
+            position: {
+                lat: x1,
+                lng: y1
+            }
+        });
     };
-    MapPage.prototype.checkStack = function () {
-        this.router.navigate(['database']);
+    MapPage.prototype.visitMapPage = function () {
+        this.router.navigate(['map']);
+    };
+    MapPage.prototype.navigateJourneyPlanner = function () {
+        this.router.navigate(['journey-planner']);
     };
     MapPage.prototype.loadDocuments = function () {
         var _this = this;

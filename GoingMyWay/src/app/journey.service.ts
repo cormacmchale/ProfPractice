@@ -26,10 +26,10 @@ export class JourneyService {
     return this.journiesTwo;
   }
 
-  sendJourney(long:number, lat:number, name:string)
+  sendJourney(startlong:number, startlat:number, endlong:number, endlat:number, name:string)
   {
-    console.log(long+" "+lat+" "+name);
-    this.addJourney = { long: long, lat: lat, name: name };
+    console.log(startlong+" "+startlat+" "+endlong+" "+endlat);
+    this.addJourney = { startlong: startlong, startlat: startlat, endlong:endlong, endlat:endlat, name: name};
     this.journies.add(this.addJourney);
   }
 

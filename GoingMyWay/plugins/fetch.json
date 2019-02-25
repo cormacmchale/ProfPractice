@@ -2,7 +2,7 @@
   "cordova-plugin-whitelist": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-whitelist@1.3.3"
+      "id": "cordova-plugin-whitelist@^1.3.3"
     },
     "is_top_level": true,
     "variables": {}
@@ -34,7 +34,7 @@
   "cordova-plugin-ionic-webview": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-ionic-webview@^3.0.0"
+      "id": "cordova-plugin-ionic-webview@latest"
     },
     "is_top_level": true,
     "variables": {}
@@ -54,7 +54,7 @@
     },
     "is_top_level": true,
     "variables": {
-      "API_KEY_FOR_BROWSER_RELEASE": "AIzaSyDQUaBvR0ZXMXsn-sPP6qhPw-qGFYmsTMs"
+      "API_KEY_FOR_ANDROID": "AIzaSyDQUaBvR0ZXMXsn-sPP6qhPw-qGFYmsTMs"
     }
   }
 }

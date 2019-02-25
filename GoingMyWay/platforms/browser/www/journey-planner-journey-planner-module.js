@@ -1966,7 +1966,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#myMap {\n  height: 90%;\n  margin: 2%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxqb3VybmV5LXBsYW5uZXJcXGpvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXO0VBQ1gsVUFBUztFQUNULGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvam91cm5leS1wbGFubmVyL2pvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbXlNYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbiAgICBtYXJnaW46MiU7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1JTtcclxufSJdfQ== */"
+module.exports = "#myMap {\n  height: 90%;\n  margin: 2%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXGpvdXJuZXktcGxhbm5lclxcam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVc7RUFDWCxVQUFTO0VBQ1QsaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9qb3VybmV5LXBsYW5uZXIvam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNteU1hcFxyXG57XHJcbiAgICBoZWlnaHQ6IDkwJTtcclxuICAgIG1hcmdpbjoyJTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -1984,6 +1984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
+/* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1997,9 +1998,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var JourneyPlannerPage = /** @class */ (function () {
-    function JourneyPlannerPage(router) {
+    function JourneyPlannerPage(router, journeyService) {
         this.router = router;
+        this.journeyService = journeyService;
         this.posA = {
             lat: 53.270962,
             lng: -9.062691
@@ -2046,6 +2049,7 @@ var JourneyPlannerPage = /** @class */ (function () {
     };
     JourneyPlannerPage.prototype.search = function (location) {
         var _this = this;
+        this.map.clear();
         console.log(location);
         _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
             "address": location
@@ -2060,14 +2064,10 @@ var JourneyPlannerPage = /** @class */ (function () {
                 position: results[0].position,
                 draggable: true,
             });
-            //add second marker at different position
-            _this.new = results[0].position;
-            _this.new.lat += 0.5;
-            _this.new.lng += 0.5;
             _this.startJourney = _this.map.addMarkerSync({
                 title: "Start Journey",
                 icon: 'Blue',
-                position: _this.new,
+                position: results[0].position,
                 draggable: true,
             });
         });
@@ -2075,10 +2075,10 @@ var JourneyPlannerPage = /** @class */ (function () {
     JourneyPlannerPage.prototype.addJourneyToDatabase = function () {
         this.start = this.startJourney.getPosition();
         this.end = this.endJourney.getPosition();
-        this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.start.lat);
+        this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat);
     };
     JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2) {
-        console.log("marker A: " + x1 + " " + y1 + " marker B " + x2 + " " + y2);
+        this.journeyService.sendJourney(x1, y1, x2, y2, "default");
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2086,7 +2086,7 @@ var JourneyPlannerPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./journey-planner.page.html */ "./src/app/journey-planner/journey-planner.page.html"),
             styles: [__webpack_require__(/*! ./journey-planner.page.scss */ "./src/app/journey-planner/journey-planner.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__["JourneyService"]])
     ], JourneyPlannerPage);
     return JourneyPlannerPage;
 }());

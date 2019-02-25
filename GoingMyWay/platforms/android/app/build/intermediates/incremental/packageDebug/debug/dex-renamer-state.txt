@@ -1,0 +1,4 @@
+#Mon Feb 25 19:54:13 GMT 2019
+base.0=C\:\\Users\\Cormac\\Desktop\\ProfPractice\\GoingMyWay\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+file.0=C\:\\Users\\Cormac\\Desktop\\ProfPractice\\GoingMyWay\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex

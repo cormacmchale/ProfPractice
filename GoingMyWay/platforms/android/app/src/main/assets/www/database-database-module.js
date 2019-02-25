@@ -111,11 +111,11 @@ var DatabasePage = /** @class */ (function () {
         this.loadDocuments();
     };
     DatabasePage.prototype.displayDocuments = function () {
-        this.loadDocuments();
+        //this.loadDocuments();
         console.log(this.getData);
     };
     DatabasePage.prototype.testSend = function () {
-        this.data.sendJourney(this.Long, this.Lat, this.name);
+        // this.data.sendJourney(this.Long,this.Lat,this.name);
     };
     DatabasePage.prototype.checkStack = function () {
         this.router.navigate(['map']);

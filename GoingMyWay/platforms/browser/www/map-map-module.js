@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxtYXBcXG1hcC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9tYXAvbWFwLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNHbWFwXHJcbntcclxuICAgIGhlaWdodDogOTAlO1xyXG59Il19 */"
+module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI0dtYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -143,9 +143,12 @@ var MapPage = /** @class */ (function () {
                 var info = _a[_i];
                 //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
                 //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
-                this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue, info.payload.doc._document.proto.fields.long.stringValue, info.payload.doc._document.proto.fields.name.stringValue);
+                this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
                 //console.log("hello");
-                //console.log(info.payload.doc._document.proto.fields.long.stringValue);
+                console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
+                console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
+                console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
+                console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
             }
         }
         else {
@@ -153,14 +156,23 @@ var MapPage = /** @class */ (function () {
         }
     };
     //add markers from database
-    MapPage.prototype.addMarkerFromDatabase = function (x, y, title) {
+    MapPage.prototype.addMarkerFromDatabase = function (x, y, x1, y1, title) {
         this.map.addMarker({
-            title: title,
+            title: title + " End",
             icon: 'Blue',
             animation: 'Drop',
             position: {
                 lat: x,
                 lng: y
+            }
+        });
+        this.map.addMarker({
+            title: title + " Start",
+            icon: 'Red',
+            animation: 'Drop',
+            position: {
+                lat: x1,
+                lng: y1
             }
         });
     };

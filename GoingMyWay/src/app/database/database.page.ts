@@ -33,7 +33,7 @@ export class DatabasePage implements OnInit {
 
   testSend()
   {
-    this.data.sendJourney(this.Long,this.Lat,this.name);
+   // this.data.sendJourney(this.Long,this.Lat,this.name);
   }
   checkStack()
   {

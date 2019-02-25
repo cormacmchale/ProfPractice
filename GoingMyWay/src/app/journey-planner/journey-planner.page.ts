@@ -12,6 +12,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geocoder, GeocoderResult } from '@ionic-native/google-maps/ngx';
+import { JourneyService } from 'src/app/journey.service';
 
 @Component({
   selector: 'app-journey-planner',
@@ -35,7 +36,7 @@ export class JourneyPlannerPage implements OnInit {
       lat: 54.270962,
       lng: -9.062691
     };
-  constructor(private router:Router) { }
+  constructor(private router:Router, private journeyService:JourneyService) { }
 
   ngOnInit() {
     this.loadMap();
@@ -79,6 +80,7 @@ export class JourneyPlannerPage implements OnInit {
   }
   search(location:string)
   {
+    this.map.clear();
     console.log(location)
     Geocoder.geocode
       ({
@@ -97,15 +99,10 @@ export class JourneyPlannerPage implements OnInit {
           draggable: true,
         });
 
-        //add second marker at different position
-        this.new = results[0].position
-        this.new.lat+=0.5;
-        this.new.lng+=0.5;
-
         this.startJourney = this.map.addMarkerSync({
           title: "Start Journey",
           icon: 'Blue',
-          position: this.new,
+          position: results[0].position,
           draggable: true,
         });
       })
@@ -114,11 +111,11 @@ export class JourneyPlannerPage implements OnInit {
   {
     this.start = this.startJourney.getPosition();
     this.end = this.endJourney.getPosition(); 
-    this.showPosition(this.start.lng,this.start.lat,this.end.lng,this.start.lat)
+    this.showPosition(this.start.lng,this.start.lat,this.end.lng,this.end.lat)
   }
 
   showPosition(x1: number, y1: number, x2: number, y2: number) 
   {
-    console.log("marker A: " + x1 + " " + y1 + " marker B " + x2 + " " + y2);
+    this.journeyService.sendJourney(x1,y1,x2,y2,"default");
   }
 }

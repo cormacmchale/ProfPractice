@@ -1,6 +1,8 @@
 export interface dbInfo
 {
-    lat:number;
-    long:number;
+    startlat:number;
+    startlong:number;
+    endlat:number;
+    endlong:number;
     name:string;
 }

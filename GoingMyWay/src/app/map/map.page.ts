@@ -47,7 +47,7 @@ export class MapPage implements OnInit {
         position: this.pos
       });
 
-  this.map.addPolyline(
+       this.map.addPolyline(
          {
           points:[this.pos, this.posTwo]
          });
@@ -64,9 +64,12 @@ export class MapPage implements OnInit {
       {
         //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
         //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
-        this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.lat.stringValue,info.payload.doc._document.proto.fields.long.stringValue,info.payload.doc._document.proto.fields.name.stringValue)
+        this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue,info.payload.doc._document.proto.fields.name.stringValue)
         //console.log("hello");
-        //console.log(info.payload.doc._document.proto.fields.long.stringValue);
+        console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
+        console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
+        console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
+        console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
       } 
     }
     else
@@ -75,11 +78,11 @@ export class MapPage implements OnInit {
     }
   }
   //add markers from database
-  addMarkerFromDatabase(x:number,y:number, title:string)
+  addMarkerFromDatabase(x:number,y:number,x1:number,y1:number, title:string)
   {
     this.map.addMarker(
       {
-        title:title,
+        title:title+" End",
         icon:'Blue',
         animation: 'Drop',
         position:
@@ -88,6 +91,17 @@ export class MapPage implements OnInit {
           lng:y
         }
       });
+      this.map.addMarker(
+        {
+          title:title+" Start",
+          icon:'Red',
+          animation: 'Drop',
+          position:
+           {
+            lat:x1,
+            lng:y1
+          }
+        });
   }
   visitMapPage()
   {

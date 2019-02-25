@@ -848,6 +848,7 @@ var map = {
 	],
 	"./journey-planner/journey-planner.module": [
 		"./src/app/journey-planner/journey-planner.module.ts",
+		"common",
 		"journey-planner-journey-planner-module"
 	],
 	"./map/map.module": [
