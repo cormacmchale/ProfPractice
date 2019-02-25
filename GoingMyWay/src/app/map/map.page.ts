@@ -89,9 +89,12 @@ export class MapPage implements OnInit {
         }
       });
   }
-  checkStack()
+  visitMapPage()
   {
-    this.router.navigate(['database']);
+    this.router.navigate(['map']);
+  }
+  navigateJourneyPlanner(){
+   this.router.navigate(['journey-planner']);
   }
   loadDocuments()
   {

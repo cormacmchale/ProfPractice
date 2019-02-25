@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>map</ion-title>\r\n    <br>\r\n    <ion-button (click)=\"checkStack()\">Navigate</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <h1>Sucessful Navigation</h1>\r\n  <ion-button (click)=\"addMarker()\">Add Marker</ion-button>\r\n  <br>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <div id=\"Gmap\"></div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <div id=\"Gmap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -164,8 +164,11 @@ var MapPage = /** @class */ (function () {
             }
         });
     };
-    MapPage.prototype.checkStack = function () {
-        this.router.navigate(['database']);
+    MapPage.prototype.visitMapPage = function () {
+        this.router.navigate(['map']);
+    };
+    MapPage.prototype.navigateJourneyPlanner = function () {
+        this.router.navigate(['journey-planner']);
     };
     MapPage.prototype.loadDocuments = function () {
         var _this = this;

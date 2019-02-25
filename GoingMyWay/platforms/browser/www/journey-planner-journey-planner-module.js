@@ -1955,7 +1955,7 @@ var JourneyPlannerPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>journeyPlanner</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n<p> Please select point A</p>\r\n<p> Please select point B</p>\r\n\r\n<div id=\"myMap\"></div>\r\n<ion-button (click)=\"addMarker()\">Add Marker</ion-button>\r\n  <br>\r\n<ion-button (click)=\"planJourney()\"> Plan journey</ion-button>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n  <ion-input [(ngModel)]=\"search_address\"  placeholder=\"\">Search location:</ion-input><ion-button (click)=\"search(search_address)\">search</ion-button>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n<div id=\"myMap\"></div>\r\n<ion-button (click)=\"addJourneyToDatabase()\">Add This Journey!</ion-button>\r\n</ion-content>"
 
 /***/ }),
 
@@ -1982,6 +1982,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JourneyPlannerPage", function() { return JourneyPlannerPage; });
 /* harmony import */ var _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ionic-native/google-maps */ "./node_modules/@ionic-native/google-maps/index.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1993,8 +1995,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var JourneyPlannerPage = /** @class */ (function () {
-    function JourneyPlannerPage() {
+    function JourneyPlannerPage(router) {
+        this.router = router;
         this.posA = {
             lat: 53.270962,
             lng: -9.062691
@@ -2008,12 +2013,6 @@ var JourneyPlannerPage = /** @class */ (function () {
         this.loadMap();
     };
     JourneyPlannerPage.prototype.loadMap = function () {
-        var _this = this;
-        // This code is necessary for browser
-        // Environment.setEnv({
-        //   'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDQUaBvR0ZXMXsn-sPP6qhPw-qGFYmsTMs',
-        //   'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDQUaBvR0ZXMXsn-sPP6qhPw-qGFYmsTMs'
-        // });
         var mapOptions = {
             camera: {
                 target: {
@@ -2025,24 +2024,59 @@ var JourneyPlannerPage = /** @class */ (function () {
             }
         };
         this.map = _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__["GoogleMaps"].create('myMap', mapOptions);
-        var marker = this.map.addMarkerSync({
-            title: "A",
-            icon: 'Blue',
-            position: this.posA,
-            draggable: true,
-        });
-        var marker2 = this.map.addMarkerSync({
-            title: "B",
-            icon: 'Red',
-            position: this.posB,
-            draggable: true,
-        });
-        marker.on(_ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__["GoogleMapsEvent"].MARKER_CLICK).subscribe(function () {
-            _this.source = marker.getPosition();
-            _this.target = marker.getPosition();
-            _this.showPosition(_this.source.lat, _this.source.lng, _this.target.lat, _this.target.lng);
-        });
+        // testing
+        // let marker: Marker = this.map.addMarkerSync({
+        //   title: "A",
+        //   icon: 'Blue',
+        //   position: this.posA,
+        //   draggable: true,
+        // });
+        // let marker2: Marker = this.map.addMarkerSync({
+        //   title: "B",
+        //   icon: 'Red',
+        //   position: this.posB,
+        //   draggable: true,
+        // });
     }; //loadMap()
+    JourneyPlannerPage.prototype.visitMapPage = function () {
+        this.router.navigate(['map']);
+    };
+    JourneyPlannerPage.prototype.navigateJourneyPlanner = function () {
+        this.router.navigate(['journey-planner']);
+    };
+    JourneyPlannerPage.prototype.search = function (location) {
+        var _this = this;
+        console.log(location);
+        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
+            "address": location
+        })
+            .then(function (results) {
+            console.log(results[0].position);
+            _this.map.setCameraTarget(results[0].position);
+            _this.map.setCameraZoom(10);
+            _this.endJourney = _this.map.addMarkerSync({
+                title: "End Journey",
+                icon: 'Red',
+                position: results[0].position,
+                draggable: true,
+            });
+            //add second marker at different position
+            _this.new = results[0].position;
+            _this.new.lat += 0.5;
+            _this.new.lng += 0.5;
+            _this.startJourney = _this.map.addMarkerSync({
+                title: "Start Journey",
+                icon: 'Blue',
+                position: _this.new,
+                draggable: true,
+            });
+        });
+    };
+    JourneyPlannerPage.prototype.addJourneyToDatabase = function () {
+        this.start = this.startJourney.getPosition();
+        this.end = this.endJourney.getPosition();
+        this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.start.lat);
+    };
     JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2) {
         console.log("marker A: " + x1 + " " + y1 + " marker B " + x2 + " " + y2);
     };
@@ -2052,7 +2086,7 @@ var JourneyPlannerPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./journey-planner.page.html */ "./src/app/journey-planner/journey-planner.page.html"),
             styles: [__webpack_require__(/*! ./journey-planner.page.scss */ "./src/app/journey-planner/journey-planner.page.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], JourneyPlannerPage);
     return JourneyPlannerPage;
 }());

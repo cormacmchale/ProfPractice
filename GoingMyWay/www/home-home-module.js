@@ -61,7 +61,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Ionic Blank\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  The world is your oyster.\r\n  <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\r\n  <ion-button (click)=\"visitMapPage()\">Map Page</ion-button>\r\n  <ion-button (click)=\"visitDatabasePage()\">Database</ion-button>\r\n  <ion-button (click)=\"navigateJourneyPlanner()\">Navigate to journeyPlanner</ion-button>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n  <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -106,9 +106,6 @@ var HomePage = /** @class */ (function () {
     //add methods here
     HomePage.prototype.visitMapPage = function () {
         this.router.navigate(['map']);
-    };
-    HomePage.prototype.visitDatabasePage = function () {
-        this.router.navigate(['database']);
     };
     HomePage.prototype.navigateJourneyPlanner = function () {
         this.router.navigate(['journey-planner']);

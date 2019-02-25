@@ -14,11 +14,6 @@ export class HomePage {
    {
      this.router.navigate(['map']);
    }
-   visitDatabasePage()
-   {
-     this.router.navigate(['database']);
-   }
-
    navigateJourneyPlanner(){
     this.router.navigate(['journey-planner']);
    }
