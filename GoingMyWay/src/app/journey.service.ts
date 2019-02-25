@@ -18,11 +18,11 @@ export class JourneyService {
   constructor(database:AngularFirestore) 
   { 
     this.journies = database.collection<any>('journey');
-    this.journiesTwo = this.journies.snapshotChanges();
   }
 
   getJourney()
   {
+    this.journiesTwo = this.journies.snapshotChanges();
     return this.journiesTwo;
   }
 
