@@ -112,9 +112,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var JourneyService = /** @class */ (function () {
     function JourneyService(database) {
         this.journies = database.collection('journey');
-        this.journiesTwo = this.journies.snapshotChanges();
     }
     JourneyService.prototype.getJourney = function () {
+        this.journiesTwo = this.journies.snapshotChanges();
         return this.journiesTwo;
     };
     JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name) {
