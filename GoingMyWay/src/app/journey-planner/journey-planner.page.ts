@@ -34,7 +34,7 @@ export class JourneyPlannerPage implements OnInit {
 
   loadMap() {
     let mapOptions: GoogleMapOptions = {
-      camera: {
+      camera: {  
         target: {
           lat: 53.270962,
           lng: -9.062691

@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <div id=\"Gmap\"></div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#Gmap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI0dtYXBcclxue1xyXG4gICAgaGVpZ2h0OiA5MCU7XHJcbn0iXX0= */"
+module.exports = "#myMap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI215TWFwXHJcbntcclxuICAgIGhlaWdodDogOTAlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -108,47 +108,38 @@ var MapPage = /** @class */ (function () {
     function MapPage(journies, router) {
         this.journies = journies;
         this.router = router;
-        this.pos = {
-            lat: 43.087,
-            lng: -90.38
-        };
-        this.posTwo = {
-            lat: 43.087,
-            lng: -99.38
-        };
+        this.userLat = 0;
+        this.userLong = 0;
     }
     MapPage.prototype.ngOnInit = function () {
         this.loadDocuments();
-        this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('Gmap');
+        this.loadMap();
     };
-    MapPage.prototype.addMarker = function () {
-        this.map.addMarker({
-            icon: 'Blue',
-            position: this.posTwo
-        });
-        this.map.addMarker({
-            icon: 'Red',
-            position: this.pos
-        });
-        this.map.addPolyline({
-            points: [this.pos, this.posTwo]
-        });
-        console.log("marker added");
-    };
+    MapPage.prototype.loadMap = function () {
+        var mapOptions = {
+            camera: {
+                target: {
+                    lat: 53.270962,
+                    lng: -9.062691
+                },
+                zoom: 5,
+                tilt: 30
+            }
+        };
+        this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('myMap', mapOptions);
+    }; //loadMap()
     MapPage.prototype.showJournies = function () {
         this.loadDocuments();
         if (this.markersToShow != null) {
             console.log(this.markersToShow);
             for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
                 var info = _a[_i];
-                //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
-                //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
                 this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
                 //console.log("hello");
-                console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
-                console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
-                console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
-                console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
+                // console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
+                // console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
+                // console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
+                // console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
             }
         }
         else {

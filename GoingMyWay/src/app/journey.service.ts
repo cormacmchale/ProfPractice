@@ -19,7 +19,6 @@ export class JourneyService {
   { 
     this.journies = database.collection<any>('journey');
   }
-
   getJourney()
   {
     this.journiesTwo = this.journies.snapshotChanges();

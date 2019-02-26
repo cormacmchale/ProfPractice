@@ -3,7 +3,6 @@ import { GoogleMaps, GoogleMap, Marker, LatLng, ILatLng, GoogleMapOptions } from
 import { JourneyService } from 'src/app/journey.service';
 import { dbInfo } from 'src/app/Journey';
 import { Router } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
@@ -14,44 +13,36 @@ import { Observable } from 'rxjs/internal/Observable';
 export class MapPage implements OnInit {
 
   check:number;
-  constructor(private journies:JourneyService, private router:Router, private getUserLocation:Geolocation) { }
+  user:ILatLng;
+  constructor(private journies:JourneyService, private router:Router) { }
   
-  userLat:number;
-  userLong:number;
+  userLat:number=0;
+  userLong:number=0;
   map:GoogleMap; 
   markersToShow:any[];
+  pointA:ILatLng;
+  pointB:ILatLng;
 
-  ngOnInit() {
-    this.loadDocuments();   
+  ngOnInit() 
+  {
+    this.loadDocuments();  
     this.loadMap();
   }
 
   loadMap() {
-
-    
-     this.getUserLocation.getCurrentPosition().then((resp) => {
-      this.userLat = resp.coords.latitude
-      this.userLong = resp.coords.longitude
-      console.log(resp);
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
-
-
-     console.log(this.userLat);
-     console.log(this.userLong);
     let mapOptions: GoogleMapOptions = {
       camera: {
         target: {
-          lat: this.userLat,
-          lng: this.userLong
+          lat: 53.270962,
+          lng: -9.062691
         },
-        zoom: 10,
+        zoom: 5,
         tilt: 30
       }
     };
     this.map = GoogleMaps.create('myMap', mapOptions);
   }//loadMap()
+
   showJournies()
   {
     this.loadDocuments();
@@ -86,6 +77,9 @@ export class MapPage implements OnInit {
           lat:x,
           lng:y
         }
+      }).then((marker:Marker)=>
+      {
+        marker.showInfoWindow();
       });
       this.map.addMarker(
         {
@@ -97,8 +91,25 @@ export class MapPage implements OnInit {
             lat:x1,
             lng:y1
           }
+        }).then((marker:Marker)=>
+        {
+          marker.showInfoWindow();
         });
-        
+
+        this.pointA.lat = x1;
+        this.pointA.lng = y1;
+        this.pointB.lat = x;
+        this.pointB.lng = y;
+
+        console.log(this.pointA.lat)
+        console.log(this.pointB.lat)
+
+        // this.map.addPolyline
+        // (
+        //   {
+        //     points:[this.pointA,this.pointB]
+        //   }
+        // );  
   }
   visitMapPage()
   {

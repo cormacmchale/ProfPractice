@@ -113,16 +113,16 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Cormac\\Desktop\\ProfPractice\\GoingMyWay\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-v24_values-v24.arsc.flat",
+            "outputFile": "C:\\Users\\Cormac\\Desktop\\ProfPractice\\GoingMyWay\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-en-rAU_values-en-rAU.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\Cormac\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\6e1a3bebcd03fc1607962fd2684e8816\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\Cormac\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b61a1c1610f4f90e7c25afd41eb58a8c\\res\\values-en-rAU\\values-en-rAU.xml",
                     "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,121,182,248",
-                        "endColumns": "65,60,65,66",
-                        "endOffsets": "116,177,243,310"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     }
                 }
             ]
@@ -201,16 +201,16 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Cormac\\Desktop\\ProfPractice\\GoingMyWay\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-en-rAU_values-en-rAU.arsc.flat",
+            "outputFile": "C:\\Users\\Cormac\\Desktop\\ProfPractice\\GoingMyWay\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-v24_values-v24.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\Cormac\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b61a1c1610f4f90e7c25afd41eb58a8c\\res\\values-en-rAU\\values-en-rAU.xml",
+                    "source": "C:\\Users\\Cormac\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\6e1a3bebcd03fc1607962fd2684e8816\\res\\values-v24\\values-v24.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,121,182,248",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "116,177,243,310"
                     }
                 }
             ]
