@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#myMap {\n  height: 90%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL21hcC9tYXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI215TWFwXHJcbntcclxuICAgIGhlaWdodDogOTAlO1xyXG59Il19 */"
+module.exports = "#myMap {\n  height: 90%;\n  margin: 2%;\n  border-radius: 5%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXG1hcFxcbWFwLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVc7RUFDWCxVQUFTO0VBQ1QsaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9tYXAvbWFwLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNteU1hcFxyXG57XHJcbiAgICBoZWlnaHQ6IDkwJTtcclxuICAgIG1hcmdpbjoyJTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -135,50 +135,87 @@ var MapPage = /** @class */ (function () {
             for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
                 var info = _a[_i];
                 this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
-                this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue);
-                // console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
-                // console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
-                // console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
-                // console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
+                //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
             }
         }
         else {
             console.log("No Data");
         }
     };
-    MapPage.prototype.addPolylinesFromDatabase = function (x, y, x1, y1) {
-        //console.log(x+" "+y+" "+x1+" "+y1);
-    };
     //add markers from database
     MapPage.prototype.addMarkerFromDatabase = function (x, y, x1, y1, title) {
-        var _this = this;
-        this.map.addMarker({
-            title: title + " End",
-            icon: 'Blue',
+        var r = this.convertRgb(x);
+        var g = this.convertRgb(y);
+        var b = this.convertRgb(x1);
+        //adding different logic
+        var startMarker = this.map.addMarkerSync({
+            title: "Start Of Journey",
+            icon: 'rgb(' + r + ',' + g + ',' + b + ')',
             animation: 'Drop',
             position: {
                 lat: x,
                 lng: y
             }
-        }).then(function (marker) {
-            marker.showInfoWindow();
-            _this.pointA = marker.getPosition();
         });
-        this.map.addMarker({
-            title: title + " Start",
-            icon: 'Red',
+        var endMarker = this.map.addMarkerSync({
+            title: "End Of Journey",
+            icon: 'rgb(' + r + ',' + g + ',' + b + ')',
             animation: 'Drop',
             position: {
                 lat: x1,
                 lng: y1
             }
-        }).then(function (marker) {
-            marker.showInfoWindow();
-            _this.pointB = marker.getPosition();
-            _this.map.addPolyline({
-                points: [_this.pointA, _this.pointB]
-            });
         });
+        var pointA = startMarker.getPosition();
+        var pointB = endMarker.getPosition();
+        this.map.addPolyline({
+            points: [pointA, pointB]
+        });
+        // this.map.addMarker(
+        //   {
+        //     title:title+" End",
+        //     icon:'Red',
+        //     animation: 'Drop',
+        //     position:
+        //      {
+        //       lat:x,
+        //       lng:y
+        //     }
+        //   }).then((marker:Marker)=>
+        //   {
+        //     marker.showInfoWindow();
+        //     this.pointA = marker.getPosition();
+        //   });
+        //   this.map.addMarker(
+        //     {
+        //       title:title+" Start",
+        //       icon:'Blue',
+        //       animation: 'Drop',
+        //       position:
+        //        {
+        //         lat:x1,
+        //         lng:y1
+        //       }
+        //     }).then((marker:Marker)=>
+        //     {
+        //       marker.showInfoWindow();
+        //       this.pointB = marker.getPosition();
+        //     });
+        //     this.addPolylinesFromDatabase(this.pointA,this.pointB) 
+    };
+    MapPage.prototype.convertRgb = function (x) {
+        //keep in range
+        if (x < 0) {
+            x = (x * x) + 20;
+        }
+        else {
+            x = x + 75;
+        }
+        //keep in range
+        if (x >= 255) {
+            x -= 100;
+        }
+        return x;
     };
     MapPage.prototype.visitMapPage = function () {
         this.router.navigate(['map']);
