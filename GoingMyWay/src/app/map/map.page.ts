@@ -20,8 +20,6 @@ export class MapPage implements OnInit {
   userLong:number=0;
   map:GoogleMap; 
   markersToShow:any[];
-  pointA:ILatLng;
-  pointB:ILatLng;
 
   ngOnInit() 
   {
@@ -65,9 +63,13 @@ export class MapPage implements OnInit {
     }
   }
   //add polylines
+  pointA:ILatLng;
+  pointB:ILatLng;
   addPolylinesFromDatabase(x:number,y:number,x1:number,y1:number)
   {
-    console.log(x+" "+y+" "+x1+" "+y1);
+    //console.log(x+" "+y+" "+x1+" "+y1);
+    
+
   }
   //add markers from database
   addMarkerFromDatabase(x:number,y:number,x1:number,y1:number, title:string)
@@ -85,6 +87,7 @@ export class MapPage implements OnInit {
       }).then((marker:Marker)=>
       {
         marker.showInfoWindow();
+        this.pointA = marker.getPosition();
       });
       this.map.addMarker(
         {
@@ -99,7 +102,13 @@ export class MapPage implements OnInit {
         }).then((marker:Marker)=>
         {
           marker.showInfoWindow();
-        });  
+          this.pointB = marker.getPosition();
+          this.map.addPolyline(
+            {
+              points:[this.pointA,this.pointB]
+            }
+          )
+        }); 
   }
   visitMapPage()
   {

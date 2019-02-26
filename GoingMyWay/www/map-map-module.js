@@ -135,7 +135,7 @@ var MapPage = /** @class */ (function () {
             for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
                 var info = _a[_i];
                 this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
-                //console.log("hello");
+                this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue);
                 // console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
                 // console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
                 // console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
@@ -146,14 +146,12 @@ var MapPage = /** @class */ (function () {
             console.log("No Data");
         }
     };
+    MapPage.prototype.addPolylinesFromDatabase = function (x, y, x1, y1) {
+        //console.log(x+" "+y+" "+x1+" "+y1);
+    };
     //add markers from database
     MapPage.prototype.addMarkerFromDatabase = function (x, y, x1, y1, title) {
-        this.pointA.lat = x1;
-        this.pointA.lng = y1;
-        this.pointB.lat = x;
-        this.pointB.lng = y;
-        console.log(this.pointA.lat);
-        console.log(this.pointB.lat);
+        var _this = this;
         this.map.addMarker({
             title: title + " End",
             icon: 'Blue',
@@ -164,6 +162,7 @@ var MapPage = /** @class */ (function () {
             }
         }).then(function (marker) {
             marker.showInfoWindow();
+            _this.pointA = marker.getPosition();
         });
         this.map.addMarker({
             title: title + " Start",
@@ -175,13 +174,11 @@ var MapPage = /** @class */ (function () {
             }
         }).then(function (marker) {
             marker.showInfoWindow();
+            _this.pointB = marker.getPosition();
+            _this.map.addPolyline({
+                points: [_this.pointA, _this.pointB]
+            });
         });
-        // this.map.addPolyline
-        // (
-        //   {
-        //     points:[this.pointA,this.pointB]
-        //   }
-        // );  
     };
     MapPage.prototype.visitMapPage = function () {
         this.router.navigate(['map']);
