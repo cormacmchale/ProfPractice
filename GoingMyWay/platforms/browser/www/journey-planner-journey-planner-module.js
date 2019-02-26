@@ -2003,14 +2003,6 @@ var JourneyPlannerPage = /** @class */ (function () {
     function JourneyPlannerPage(router, journeyService) {
         this.router = router;
         this.journeyService = journeyService;
-        this.posA = {
-            lat: 53.270962,
-            lng: -9.062691
-        };
-        this.posB = {
-            lat: 54.270962,
-            lng: -9.062691
-        };
     }
     JourneyPlannerPage.prototype.ngOnInit = function () {
         this.loadMap();
@@ -2027,19 +2019,6 @@ var JourneyPlannerPage = /** @class */ (function () {
             }
         };
         this.map = _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__["GoogleMaps"].create('myMap', mapOptions);
-        // testing
-        // let marker: Marker = this.map.addMarkerSync({
-        //   title: "A",
-        //   icon: 'Blue',
-        //   position: this.posA,
-        //   draggable: true,
-        // });
-        // let marker2: Marker = this.map.addMarkerSync({
-        //   title: "B",
-        //   icon: 'Red',
-        //   position: this.posB,
-        //   draggable: true,
-        // });
     }; //loadMap()
     JourneyPlannerPage.prototype.visitMapPage = function () {
         this.router.navigate(['map']);
@@ -2058,6 +2037,7 @@ var JourneyPlannerPage = /** @class */ (function () {
             console.log(results[0].position);
             _this.map.setCameraTarget(results[0].position);
             _this.map.setCameraZoom(10);
+            var mark = results[0].position.lat;
             _this.endJourney = _this.map.addMarkerSync({
                 title: "End Journey",
                 icon: 'Red',

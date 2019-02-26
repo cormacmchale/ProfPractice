@@ -23,6 +23,8 @@ export class JourneyPlannerPage implements OnInit {
   map: GoogleMap;
   startJourney:Marker;
   endJourney:Marker;
+  start:ILatLng;
+  end:ILatLng;
 
   constructor(private router:Router, private journeyService:JourneyService) { }
 

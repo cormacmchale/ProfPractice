@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleMaps, GoogleMap, Marker, LatLng, ILatLng } from '@ionic-native/google-maps/ngx';
+import { GoogleMaps, GoogleMap, Marker, LatLng, ILatLng, GoogleMapOptions } from '@ionic-native/google-maps/ngx';
 import { JourneyService } from 'src/app/journey.service';
 import { dbInfo } from 'src/app/Journey';
 import { Router } from '@angular/router';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-map',
@@ -12,15 +14,44 @@ import { Router } from '@angular/router';
 export class MapPage implements OnInit {
 
   check:number;
-  constructor(private journies:JourneyService, private router:Router) { }
+  constructor(private journies:JourneyService, private router:Router, private getUserLocation:Geolocation) { }
   
+  userLat:number;
+  userLong:number;
   map:GoogleMap; 
   markersToShow:any[];
 
   ngOnInit() {
     this.loadDocuments();   
-    this.map = GoogleMaps.create('Gmap');
+    this.loadMap();
   }
+
+  loadMap() {
+
+    
+     this.getUserLocation.getCurrentPosition().then((resp) => {
+      this.userLat = resp.coords.latitude
+      this.userLong = resp.coords.longitude
+      console.log(resp);
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+
+
+     console.log(this.userLat);
+     console.log(this.userLong);
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: this.userLat,
+          lng: this.userLong
+        },
+        zoom: 10,
+        tilt: 30
+      }
+    };
+    this.map = GoogleMaps.create('myMap', mapOptions);
+  }//loadMap()
   showJournies()
   {
     this.loadDocuments();
