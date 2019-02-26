@@ -21,21 +21,9 @@ import { JourneyService } from 'src/app/journey.service';
 })
 export class JourneyPlannerPage implements OnInit {
   map: GoogleMap;
-  new: ILatLng;
-  start: ILatLng;
-  end: ILatLng;
   startJourney:Marker;
   endJourney:Marker;
-  posA: ILatLng =
-    {
-      lat: 53.270962,
-      lng: -9.062691
-    };
-  posB: ILatLng =
-    {
-      lat: 54.270962,
-      lng: -9.062691
-    };
+
   constructor(private router:Router, private journeyService:JourneyService) { }
 
   ngOnInit() {
@@ -55,20 +43,6 @@ export class JourneyPlannerPage implements OnInit {
     };
 
     this.map = GoogleMaps.create('myMap', mapOptions);
-
-    // testing
-    // let marker: Marker = this.map.addMarkerSync({
-    //   title: "A",
-    //   icon: 'Blue',
-    //   position: this.posA,
-    //   draggable: true,
-    // });
-    // let marker2: Marker = this.map.addMarkerSync({
-    //   title: "B",
-    //   icon: 'Red',
-    //   position: this.posB,
-    //   draggable: true,
-    // });
   }//loadMap()
 
   visitMapPage()
@@ -91,7 +65,7 @@ export class JourneyPlannerPage implements OnInit {
         console.log(results[0].position); 
         this.map.setCameraTarget(results[0].position);
         this.map.setCameraZoom(10);    
-        
+        let mark:number = results[0].position.lat;
         this.endJourney = this.map.addMarkerSync({
           title: "End Journey",
           icon: 'Red',
@@ -117,5 +91,7 @@ export class JourneyPlannerPage implements OnInit {
   showPosition(x1: number, y1: number, x2: number, y2: number) 
   {
     this.journeyService.sendJourney(x1,y1,x2,y2,"default");
+    alert("Journey added");
+    this.router.navigate(['home']);
   }
 }

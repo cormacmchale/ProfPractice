@@ -2079,6 +2079,8 @@ var JourneyPlannerPage = /** @class */ (function () {
     };
     JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2) {
         this.journeyService.sendJourney(x1, y1, x2, y2, "default");
+        alert("Journey added");
+        this.router.navigate(['home']);
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

@@ -43,7 +43,7 @@ var MapPageModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
+                _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes),
             ],
             declarations: [_map_page__WEBPACK_IMPORTED_MODULE_5__["MapPage"]]
         })

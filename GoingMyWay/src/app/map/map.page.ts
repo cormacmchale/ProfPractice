@@ -11,48 +11,15 @@ import { Router } from '@angular/router';
 })
 export class MapPage implements OnInit {
 
-
+  check:number;
   constructor(private journies:JourneyService, private router:Router) { }
   
   map:GoogleMap; 
-  pos:ILatLng = 
-  {
-    lat:43.087,
-    lng:-90.38
-  };
-  posTwo:ILatLng = 
-  {
-    lat:43.087,
-    lng:-99.38
-  };
-  addPos:ILatLng;
-
   markersToShow:any[];
 
   ngOnInit() {
-    this.loadDocuments();
+    this.loadDocuments();   
     this.map = GoogleMaps.create('Gmap');
-  }
-  addMarker()
-  {
-    this.map.addMarker(
-      {
-        icon:'Blue',
-        position: this.posTwo
-      });
-
-      this.map.addMarker(
-      {
-        icon:'Red',
-        position: this.pos
-      });
-
-       this.map.addPolyline(
-         {
-          points:[this.pos, this.posTwo]
-         });
-    
-    console.log("marker added");
   }
   showJournies()
   {
@@ -62,14 +29,12 @@ export class MapPage implements OnInit {
       console.log(this.markersToShow);
       for (let info of this.markersToShow)
       {
-        //this.pos.lat = info.payload.doc._document.proto.fields.lat.stringValue;
-        //this.pos.lng = info.payload.doc._document.proto.fields.long.stringValue;
         this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue,info.payload.doc._document.proto.fields.name.stringValue)
         //console.log("hello");
-        console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
-        console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
-        console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
-        console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
+        // console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
+        // console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
+        // console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
+        // console.log(info.payload.doc._document.proto.fields.startlong.doubleValue);
       } 
     }
     else
@@ -102,6 +67,7 @@ export class MapPage implements OnInit {
             lng:y1
           }
         });
+        
   }
   visitMapPage()
   {
