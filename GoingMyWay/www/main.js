@@ -839,6 +839,7 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./database/database.module": [
 		"./src/app/database/database.module.ts",
+		"default~database-database-module~journey-planner-journey-planner-module~map-map-module",
 		"common",
 		"database-database-module"
 	],
@@ -848,11 +849,13 @@ var map = {
 	],
 	"./journey-planner/journey-planner.module": [
 		"./src/app/journey-planner/journey-planner.module.ts",
+		"default~database-database-module~journey-planner-journey-planner-module~map-map-module",
 		"common",
 		"journey-planner-journey-planner-module"
 	],
 	"./map/map.module": [
 		"./src/app/map/map.module.ts",
+		"default~database-database-module~journey-planner-journey-planner-module~map-map-module",
 		"common",
 		"map-map-module"
 	]

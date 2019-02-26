@@ -13,11 +13,9 @@ import { Observable } from 'rxjs/internal/Observable';
 export class MapPage implements OnInit {
 
   check:number;
-  user:ILatLng;
+  user:any;
   constructor(private journies:JourneyService, private router:Router) { }
-  
-  userLat:number=0;
-  userLong:number=0;
+
   map:GoogleMap; 
   markersToShow:any[];
 
@@ -99,38 +97,7 @@ export class MapPage implements OnInit {
             points:[pointA,pointB]
           }
         )
-        // this.map.addMarker(
-        //   {
-        //     title:title+" End",
-        //     icon:'Red',
-        //     animation: 'Drop',
-        //     position:
-        //      {
-        //       lat:x,
-        //       lng:y
-        //     }
-        //   }).then((marker:Marker)=>
-        //   {
-        //     marker.showInfoWindow();
-        //     this.pointA = marker.getPosition();
-        //   });
-        //   this.map.addMarker(
-        //     {
-        //       title:title+" Start",
-        //       icon:'Blue',
-        //       animation: 'Drop',
-        //       position:
-        //        {
-        //         lat:x1,
-        //         lng:y1
-        //       }
-        //     }).then((marker:Marker)=>
-        //     {
-        //       marker.showInfoWindow();
-        //       this.pointB = marker.getPosition();
-        //     });
-        //     this.addPolylinesFromDatabase(this.pointA,this.pointB) 
-  }
+    }
   convertRgb(x:number):number
   {
     //keep in range
@@ -162,5 +129,23 @@ export class MapPage implements OnInit {
       {
         this.markersToShow=res;
       });
+  }
+  myLocation()
+  {
+    this.user = this.journies.getlocation();
+    console.log(this.user)
+    console.log(this.user.coords.latitude)
+    //console.log(this.user[0].__zone_symbol__value.coords.longitude)
+  }
+  findUser()
+  {
+    this.map.setOptions(
+      {
+        target: {
+          lat: this.user[0].__zone_symbol__value.coords.latitude,
+          lng: this.user[0].__zone_symbol__value.coords.longitude
+        }
+      }
+    )
   }
 }

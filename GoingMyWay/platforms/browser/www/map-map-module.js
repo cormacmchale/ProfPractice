@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <br>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Going My Way/RideShare</ion-title>\r\n    <ion-button (click)=\"visitMapPage()\">Journies</ion-button>\r\n    <ion-button (click)=\"navigateJourneyPlanner()\">Add a Journey</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <ion-button (click)=\"myLocation()\">Check Local Area</ion-button>\r\n  <br>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -108,8 +108,6 @@ var MapPage = /** @class */ (function () {
     function MapPage(journies, router) {
         this.journies = journies;
         this.router = router;
-        this.userLat = 0;
-        this.userLong = 0;
     }
     MapPage.prototype.ngOnInit = function () {
         this.loadDocuments();
@@ -171,37 +169,6 @@ var MapPage = /** @class */ (function () {
         this.map.addPolyline({
             points: [pointA, pointB]
         });
-        // this.map.addMarker(
-        //   {
-        //     title:title+" End",
-        //     icon:'Red',
-        //     animation: 'Drop',
-        //     position:
-        //      {
-        //       lat:x,
-        //       lng:y
-        //     }
-        //   }).then((marker:Marker)=>
-        //   {
-        //     marker.showInfoWindow();
-        //     this.pointA = marker.getPosition();
-        //   });
-        //   this.map.addMarker(
-        //     {
-        //       title:title+" Start",
-        //       icon:'Blue',
-        //       animation: 'Drop',
-        //       position:
-        //        {
-        //         lat:x1,
-        //         lng:y1
-        //       }
-        //     }).then((marker:Marker)=>
-        //     {
-        //       marker.showInfoWindow();
-        //       this.pointB = marker.getPosition();
-        //     });
-        //     this.addPolylinesFromDatabase(this.pointA,this.pointB) 
     };
     MapPage.prototype.convertRgb = function (x) {
         //keep in range
@@ -227,6 +194,20 @@ var MapPage = /** @class */ (function () {
         var _this = this;
         this.journies.getJourney().subscribe(function (res) {
             _this.markersToShow = res;
+        });
+    };
+    MapPage.prototype.myLocation = function () {
+        this.user = this.journies.getlocation();
+        console.log(this.user);
+        console.log(this.user.coords.latitude);
+        //console.log(this.user[0].__zone_symbol__value.coords.longitude)
+    };
+    MapPage.prototype.findUser = function () {
+        this.map.setOptions({
+            target: {
+                lat: this.user[0].__zone_symbol__value.coords.latitude,
+                lng: this.user[0].__zone_symbol__value.coords.longitude
+            }
         });
     };
     MapPage = __decorate([
