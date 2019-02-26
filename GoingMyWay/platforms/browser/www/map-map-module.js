@@ -148,6 +148,12 @@ var MapPage = /** @class */ (function () {
     };
     //add markers from database
     MapPage.prototype.addMarkerFromDatabase = function (x, y, x1, y1, title) {
+        this.pointA.lat = x1;
+        this.pointA.lng = y1;
+        this.pointB.lat = x;
+        this.pointB.lng = y;
+        console.log(this.pointA.lat);
+        console.log(this.pointB.lat);
         this.map.addMarker({
             title: title + " End",
             icon: 'Blue',
@@ -170,10 +176,6 @@ var MapPage = /** @class */ (function () {
         }).then(function (marker) {
             marker.showInfoWindow();
         });
-        // this.pointA.lat = x1;
-        // this.pointA.lng = y1;
-        // this.pointB.lat = x;
-        // this.pointB.lng = y;
         // this.map.addPolyline
         // (
         //   {

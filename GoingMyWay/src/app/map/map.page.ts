@@ -52,7 +52,7 @@ export class MapPage implements OnInit {
       for (let info of this.markersToShow)
       {
         this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue,info.payload.doc._document.proto.fields.name.stringValue)
-        //console.log("hello");
+        this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
         // console.log(info.payload.doc._document.proto.fields.endlat.doubleValue);
         // console.log(info.payload.doc._document.proto.fields.endlong.doubleValue);
         // console.log(info.payload.doc._document.proto.fields.startlat.doubleValue);
@@ -63,6 +63,11 @@ export class MapPage implements OnInit {
     {
       console.log("No Data");
     }
+  }
+  //add polylines
+  addPolylinesFromDatabase(x:number,y:number,x1:number,y1:number)
+  {
+    console.log(x+" "+y+" "+x1+" "+y1);
   }
   //add markers from database
   addMarkerFromDatabase(x:number,y:number,x1:number,y1:number, title:string)
@@ -94,22 +99,7 @@ export class MapPage implements OnInit {
         }).then((marker:Marker)=>
         {
           marker.showInfoWindow();
-        });
-
-        this.pointA.lat = x1;
-        this.pointA.lng = y1;
-        this.pointB.lat = x;
-        this.pointB.lng = y;
-
-        console.log(this.pointA.lat)
-        console.log(this.pointB.lat)
-
-        // this.map.addPolyline
-        // (
-        //   {
-        //     points:[this.pointA,this.pointB]
-        //   }
-        // );  
+        });  
   }
   visitMapPage()
   {
