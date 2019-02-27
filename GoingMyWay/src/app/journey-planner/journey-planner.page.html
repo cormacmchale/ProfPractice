@@ -1,13 +1,16 @@
-<ion-header>
+<<ion-header>
   <ion-toolbar>
-    <ion-title>Going My Way/RideShare</ion-title>
-    <ion-button (click)="visitMapPage()">Journies</ion-button>
-    <ion-button (click)="navigateJourneyPlanner()">Add a Journey</ion-button>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Going My Way/RideShare
+    </ion-title>
   </ion-toolbar>
-  <ion-input [(ngModel)]="search_address"  placeholder="">Search location:</ion-input><ion-button (click)="search(search_address)">search</ion-button>
 </ion-header>
 
 <ion-content padding>
 <div id="myMap"></div>
+<ion-input [(ngModel)]="search_address"  placeholder="">Search location:</ion-input><ion-button (click)="search(search_address)">search</ion-button>
 <ion-button (click)="addJourneyToDatabase()">Add This Journey!</ion-button>
 </ion-content>

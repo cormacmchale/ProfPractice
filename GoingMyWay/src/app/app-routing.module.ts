@@ -5,8 +5,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
-  { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },  { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
-
+  { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
+  { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' }
 ];
 
 @NgModule({

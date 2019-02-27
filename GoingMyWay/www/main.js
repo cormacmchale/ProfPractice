@@ -907,7 +907,7 @@ var routes = [
     { path: 'home', loadChildren: './home/home.module#HomePageModule' },
     { path: 'map', loadChildren: './map/map.module#MapPageModule' },
     { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
-    { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
+    { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -932,7 +932,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\r\n  <ion-split-pane>\r\n    <ion-menu type=\"overlay\">\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-title>\r\n            Menu\r\n          </ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appMenu\">\r\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" >\r\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\r\n              <ion-label>{{p.title}} </ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n\r\n\r\n        </ion-list>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <ion-router-outlet main></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>"
 
 /***/ }),
 
@@ -964,10 +964,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var AppComponent = /** @class */ (function () {
+    //selectedPath = "";
     function AppComponent(platform, splashScreen, statusBar) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        //rootPage: any = HomePage;
+        this.appMenu = [
+            { title: "Home", url: '/home', icon: 'home', pathMatch: 'full' },
+            { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
+            { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' }
+        ];
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -1129,7 +1136,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Cormac\Desktop\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Lena\Desktop\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
 
 
 /***/ })

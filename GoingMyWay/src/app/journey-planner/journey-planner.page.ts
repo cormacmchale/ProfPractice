@@ -20,6 +20,7 @@ import { JourneyService } from 'src/app/journey.service';
   styleUrls: ['./journey-planner.page.scss'],
 })
 export class JourneyPlannerPage implements OnInit {
+  
   map: GoogleMap;
   startJourney:Marker;
   endJourney:Marker;
