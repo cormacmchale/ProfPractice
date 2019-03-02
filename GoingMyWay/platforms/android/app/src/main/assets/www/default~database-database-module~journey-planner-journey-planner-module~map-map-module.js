@@ -111,21 +111,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var JourneyService = /** @class */ (function () {
-    function JourneyService(database, getUserLocation) {
-        var _this = this;
-        this.getUserLocation = getUserLocation;
+    function JourneyService(database, geolocation) {
+        this.geolocation = geolocation;
         this.journies = database.collection('journey');
-        this.getUserLocation.getCurrentPosition().then(function (resp) {
-            _this.location.lat = resp.coords.latitude;
-            _this.location.lng = resp.coords.longitude;
-            return _this.location;
-        }).catch(function (error) {
-            console.log('Error getting location', error);
-        });
     }
-    JourneyService.prototype.getlocation = function () {
-        return this.location;
-    };
     JourneyService.prototype.getJourney = function () {
         this.journiesTwo = this.journies.snapshotChanges();
         return this.journiesTwo;
@@ -134,6 +123,10 @@ var JourneyService = /** @class */ (function () {
         console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
         this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name };
         this.journies.add(this.addJourney);
+    };
+    JourneyService.prototype.getlocation = function () {
+        var user = this.geolocation.getCurrentPosition();
+        return user;
     };
     JourneyService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

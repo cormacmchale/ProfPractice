@@ -839,7 +839,7 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./database/database.module": [
 		"./src/app/database/database.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~map-map-module",
+		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"database-database-module"
 	],
@@ -849,13 +849,19 @@ var map = {
 	],
 	"./journey-planner/journey-planner.module": [
 		"./src/app/journey-planner/journey-planner.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~map-map-module",
+		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"journey-planner-journey-planner-module"
 	],
+	"./login/login.module": [
+		"./src/app/login/login.module.ts",
+		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
+		"common",
+		"login-login-module"
+	],
 	"./map/map.module": [
 		"./src/app/map/map.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~map-map-module",
+		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"map-map-module"
 	]
@@ -907,7 +913,8 @@ var routes = [
     { path: 'home', loadChildren: './home/home.module#HomePageModule' },
     { path: 'map', loadChildren: './map/map.module#MapPageModule' },
     { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
-    { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' }
+    { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
+    { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -932,7 +939,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n  <ion-split-pane>\r\n    <ion-menu type=\"overlay\">\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-title>\r\n            Menu\r\n          </ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appMenu\">\r\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" >\r\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\r\n              <ion-label>{{p.title}} </ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n\r\n\r\n        </ion-list>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <ion-router-outlet main></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>"
+module.exports = "<ion-app>\r\n  <ion-split-pane>\r\n    <ion-menu type=\"overlay\">\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-title>\r\n            Menu\r\n          </ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appMenu\">\r\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" >\r\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\r\n              <ion-label>{{p.title}} </ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n        </ion-list>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <ion-router-outlet main></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>"
 
 /***/ }),
 
@@ -973,7 +980,8 @@ var AppComponent = /** @class */ (function () {
         this.appMenu = [
             { title: "Home", url: '/home', icon: 'home', pathMatch: 'full' },
             { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
-            { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' }
+            { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' },
+            { title: "Login/Register", url: '/login', icon: 'happy', pathMatch: 'full' }
         ];
         this.initializeApp();
     }
@@ -1023,7 +1031,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
+/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! angularfire2/auth */ "./node_modules/angularfire2/auth/index.js");
+/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1043,6 +1053,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -1050,9 +1061,13 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
             entryComponents: [],
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"], angularfire2__WEBPACK_IMPORTED_MODULE_8__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].firebase), angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"]],
+            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(),
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
+                angularfire2__WEBPACK_IMPORTED_MODULE_8__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].firebase),
+                angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
+                angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__["AngularFireAuthModule"]],
             providers: [
-                _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_11__["GoogleMaps"],
+                _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_12__["GoogleMaps"],
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicRouteStrategy"] }
@@ -1136,7 +1151,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Lena\Desktop\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Cormac\Desktop\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
 
 
 /***/ })

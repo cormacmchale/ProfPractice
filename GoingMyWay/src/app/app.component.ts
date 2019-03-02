@@ -15,7 +15,8 @@ export class AppComponent {
   public appMenu = [
     { title: "Home", url: '/home', icon: 'home', pathMatch: 'full' },
     { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
-    { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' }
+    { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' },
+    { title: "Login/Register", url: '/login', icon: 'happy', pathMatch: 'full' }
   ]
   //selectedPath = "";
   constructor(

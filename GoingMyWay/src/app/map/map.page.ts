@@ -23,6 +23,7 @@ export class MapPage implements OnInit {
   {
     this.loadDocuments();  
     this.loadMap();
+    this.showJournies(); 
   }
 
   loadMap() {
@@ -37,11 +38,12 @@ export class MapPage implements OnInit {
       }
     };
     this.map = GoogleMaps.create('myMap', mapOptions);
+    //setTimeout(this.showJournies(), 2000);
   }//loadMap()
 
   showJournies()
   {
-    this.loadDocuments();
+    //this.loadDocuments();
     if(this.markersToShow!=null)
     { 
       console.log(this.markersToShow);
@@ -129,7 +131,11 @@ export class MapPage implements OnInit {
       {
         this.markersToShow=res;
       });
+      console.log(this.markersToShow)
   }
+
+
+  //not working, may not implement
   myLocation()
   {
     this.user = this.journies.getlocation();
