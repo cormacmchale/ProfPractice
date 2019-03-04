@@ -62,7 +62,7 @@ var TestGeolocationPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-row>\r\n      <ion-col text-start padding-top>\r\n        <ion-title>Google Map</ion-title>\r\n      </ion-col>\r\n      <ion-col text-end>\r\n        <ion-button (click)=\"loadMap()\" shape=\"round\" fill=\"outline\">\r\n          <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n          Where I Am\r\n        </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-header>\r\n  <ion-content>\r\n   \r\n    <div class=\"map-wrapper\">\r\n      <div id=\"map_center\">\r\n        <img src=\"../../assets/icon/center_marker.png\" />\r\n      </div>\r\n      <div #map id=\"map\"></div>\r\n    </div>\r\n    <div id=\"address\">\r\n      <span>{{address}}</span>\r\n    </div>\r\n   \r\n   \r\n  </ion-content>"
+module.exports = "<ion-header>\r\n    <ion-row>\r\n      <ion-col text-start padding-top>\r\n        <ion-title>Google Map</ion-title>\r\n      </ion-col>\r\n      <ion-col text-end></ion-col>\r\n        <ion-button (click)=\"loadMap()\" shape=\"round\" fill=\"outline\">\r\n          <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n          Where I Am\r\n        </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-header>\r\n  <ion-content>\r\n   \r\n    <div class=\"map-wrapper\">\r\n      <div id=\"map_center\">\r\n        <img src=\"../../assets/icon/center_marker.png\" />\r\n      </div>\r\n      <div #map id=\"map\"></div>\r\n    </div>\r\n    <div id=\"address\">\r\n      <span>{{address}}</span>\r\n    </div>\r\n   \r\n   \r\n  </ion-content>"
 
 /***/ }),
 
