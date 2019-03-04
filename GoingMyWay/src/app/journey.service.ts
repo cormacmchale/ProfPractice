@@ -17,11 +17,9 @@ export class JourneyService {
  addJourney:dbInfo;
  private journies: AngularFirestoreCollection<any>;
  private journiesTwo: Observable<any[]>;
- public isLoggedIn:boolean;
 
   constructor(database:AngularFirestore, private geolocation: Geolocation, private authentication: AngularFireAuth)
   { 
-    this.isLoggedIn = false;
     this.journies = database.collection<any>('journey');
   }
   getJourney()
@@ -49,7 +47,6 @@ export class JourneyService {
       {
         alert("Login Success!")
         console.log(result.user.email)
-        this.isLoggedIn = true;
       }
     }
     catch(e)

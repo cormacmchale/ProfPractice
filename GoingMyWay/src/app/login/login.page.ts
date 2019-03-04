@@ -34,6 +34,10 @@ export class LoginPage implements OnInit {
   {
     this.result = this.signIn.getUser();
     console.log(this.result)
+    if(!this.result)
+    {
+      alert("No one logged in")
+    }
   }
 
 }

@@ -86,14 +86,23 @@ export class JourneyPlannerPage implements OnInit {
   }
   addJourneyToDatabase()
   {
-    this.start = this.startJourney.getPosition();
-    this.end = this.endJourney.getPosition(); 
-    this.showPosition(this.start.lng,this.start.lat,this.end.lng,this.end.lat)
+    if(!this.journeyService.getUser())
+    {
+      alert("Please Log in to add a Journey")
+    }
+    else
+    {
+      let user:any = this.journeyService.getUser();
+      let userName:string = user.email
+      this.start = this.startJourney.getPosition();
+      this.end = this.endJourney.getPosition(); 
+      this.showPosition(this.start.lng,this.start.lat,this.end.lng,this.end.lat,userName)
+    }
   }
 
-  showPosition(x1: number, y1: number, x2: number, y2: number) 
+  showPosition(x1: number, y1: number, x2: number, y2: number, user:string) 
   {
-    this.journeyService.sendJourney(x1,y1,x2,y2,"default");
+    this.journeyService.sendJourney(x1,y1,x2,y2,user);
     alert("Journey added");
     this.router.navigate(['home']);
   }

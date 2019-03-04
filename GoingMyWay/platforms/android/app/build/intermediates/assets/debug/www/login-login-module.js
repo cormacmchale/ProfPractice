@@ -62,7 +62,7 @@ var LoginPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-item>\r\n    <ion-label position=\"floating\">E-Mail</ion-label>\r\n    <ion-input [(ngModel)] = \"userName\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Password</ion-label>\r\n    <ion-input [(ngModel)] = \"eMail\" inputmode=\"password\"></ion-input>\r\n  </ion-item>\r\n  <ion-button (click)=\"login()\">Login</ion-button>\r\n  <ion-button (click)=\"register()\">Register</ion-button>\r\n  <ion-button (click)=\"checkUser()\">Check User</ion-button>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-item>\r\n    <ion-label position=\"floating\">E-Mail</ion-label>\r\n    <ion-input [(ngModel)] = \"userName\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Password</ion-label>\r\n    <ion-input [(ngModel)] = \"eMail\" inputmode=\"password\"></ion-input>\r\n  </ion-item>\r\n  <ion-button (click)=\"login()\">Login</ion-button>\r\n  <ion-button (click)=\"register()\">Register</ion-button>\r\n  <ion-button (click)=\"checkUser()\">Check User</ion-button>\r\n  <ion-button color=\"danger\" (click)=\"logOut()\">Log out</ion-button>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -115,6 +115,10 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage.prototype.register = function () {
         this.signIn.userRegister(this.userName, this.eMail);
+    };
+    LoginPage.prototype.logOut = function () {
+        this.result = this.signIn.logUserOut();
+        console.log(this.result);
     };
     LoginPage.prototype.checkUser = function () {
         this.result = this.signIn.getUser();

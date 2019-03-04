@@ -223,6 +223,9 @@ var JourneyService = /** @class */ (function () {
     JourneyService.prototype.getUser = function () {
         return this.authentication.auth.currentUser;
     };
+    JourneyService.prototype.logUserOut = function () {
+        return this.authentication.auth.signOut();
+    };
     JourneyService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'

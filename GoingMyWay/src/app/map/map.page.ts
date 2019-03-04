@@ -22,8 +22,7 @@ export class MapPage implements OnInit {
   ngOnInit() 
   {
     this.loadDocuments();  
-    this.loadMap();
-    this.showJournies(); 
+    this.loadMap(); 
   }
 
   loadMap() {
@@ -43,24 +42,31 @@ export class MapPage implements OnInit {
 
   showJournies()
   {
-    //this.loadDocuments();
-    if(this.markersToShow!=null)
-    { 
-      console.log(this.markersToShow);
-      for (let info of this.markersToShow)
-      {
-        this.addMarkerFromDatabase(
-          info.payload.doc._document.proto.fields.endlat.doubleValue,
-          info.payload.doc._document.proto.fields.endlong.doubleValue,
-          info.payload.doc._document.proto.fields.startlat.doubleValue,
-          info.payload.doc._document.proto.fields.startlong.doubleValue,
-          info.payload.doc._document.proto.fields.name.stringValue)
-        //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
-      } 
+    if(!this.journies.getUser())
+    {
+      alert("Please Log in to view Journies")
     }
     else
     {
-      console.log("No Data");
+      //this.loadDocuments();
+      if(this.markersToShow!=null)
+      { 
+        console.log(this.markersToShow);
+        for (let info of this.markersToShow)
+        {
+          this.addMarkerFromDatabase(
+            info.payload.doc._document.proto.fields.endlat.doubleValue,
+            info.payload.doc._document.proto.fields.endlong.doubleValue,
+            info.payload.doc._document.proto.fields.startlat.doubleValue,
+            info.payload.doc._document.proto.fields.startlong.doubleValue,
+            info.payload.doc._document.proto.fields.name.stringValue)
+          //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
+        } 
+      }
+      else
+      {
+        console.log("No Data");
+      }
     }
   }
   //add markers from database
@@ -72,7 +78,7 @@ export class MapPage implements OnInit {
     //adding different logic
         let startMarker: Marker = this.map.addMarkerSync(
           {
-            title: "Start Of Journey",
+            title: title,
             icon: 'rgb('+r+','+g+','+b+')',
             animation: 'Drop',
             position: 
@@ -81,9 +87,10 @@ export class MapPage implements OnInit {
               lng:y
             }
           })
+          startMarker.showInfoWindow();
         let endMarker: Marker = this.map.addMarkerSync(
           {
-              title: "End Of Journey",
+              title: title,
               icon: 'rgb('+r+','+g+','+b+')',
               animation: 'Drop',
               position: 
@@ -92,6 +99,7 @@ export class MapPage implements OnInit {
                 lng:y1
               }
           })
+          endMarker.showInfoWindow();
         let pointA: ILatLng = startMarker.getPosition();
         let pointB: ILatLng = endMarker.getPosition();
         this.map.addPolyline(
