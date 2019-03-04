@@ -16,26 +16,13 @@ export class DatabasePage implements OnInit {
     this.loadDocuments();
   }
 
-  //variables on Page
-  Long:number;
-  Lat:number;
-  name:string;
-  displayData:string;
-
-  //display this
-  answer:string;
-
-  displayDocuments()
-  {
-      //this.loadDocuments();
-      console.log(this.getData);     
-  }
   loadDocuments()
   {
     this.data.getJourney().subscribe(res=>
       {
         this.getData=res;
       });
+      console.log(this.getData); 
   }
 
 }
