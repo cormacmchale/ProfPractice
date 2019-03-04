@@ -983,7 +983,11 @@ var AppComponent = /** @class */ (function () {
             { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
             { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' },
             { title: "Login/Register", url: '/login', icon: 'happy', pathMatch: 'full' },
+<<<<<<< HEAD
             { title: "test", url: '/test-geolocation', icon: 'sad', pathMatch: 'full' }
+=======
+            { title: "Manage Journies", url: '/database', icon: 'trash', pathMatch: 'full' }
+>>>>>>> 107f6d5ff92888b75a9bbf35ec6799f266e8e585
         ];
         this.initializeApp();
     }

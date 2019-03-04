@@ -152,7 +152,6 @@ var JourneyService = /** @class */ (function () {
     function JourneyService(database, geolocation, authentication) {
         this.geolocation = geolocation;
         this.authentication = authentication;
-        this.isLoggedIn = false;
         this.journies = database.collection('journey');
     }
     JourneyService.prototype.getJourney = function () {
@@ -181,7 +180,6 @@ var JourneyService = /** @class */ (function () {
                         if (result) {
                             alert("Login Success!");
                             console.log(result.user.email);
-                            this.isLoggedIn = true;
                         }
                         return [3 /*break*/, 3];
                     case 2:

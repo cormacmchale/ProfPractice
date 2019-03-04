@@ -2053,12 +2053,19 @@ var JourneyPlannerPage = /** @class */ (function () {
         });
     };
     JourneyPlannerPage.prototype.addJourneyToDatabase = function () {
-        this.start = this.startJourney.getPosition();
-        this.end = this.endJourney.getPosition();
-        this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat);
+        if (!this.journeyService.getUser()) {
+            alert("Please Log in to add a Journey");
+        }
+        else {
+            var user = this.journeyService.getUser();
+            var userName = user.email;
+            this.start = this.startJourney.getPosition();
+            this.end = this.endJourney.getPosition();
+            this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName);
+        }
     };
-    JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2) {
-        this.journeyService.sendJourney(x1, y1, x2, y2, "default");
+    JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2, user) {
+        this.journeyService.sendJourney(x1, y1, x2, y2, user);
         alert("Journey added");
         this.router.navigate(['home']);
     };

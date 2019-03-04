@@ -62,7 +62,7 @@ var DatabasePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n\r\n  <ion-item>\r\n    <ion-label position=\"floating\">Longitude</ion-label>\r\n    <ion-input [(ngModel)] = \"Long\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Latitude</ion-label>\r\n    <ion-input [(ngModel)] = \"Lat\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Profile Name</ion-label>\r\n    <ion-input [(ngModel)] = \"name\" ></ion-input>\r\n  </ion-item>\r\n\r\n  <ion-button (click)=\"testSend()\">Send to Database</ion-button>\r\n  <br>\r\n  <br>\r\n  <ion-button (click)=\"displayDocuments()\">Log Documents</ion-button>\r\n  <br>\r\n  <br>\r\n\r\n\r\n  <!-- <ion-item  *ngFor =\"let data of getData\" >\r\n  {{data.payload.doc._document.proto.fields.lat.stringValue}} \r\n  {{data.payload.doc._document.proto.fields.long.stringValue}}\r\n  {{data.payload.doc._document.proto.fields.name.stringValue}}\r\n  </ion-item>  -->\r\n\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n   <!-- might not be needed -->\r\n  <!-- <ion-button (click)=\"getUserJournies()\">Manage My Journies</ion-button> -->\r\n\r\n  <ion-item *ngFor=\"let info of getData\">\r\n    <ion-label>{{info.payload.doc._document.proto.fields.endlat.doubleValue}}</ion-label>\r\n  </ion-item>\r\n  \r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -110,21 +110,15 @@ var DatabasePage = /** @class */ (function () {
     DatabasePage.prototype.ngOnInit = function () {
         this.loadDocuments();
     };
-    DatabasePage.prototype.displayDocuments = function () {
-        //this.loadDocuments();
-        console.log(this.getData);
-    };
-    DatabasePage.prototype.testSend = function () {
-        // this.data.sendJourney(this.Long,this.Lat,this.name);
-    };
-    DatabasePage.prototype.checkStack = function () {
-        this.router.navigate(['map']);
-    };
     DatabasePage.prototype.loadDocuments = function () {
         var _this = this;
         this.data.getJourney().subscribe(function (res) {
             _this.getData = res;
         });
+        console.log(this.getData);
+    };
+    DatabasePage.prototype.getUserJournies = function () {
+        this.loadDocuments();
     };
     DatabasePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JourneyService } from 'src/app/journey.service';
-import { dbInfo } from 'src/app/Journey';
 import { Router } from '@angular/router';
+import { Geocoder, GeocoderResult } from '@ionic-native/google-maps/ngx';
 @Component({
   selector: 'app-database',
   templateUrl: './database.page.html',
@@ -16,35 +16,18 @@ export class DatabasePage implements OnInit {
     this.loadDocuments();
   }
 
-  //variables on Page
-  Long:number;
-  Lat:number;
-  name:string;
-  displayData:string;
-
-  //display this
-  answer:string;
-
-  displayDocuments()
-  {
-      //this.loadDocuments();
-      console.log(this.getData);     
-  }
-
-  testSend()
-  {
-   // this.data.sendJourney(this.Long,this.Lat,this.name);
-  }
-  checkStack()
-  {
-    this.router.navigate(['map']);
-  }
   loadDocuments()
   {
     this.data.getJourney().subscribe(res=>
       {
         this.getData=res;
       });
+      console.log(this.getData); 
+  }
+  getUserJournies()
+  {
+    this.loadDocuments();
+    
   }
 
 }
