@@ -10,9 +10,11 @@
 </ion-header>
 
 <ion-content padding>
+   <!-- might not be needed -->
+  <!-- <ion-button (click)="getUserJournies()">Manage My Journies</ion-button> -->
 
-  <ion-item>
-    <ion-label>Longitude</ion-label>
+  <ion-item *ngFor="let info of getData">
+    <ion-label>{{info.payload.doc._document.proto.fields.endlat.doubleValue}}</ion-label>
   </ion-item>
   
 </ion-content>

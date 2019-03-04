@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JourneyService } from 'src/app/journey.service';
-import { dbInfo } from 'src/app/Journey';
 import { Router } from '@angular/router';
+import { Geocoder, GeocoderResult } from '@ionic-native/google-maps/ngx';
 @Component({
   selector: 'app-database',
   templateUrl: './database.page.html',
@@ -23,6 +23,11 @@ export class DatabasePage implements OnInit {
         this.getData=res;
       });
       console.log(this.getData); 
+  }
+  getUserJournies()
+  {
+    this.loadDocuments();
+    
   }
 
 }
