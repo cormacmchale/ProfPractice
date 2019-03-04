@@ -21,7 +21,7 @@ export class JourneyService {
 
   constructor(database:AngularFirestore, private geolocation: Geolocation, private authentication: AngularFireAuth)
   { 
-    this.isLoggedIn = false();
+    this.isLoggedIn = false;
     this.journies = database.collection<any>('journey');
   }
   getJourney()
@@ -82,5 +82,9 @@ export class JourneyService {
   getUser()
   {
     return this.authentication.auth.currentUser;
+  }
+  logUserOut()
+  {
+    return this.authentication.auth.signOut();
   }
 }

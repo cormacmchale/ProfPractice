@@ -25,6 +25,11 @@ export class LoginPage implements OnInit {
   {
     this.signIn.userRegister(this.userName,this.eMail);
   }
+  logOut()
+  {
+    this.result = this.signIn.logUserOut();
+    console.log(this.result)
+  }
   checkUser()
   {
     this.result = this.signIn.getUser();
