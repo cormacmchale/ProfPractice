@@ -18,4 +18,8 @@ export class HomePage {
     this.router.navigate(['journey-planner']);
    }
 
+   navigateTestGeolocation(){
+    this.router.navigate(['test-geolocation']);
+   }
+
 }

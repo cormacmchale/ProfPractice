@@ -839,7 +839,6 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./database/database.module": [
 		"./src/app/database/database.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"database-database-module"
 	],
@@ -849,21 +848,22 @@ var map = {
 	],
 	"./journey-planner/journey-planner.module": [
 		"./src/app/journey-planner/journey-planner.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"journey-planner-journey-planner-module"
 	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"login-login-module"
 	],
 	"./map/map.module": [
 		"./src/app/map/map.module.ts",
-		"default~database-database-module~journey-planner-journey-planner-module~login-login-module~map-map-m~26387949",
 		"common",
 		"map-map-module"
+	],
+	"./test-geolocation/test-geolocation.module": [
+		"./src/app/test-geolocation/test-geolocation.module.ts",
+		"test-geolocation-test-geolocation-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -914,7 +914,8 @@ var routes = [
     { path: 'map', loadChildren: './map/map.module#MapPageModule' },
     { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
     { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
-    { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+    { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+    { path: 'test-geolocation', loadChildren: './test-geolocation/test-geolocation.module#TestGeolocationPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -981,7 +982,8 @@ var AppComponent = /** @class */ (function () {
             { title: "Home", url: '/home', icon: 'home', pathMatch: 'full' },
             { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
             { title: "Map", url: '/map', icon: 'map', pathMatch: 'full' },
-            { title: "Login/Register", url: '/login', icon: 'happy', pathMatch: 'full' }
+            { title: "Login/Register", url: '/login', icon: 'happy', pathMatch: 'full' },
+            { title: "test", url: '/test-geolocation', icon: 'sad', pathMatch: 'full' }
         ];
         this.initializeApp();
     }
@@ -1034,6 +1036,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! angularfire2/auth */ "./node_modules/angularfire2/auth/index.js");
 /* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
+/* harmony import */ var _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/google-maps */ "./node_modules/@ionic-native/google-maps/index.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+/* harmony import */ var _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/native-geocoder/ngx */ "./node_modules/@ionic-native/native-geocoder/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1054,6 +1059,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -1067,6 +1075,9 @@ var AppModule = /** @class */ (function () {
                 angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
                 angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__["AngularFireAuthModule"]],
             providers: [
+                _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_15__["NativeGeocoder"],
+                _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_13__["Geocoder"],
+                _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_14__["Geolocation"],
                 _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_12__["GoogleMaps"],
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
@@ -1151,7 +1162,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Cormac\Desktop\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Lena\Desktop\ProfPractice\GoingMyWay\src\main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -61,7 +61,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content padding>\r\n  \r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content padding>\r\n    <ion-button (click)=\"navigateTestGeolocation()\">testGeolocation</ion-button>\r\n  <p>Welcome to RideShare app</p>\r\n  <p>In order to use the app you need to be registered and logged in</p>\r\n  <p>As soon as you did that </p>\r\n</ion-content>"
 
 /***/ }),
 
@@ -109,6 +109,9 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.navigateJourneyPlanner = function () {
         this.router.navigate(['journey-planner']);
+    };
+    HomePage.prototype.navigateTestGeolocation = function () {
+        this.router.navigate(['test-geolocation']);
     };
     HomePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
