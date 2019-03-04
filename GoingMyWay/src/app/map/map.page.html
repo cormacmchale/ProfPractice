@@ -1,18 +1,16 @@
 <ion-header>
   <ion-toolbar>
-
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons> 
       <ion-row>
-          <ion-col text-start padding-top>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>    
+          <ion-col text-start padding-top> 
     <ion-title>
       Going My Way/RideShare
     </ion-title>
   </ion-col>
   <ion-col text-end>
-
-    <ion-button (click)="showJournies()" shape="round" fill="outline">
+    <ion-button (click)="getUserJournies()" shape="round" fill="outline">
         <ion-icon slot="start" name="locate"></ion-icon>
         Show Journies
       </ion-button>
