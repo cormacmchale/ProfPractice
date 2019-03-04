@@ -123,6 +123,9 @@ var LoginPage = /** @class */ (function () {
     LoginPage.prototype.checkUser = function () {
         this.result = this.signIn.getUser();
         console.log(this.result);
+        if (!this.result) {
+            alert("No one logged in");
+        }
     };
     LoginPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

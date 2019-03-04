@@ -72,9 +72,7 @@ export class JourneyService {
       let errorforUser: string = e.message;
       console.error(e.message);
       alert(errorforUser+"\n Registration failed")
-
     }  
-
   }
   getUser()
   {

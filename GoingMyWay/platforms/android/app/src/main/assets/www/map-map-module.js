@@ -112,7 +112,6 @@ var MapPage = /** @class */ (function () {
     MapPage.prototype.ngOnInit = function () {
         this.loadDocuments();
         this.loadMap();
-        this.showJournies();
     };
     MapPage.prototype.loadMap = function () {
         var mapOptions = {
@@ -129,17 +128,22 @@ var MapPage = /** @class */ (function () {
         //setTimeout(this.showJournies(), 2000);
     }; //loadMap()
     MapPage.prototype.showJournies = function () {
-        //this.loadDocuments();
-        if (this.markersToShow != null) {
-            console.log(this.markersToShow);
-            for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
-                var info = _a[_i];
-                this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
-                //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
-            }
+        if (!this.journies.getUser()) {
+            alert("Please Log in to view Journies");
         }
         else {
-            console.log("No Data");
+            //this.loadDocuments();
+            if (this.markersToShow != null) {
+                console.log(this.markersToShow);
+                for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
+                    var info = _a[_i];
+                    this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
+                    //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
+                }
+            }
+            else {
+                console.log("No Data");
+            }
         }
     };
     //add markers from database
@@ -149,7 +153,7 @@ var MapPage = /** @class */ (function () {
         var b = this.convertRgb(x1);
         //adding different logic
         var startMarker = this.map.addMarkerSync({
-            title: "Start Of Journey",
+            title: title,
             icon: 'rgb(' + r + ',' + g + ',' + b + ')',
             animation: 'Drop',
             position: {
@@ -157,8 +161,9 @@ var MapPage = /** @class */ (function () {
                 lng: y
             }
         });
+        startMarker.showInfoWindow();
         var endMarker = this.map.addMarkerSync({
-            title: "End Of Journey",
+            title: title,
             icon: 'rgb(' + r + ',' + g + ',' + b + ')',
             animation: 'Drop',
             position: {
@@ -166,6 +171,7 @@ var MapPage = /** @class */ (function () {
                 lng: y1
             }
         });
+        endMarker.showInfoWindow();
         var pointA = startMarker.getPosition();
         var pointB = endMarker.getPosition();
         this.map.addPolyline({

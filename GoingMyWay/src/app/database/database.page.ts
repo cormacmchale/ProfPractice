@@ -30,15 +30,6 @@ export class DatabasePage implements OnInit {
       //this.loadDocuments();
       console.log(this.getData);     
   }
-
-  testSend()
-  {
-   // this.data.sendJourney(this.Long,this.Lat,this.name);
-  }
-  checkStack()
-  {
-    this.router.navigate(['map']);
-  }
   loadDocuments()
   {
     this.data.getJourney().subscribe(res=>
