@@ -1,1 +1,16 @@
-
+#outerBox{
+    width: 100%;
+  height: 100%;
+  background-color: dodgerblue
+    
+}    
+#instructions{
+  margin: auto;
+  width: 65%;
+  height: 80%;
+  border: 3px solid dodgerblue;
+  padding: 10px;
+  text-align: center;
+  align-content: center;
+  background: url('../assets/roadsmall.jpg');
+}
