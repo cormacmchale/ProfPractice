@@ -23,8 +23,12 @@
   <!-- might not be needed -->
   <!-- <ion-button (click)="getUserJournies()">Manage My Journies</ion-button> -->
 
-  <ion-card *ngFor="let info of getData">{{info}}
-    <ion-button color="danger">Delete</ion-button>
+  <ion-card *ngFor="let info of getData">
+    <ion-card-content *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName">
+      {{info.payload.doc._document.key.path.segments[6]}}
+    </ion-card-content>
+    <ion-button color="danger" *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName" 
+    (click)="deleteJourney(info.payload.doc._document.key.path.segments[6])">Delete</ion-button>
   </ion-card>
   
 </ion-content>
