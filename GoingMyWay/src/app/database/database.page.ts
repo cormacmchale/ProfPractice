@@ -13,6 +13,7 @@ import {
   Environment,
   ILatLng
 } from '@ionic-native/google-maps';
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-database',
   templateUrl: './database.page.html',
@@ -22,7 +23,7 @@ export class DatabasePage implements OnInit {
 
   constructor(private data: JourneyService, private router:Router) { }
   getData:any[];
-  addArray:[];
+
   ngOnInit()
   {
     this.loadDocuments();
@@ -45,17 +46,20 @@ export class DatabasePage implements OnInit {
       {
          let startLat:number = myJournies.payload.doc._document.proto.fields.startlat.doubleValue
          let startLong:number = myJournies.payload.doc._document.proto.fields.startlong.doubleValue
-         this.geoCoding(startLat,startLong)
+         this.geoCoding(startLat,startLong)        
       }
     }  
   }
+
+  //possibly dont need this yet
   geoCoding(x:number,y:number)
   {
     Geocoder.geocode({
-      position:{"lat":x,
-                "lng":y
+      position:
+      {"lat":x,
+       "lng":y
               }}).then((results: GeocoderResult[])=>
-    {
+       {
       let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
       console.log(location)
     })

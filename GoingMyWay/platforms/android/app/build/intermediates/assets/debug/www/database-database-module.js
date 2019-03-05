@@ -62,7 +62,7 @@ var DatabasePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n\r\n  <ion-item>\r\n    <ion-label position=\"floating\">Longitude</ion-label>\r\n    <ion-input [(ngModel)] = \"Long\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Latitude</ion-label>\r\n    <ion-input [(ngModel)] = \"Lat\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Profile Name</ion-label>\r\n    <ion-input [(ngModel)] = \"name\" ></ion-input>\r\n  </ion-item>\r\n\r\n  <ion-button (click)=\"testSend()\">Send to Database</ion-button>\r\n  <br>\r\n  <br>\r\n  <ion-button (click)=\"displayDocuments()\">Log Documents</ion-button>\r\n  <br>\r\n  <br>\r\n\r\n\r\n  <!-- <ion-item  *ngFor =\"let data of getData\" >\r\n  {{data.payload.doc._document.proto.fields.lat.stringValue}} \r\n  {{data.payload.doc._document.proto.fields.long.stringValue}}\r\n  {{data.payload.doc._document.proto.fields.name.stringValue}}\r\n  </ion-item>  -->\r\n\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n      <ion-buttons slot=\"start\">\r\n          <ion-menu-button></ion-menu-button>   \r\n      </ion-buttons>\r\n      <ion-row>\r\n    <ion-col text-start padding-top>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-col>\r\n  <ion-col text-end>\r\n    <ion-button (click)=\"getUserJournies()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Show Journies\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <!-- might not be needed -->\r\n  <!-- <ion-button (click)=\"getUserJournies()\">Manage My Journies</ion-button> -->\r\n\r\n  <ion-item *ngFor=\"let info of journeyAddressArray\">\r\n    <ion-label>info</ion-label>\r\n  </ion-item>\r\n  \r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -90,6 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -102,6 +103,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DatabasePage = /** @class */ (function () {
     function DatabasePage(data, router) {
         this.data = data;
@@ -110,20 +112,32 @@ var DatabasePage = /** @class */ (function () {
     DatabasePage.prototype.ngOnInit = function () {
         this.loadDocuments();
     };
-    DatabasePage.prototype.displayDocuments = function () {
-        //this.loadDocuments();
-        console.log(this.getData);
-    };
-    DatabasePage.prototype.testSend = function () {
-        // this.data.sendJourney(this.Long,this.Lat,this.name);
-    };
-    DatabasePage.prototype.checkStack = function () {
-        this.router.navigate(['map']);
-    };
     DatabasePage.prototype.loadDocuments = function () {
         var _this = this;
         this.data.getJourney().subscribe(function (res) {
             _this.getData = res;
+        });
+    };
+    DatabasePage.prototype.getUserJournies = function () {
+        var user = this.data.getUser();
+        var userName = user.email;
+        for (var _i = 0, _a = this.getData; _i < _a.length; _i++) {
+            var myJournies = _a[_i];
+            if (myJournies.payload.doc._document.proto.fields.name.stringValue == userName) {
+                var startLat = myJournies.payload.doc._document.proto.fields.startlat.doubleValue;
+                var startLong = myJournies.payload.doc._document.proto.fields.startlong.doubleValue;
+                this.geoCoding(startLat, startLong);
+            }
+        }
+    };
+    DatabasePage.prototype.geoCoding = function (x, y) {
+        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
+            position: { "lat": x,
+                "lng": y
+            }
+        }).then(function (results) {
+            var location = results[0].country + "," + results[0].adminArea + "," + results[0].locality;
+            console.log(location);
         });
     };
     DatabasePage = __decorate([
