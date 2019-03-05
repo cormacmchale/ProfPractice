@@ -82,4 +82,13 @@ export class JourneyService {
   {
     return this.authentication.auth.signOut();
   }
+  deleteJourney(journeyId:string)
+  {
+     this.journies.doc(journeyId).delete().then(function() {
+      alert("Journey Deleted!");
+     }).catch(function(error) 
+       {
+        alert("Error removing document: "+error);
+      });
+  }
 }

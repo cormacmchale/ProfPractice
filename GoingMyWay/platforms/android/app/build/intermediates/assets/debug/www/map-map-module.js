@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-button (click)=\"showJournies()\">Show Markers</ion-button>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n      <ion-buttons slot=\"start\">\r\n          <ion-menu-button></ion-menu-button>\r\n        </ion-buttons>   \r\n      <ion-row>\r\n          <ion-col text-start padding-top>\r\n    \r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-col>\r\n  <ion-col text-end>\r\n    <ion-button (click)=\"showJournies()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Show Journies\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
