@@ -11,7 +11,7 @@ import {
 } from '@ionic-native/google-maps';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Geocoder, GeocoderResult } from '@ionic-native/google-maps/ngx';
+import { Geocoder, GeocoderResult, BaseArrayClass } from '@ionic-native/google-maps/ngx';
 import { JourneyService } from 'src/app/journey.service';
 
 @Component({
@@ -20,14 +20,16 @@ import { JourneyService } from 'src/app/journey.service';
   styleUrls: ['./journey-planner.page.scss'],
 })
 export class JourneyPlannerPage implements OnInit {
-  
-  map: GoogleMap;
-  startJourney:Marker;
-  endJourney:Marker;
-  start:ILatLng;
-  end:ILatLng;
 
-  constructor(private router:Router, private journeyService:JourneyService) { }
+  map: GoogleMap;
+  startJourney: Marker;
+  endJourney: Marker;
+  start: ILatLng;
+  end: ILatLng;
+  startAddress: string;
+  endAddress: string;
+
+  constructor(private router: Router, private journeyService: JourneyService) { }
 
   ngOnInit() {
     this.loadMap();
@@ -35,7 +37,7 @@ export class JourneyPlannerPage implements OnInit {
 
   loadMap() {
     let mapOptions: GoogleMapOptions = {
-      camera: {  
+      camera: {
         target: {
           lat: 53.270962,
           lng: -9.062691
@@ -48,27 +50,24 @@ export class JourneyPlannerPage implements OnInit {
     this.map = GoogleMaps.create('myMap', mapOptions);
   }//loadMap()
 
-  visitMapPage()
-  {
+  visitMapPage() {
     this.router.navigate(['map']);
   }
-  navigateJourneyPlanner(){
-   this.router.navigate(['journey-planner']);
+  navigateJourneyPlanner() {
+    this.router.navigate(['journey-planner']);
   }
-  search(location:string)
-  {
+  search(location: string) {
     this.map.clear();
     console.log(location)
     Geocoder.geocode
       ({
-        "address":location
+        "address": location
       })
-      .then((results: GeocoderResult[])=>
-      {
-        console.log(results[0].position); 
+      .then((results: GeocoderResult[]) => {
+        console.log(results[0].position);
         this.map.setCameraTarget(results[0].position);
-        this.map.setCameraZoom(10);    
-        let mark:number = results[0].position.lat;
+        this.map.setCameraZoom(10);
+        let mark: number = results[0].position.lat;
         this.endJourney = this.map.addMarkerSync({
           title: "End Journey",
           icon: 'Red',
@@ -84,47 +83,47 @@ export class JourneyPlannerPage implements OnInit {
         });
       })
   }
-  addJourneyToDatabase()
-  {
-    if(!this.journeyService.getUser())
-    {
+  addJourneyToDatabase() {
+    if (!this.journeyService.getUser()) {
       alert("Please Log in to add a Journey")
     }
-    else
-    {
-      let user:any = this.journeyService.getUser();
-      let userName:string = user.email
+    else {
+      let user: any = this.journeyService.getUser();
+      let userName: string = user.email
       this.start = this.startJourney.getPosition();
-      this.end = this.endJourney.getPosition(); 
-      this.showPosition(this.start.lng,this.start.lat,this.end.lng,this.end.lat,userName)
+      this.end = this.endJourney.getPosition();
+      this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName)
     }
   }
 
-  showPosition(x1: number, y1: number, x2: number, y2: number, user:string) 
-  {
-    console.log(x1+" "+y1);
+  showPosition(x1: number, y1: number, x2: number, y2: number, user: string) {
+
     Geocoder.geocode
       ({
-      position:
-      {"lat":y1,
-       "lng":x1
-              }}).then((results: GeocoderResult[])=>
-      {
-        //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
+        position:
+          [{
+            "lat": y1,
+            "lng": x1
+          },
+          {
+          "lat": y2,
+          "lng": x2
+          }]
+          }).then((results: BaseArrayClass<GeocoderResult[]>) => {
+        // let startAddress: any = results[0]
+        // let endAddress:any= results[1]
+        // console.log(startAddress)
+        // console.log(endAddress)
         console.log(results)
+        // for (let i in endAddress) {
+        //   this.endAddress += i + ","
+        // }
+        // console.log(endAddress)
+        // console.log(this.endAddress)
       })
-      Geocoder.geocode
-      ({
-      position:
-      {"lat":y2,
-       "lng":x2
-              }}).then((results: GeocoderResult[])=>
-      {
-        //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
-        console.log(results)
-      })
-    //this.journeyService.sendJourney(x1,y1,x2,y2,user);
-    //alert("Journey added");
-    //this.router.navigate(['home']);
+    //this.journeyService.sendJourney(x1, y1, x2, y2, user, this.startAddress, this.endAddress);
+    alert("Journey added");
+    this.router.navigate(['home']);
   }
+
 }

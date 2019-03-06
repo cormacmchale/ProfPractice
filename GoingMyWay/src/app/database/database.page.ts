@@ -21,30 +21,25 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
 })
 export class DatabasePage implements OnInit {
 
-  constructor(private data: JourneyService, private router:Router) { }
-  getData:any[];
-  user:any
-  userName:string
-  ngOnInit()
-  {
+  constructor(private data: JourneyService, private router: Router) { }
+  getData: any[];
+  user: any
+  userName: string
+  ngOnInit() {
     this.loadDocuments();
   }
 
-  loadDocuments()
-  {
+  loadDocuments() {
     this.user = this.data.getUser();
-    this.userName= this.user.email
-      this.data.getJourney().subscribe(res=>
-        {
-          this.getData=res      
-        });
+    this.userName = this.user.email
+    this.data.getJourney().subscribe(res => {
+      this.getData = res
+    });
   }
-  getUserJournies()
-  {
-    this.loadDocuments();  
+  getUserJournies() {
+    this.loadDocuments();
   }
-  deleteJourney(x:string)
-  {
+  deleteJourney(x: string) {
     this.data.deleteJourney(x)
   }
 }

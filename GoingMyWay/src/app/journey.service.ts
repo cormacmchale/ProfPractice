@@ -14,81 +14,67 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 export class JourneyService {
 
- addJourney:dbInfo;
- private journies: AngularFirestoreCollection<any>;
- private journiesTwo: Observable<any[]>;
+  addJourney: dbInfo;
+  private journies: AngularFirestoreCollection<any>;
+  private journiesTwo: Observable<any[]>;
 
-  constructor(database:AngularFirestore, private geolocation: Geolocation, private authentication: AngularFireAuth)
-  { 
+  constructor(database: AngularFirestore, private geolocation: Geolocation, private authentication: AngularFireAuth) {
     this.journies = database.collection<any>('journey');
   }
-  getJourney()
-  {
+  getJourney() {
     this.journiesTwo = this.journies.snapshotChanges();
     return this.journiesTwo;
   }
-  sendJourney(startlong:number, startlat:number, endlong:number, endlat:number, name:string)
-  {
-    console.log(startlong+" "+startlat+" "+endlong+" "+endlat);
-    this.addJourney = { startlong: startlong, startlat: startlat, endlong:endlong, endlat:endlat, name: name};
+  sendJourney(startlong: number, startlat: number, endlong: number, endlat: number, name: string, startAddress: string, endAddress: string) {
+    console.log(startAddress)
+    console.log(endAddress)
+    console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
+    this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name };
     this.journies.add(this.addJourney);
   }
-  getlocation():any
-  {
-    let user:any = this.geolocation.getCurrentPosition()
+  getlocation(): any {
+    let user: any = this.geolocation.getCurrentPosition()
     return user;
   }
-  async userAuthentication(name:string, password:string)
-  {
-    try
-    {   
-      const result =  await this.authentication.auth.signInWithEmailAndPassword(name,password);
-      if(result)
-      {
+  async userAuthentication(name: string, password: string) {
+    try {
+      const result = await this.authentication.auth.signInWithEmailAndPassword(name, password);
+      if (result) {
         alert("Login Success!")
         console.log(result.user.email)
       }
     }
-    catch(e)
-    {
+    catch (e) {
       let errorforUser: string = e.message;
       console.error(e.message);
-      alert(errorforUser+"\n Login failed")
+      alert(errorforUser + "\n Login failed")
     }
   }
 
-  async userRegister(name:string,password:string)
-  {
-    try
-    {
-     const result = await this.authentication.auth.createUserWithEmailAndPassword(name,password);
-     if(result)
-     {
-       alert("Registration Success!")
-     }
+  async userRegister(name: string, password: string) {
+    try {
+      const result = await this.authentication.auth.createUserWithEmailAndPassword(name, password);
+      if (result) {
+        alert("Registration Success!")
+      }
     }
-    catch(e)
-    {
+    catch (e) {
       let errorforUser: string = e.message;
       console.error(e.message);
-      alert(errorforUser+"\n Registration failed")
-    }  
+      alert(errorforUser + "\n Registration failed")
+    }
   }
-  getUser()
-  {
+  getUser() {
     return this.authentication.auth.currentUser;
   }
-  logUserOut()
-  {
+  logUserOut() {
     return this.authentication.auth.signOut();
   }
-  deleteJourney(journeyId:string)
-  {
-     this.journies.doc(journeyId).delete().then(function() {
+  deleteJourney(journeyId: string) {
+    this.journies.doc(journeyId).delete().then(function () {
       alert("Journey Deleted!");
-     }).catch(function(error) 
-       {
-        alert("Error removing document: "+error);
-      });
+    }).catch(function (error) {
+      alert("Error removing document: " + error);
+    });
   }
 }

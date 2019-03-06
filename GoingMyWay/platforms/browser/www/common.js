@@ -159,7 +159,9 @@ var JourneyService = /** @class */ (function () {
         this.journiesTwo = this.journies.snapshotChanges();
         return this.journiesTwo;
     };
-    JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name) {
+    JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name, startAddress, endAddress) {
+        console.log(startAddress);
+        console.log(endAddress);
         console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
         this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name };
         this.journies.add(this.addJourney);

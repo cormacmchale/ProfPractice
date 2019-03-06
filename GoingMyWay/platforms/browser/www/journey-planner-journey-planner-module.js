@@ -172,26 +172,30 @@ var JourneyPlannerPage = /** @class */ (function () {
         }
     };
     JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2, user) {
-        console.log(x1 + " " + y1);
         _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
-            position: { "lat": y1,
-                "lng": x1
-            }
+            position: [{
+                    "lat": y1,
+                    "lng": x1
+                },
+                {
+                    "lat": y2,
+                    "lng": x2
+                }]
         }).then(function (results) {
-            //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
+            // let startAddress: any = results[0]
+            // let endAddress:any= results[1]
+            // console.log(startAddress)
+            // console.log(endAddress)
             console.log(results);
+            // for (let i in endAddress) {
+            //   this.endAddress += i + ","
+            // }
+            // console.log(endAddress)
+            // console.log(this.endAddress)
         });
-        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
-            position: { "lat": y2,
-                "lng": x2
-            }
-        }).then(function (results) {
-            //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
-            console.log(results);
-        });
-        //this.journeyService.sendJourney(x1,y1,x2,y2,user);
-        //alert("Journey added");
-        //this.router.navigate(['home']);
+        //this.journeyService.sendJourney(x1, y1, x2, y2, user, this.startAddress, this.endAddress);
+        alert("Journey added");
+        this.router.navigate(['home']);
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
