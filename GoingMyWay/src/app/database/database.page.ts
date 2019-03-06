@@ -41,26 +41,7 @@ export class DatabasePage implements OnInit {
   }
   getUserJournies()
   {
-    this.loadDocuments();
-    // for (let myJournies of this.getData)
-    // {
-    //      let startLat:number = myJournies.payload.doc._document.proto.fields.startlat.doubleValue
-    //      let startLong:number = myJournies.payload.doc._document.proto.fields.startlong.doubleValue
-    //      this.geoCoding(startLat,startLong)        
-    // }  
-  }
-  //possibly dont need this yet
-  geoCoding(x:number,y:number)
-  {
-    Geocoder.geocode({
-      position:
-      {"lat":x,
-       "lng":y
-              }}).then((results: GeocoderResult[])=>
-       {
-      let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
-      console.log(location)
-    })
+    this.loadDocuments();  
   }
   deleteJourney(x:string)
   {

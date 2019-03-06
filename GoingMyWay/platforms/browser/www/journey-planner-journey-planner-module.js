@@ -62,7 +62,7 @@ var JourneyPlannerPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n        <ion-menu-button></ion-menu-button>\r\n      </ion-buttons>\r\n  <ion-row>\r\n    <ion-col text-start padding-top>\r\n     \r\n      <ion-title>\r\n        Going My Way/RideShare\r\n      </ion-title>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"addJourneyToDatabase()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Add This Journey!\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-row>\r\n\r\n    <ion-col text-start padding-top>\r\n        <ion-input id=\"myInput\" [(ngModel)]=\"search_address\" placeholder=\"\" > Search location:</ion-input>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"search(search_address)\" shape=\"round\" fill=\"outline\">search</ion-button>\r\n    </ion-col>\r\n\r\n  </ion-row>\r\n\r\n  <div id=\"myMap\"></div>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n        <ion-menu-button></ion-menu-button>\r\n      </ion-buttons>\r\n  <ion-row>\r\n    <ion-col text-start padding-top>\r\n     \r\n      <ion-title>\r\n        Going My Way/RideShare\r\n      </ion-title>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"addJourneyToDatabase()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Add This Journey!\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-row>\r\n\r\n    <ion-col text-start padding-top>\r\n        <ion-input id=\"myInput\" [(ngModel)]=\"search_address\" placeholder=\"Search location:\" > </ion-input>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"search(search_address)\" shape=\"round\" fill=\"outline\">search</ion-button>\r\n    </ion-col>\r\n\r\n  </ion-row>\r\n\r\n  <div id=\"myMap\"></div>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"sta
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#myMap {\n  height: 90%;\n  margin: 2%;\n  border-radius: 5%; }\n\n#myInput {\n  border-radius: 30px !important;\n  padding-left: 30px !important;\n  font-size: 0.9em;\n  margin-bottom: 10px;\n  border: 1px solid dodgerblue;\n  box-shadow: none !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcTGVuYVxcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxqb3VybmV5LXBsYW5uZXJcXGpvdXJuZXktcGxhbm5lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXO0VBQ1gsVUFBUztFQUNULGlCQUFpQixFQUFBOztBQUlyQjtFQUVJLDhCQUE4QjtFQUM5Qiw2QkFBNkI7RUFDN0IsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQiw0QkFBNEI7RUFDNUIsMkJBQTJCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9qb3VybmV5LXBsYW5uZXIvam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNteU1hcFxyXG57XHJcbiAgICBoZWlnaHQ6IDkwJTtcclxuICAgIG1hcmdpbjoyJTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUlO1xyXG59XHJcblxyXG5cclxuI215SW5wdXQgXHJcbnsgIFxyXG4gICAgYm9yZGVyLXJhZGl1czogMzBweCAhaW1wb3J0YW50O1xyXG4gICAgcGFkZGluZy1sZWZ0OiAzMHB4ICFpbXBvcnRhbnQ7XHJcbiAgICBmb250LXNpemU6IDAuOWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkIGRvZGdlcmJsdWU7XHJcbiAgICBib3gtc2hhZG93OiBub25lICFpbXBvcnRhbnQ7XHJcbn1cclxuICBcclxuICAiXX0= */"
+module.exports = "#myMap {\n  height: 90%;\n  margin: 2%;\n  border-radius: 5%; }\n\n#myInput {\n  border-radius: 30px !important;\n  padding-left: 30px !important;\n  font-size: 0.9em;\n  margin-bottom: 10px;\n  border: 1px solid dodgerblue;\n  box-shadow: none !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam91cm5leS1wbGFubmVyL0M6XFxVc2Vyc1xcQ29ybWFjXFxEZXNrdG9wXFxQcm9mUHJhY3RpY2VcXEdvaW5nTXlXYXkvc3JjXFxhcHBcXGpvdXJuZXktcGxhbm5lclxcam91cm5leS1wbGFubmVyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLFdBQVc7RUFDWCxVQUFTO0VBQ1QsaUJBQWlCLEVBQUE7O0FBSXJCO0VBRUksOEJBQThCO0VBQzlCLDZCQUE2QjtFQUM3QixnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLDRCQUE0QjtFQUM1QiwyQkFBMkIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2pvdXJuZXktcGxhbm5lci9qb3VybmV5LXBsYW5uZXIucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI215TWFwXHJcbntcclxuICAgIGhlaWdodDogOTAlO1xyXG4gICAgbWFyZ2luOjIlO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNSU7XHJcbn1cclxuXHJcblxyXG4jbXlJbnB1dCBcclxueyAgXHJcbiAgICBib3JkZXItcmFkaXVzOiAzMHB4ICFpbXBvcnRhbnQ7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDMwcHggIWltcG9ydGFudDtcclxuICAgIGZvbnQtc2l6ZTogMC45ZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgZG9kZ2VyYmx1ZTtcclxuICAgIGJveC1zaGFkb3c6IG5vbmUgIWltcG9ydGFudDtcclxufVxyXG4gIFxyXG4gICJdfQ== */"
 
 /***/ }),
 
@@ -172,9 +172,26 @@ var JourneyPlannerPage = /** @class */ (function () {
         }
     };
     JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2, user) {
-        this.journeyService.sendJourney(x1, y1, x2, y2, user);
-        alert("Journey added");
-        this.router.navigate(['home']);
+        console.log(x1 + " " + y1);
+        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
+            position: { "lat": y1,
+                "lng": x1
+            }
+        }).then(function (results) {
+            //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
+            console.log(results);
+        });
+        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
+            position: { "lat": y2,
+                "lng": x2
+            }
+        }).then(function (results) {
+            //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
+            console.log(results);
+        });
+        //this.journeyService.sendJourney(x1,y1,x2,y2,user);
+        //alert("Journey added");
+        //this.router.navigate(['home']);
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

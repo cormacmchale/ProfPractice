@@ -26,9 +26,9 @@
   <ion-card *ngFor="let info of getData">
     <ion-card-content *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName">
       {{info.payload.doc._document.key.path.segments[6]}}
+      <ion-button color="danger"
+      (click)="deleteJourney(info.payload.doc._document.key.path.segments[6])">Delete</ion-button>
     </ion-card-content>
-    <ion-button color="danger" *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName" 
-    (click)="deleteJourney(info.payload.doc._document.key.path.segments[6])">Delete</ion-button>
   </ion-card>
   
 </ion-content>

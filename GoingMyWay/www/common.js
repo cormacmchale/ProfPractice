@@ -225,6 +225,13 @@ var JourneyService = /** @class */ (function () {
     JourneyService.prototype.logUserOut = function () {
         return this.authentication.auth.signOut();
     };
+    JourneyService.prototype.deleteJourney = function (journeyId) {
+        this.journies.doc(journeyId).delete().then(function () {
+            alert("Journey Deleted!");
+        }).catch(function (error) {
+            alert("Error removing document: " + error);
+        });
+    };
     JourneyService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'

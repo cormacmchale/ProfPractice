@@ -62,7 +62,7 @@ var DatabasePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n      <ion-buttons slot=\"start\">\r\n          <ion-menu-button></ion-menu-button>   \r\n      </ion-buttons>\r\n      <ion-row>\r\n    <ion-col text-start padding-top>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-col>\r\n  <ion-col text-end>\r\n    <ion-button (click)=\"getUserJournies()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Show Journies\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <!-- might not be needed -->\r\n  <!-- <ion-button (click)=\"getUserJournies()\">Manage My Journies</ion-button> -->\r\n\r\n  <ion-item *ngFor=\"let info of journeyAddressArray\">\r\n    <ion-label>info</ion-label>\r\n  </ion-item>\r\n  \r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n      <ion-buttons slot=\"start\">\r\n          <ion-menu-button></ion-menu-button>   \r\n      </ion-buttons>\r\n      <ion-row>\r\n    <ion-col text-start padding-top>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-col>\r\n  <ion-col text-end>\r\n    <ion-button (click)=\"getUserJournies()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Show Journies\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <!-- might not be needed -->\r\n  <!-- <ion-button (click)=\"getUserJournies()\">Manage My Journies</ion-button> -->\r\n\r\n  <ion-card *ngFor=\"let info of getData\">\r\n    <ion-card-content *ngIf=\"info.payload.doc._document.proto.fields.name.stringValue == userName\">\r\n      {{info.payload.doc._document.key.path.segments[6]}}\r\n      <ion-button color=\"danger\"\r\n      (click)=\"deleteJourney(info.payload.doc._document.key.path.segments[6])\">Delete</ion-button>\r\n    </ion-card-content>\r\n  </ion-card>\r\n  \r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -90,7 +90,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -100,7 +99,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -114,31 +112,17 @@ var DatabasePage = /** @class */ (function () {
     };
     DatabasePage.prototype.loadDocuments = function () {
         var _this = this;
+        this.user = this.data.getUser();
+        this.userName = this.user.email;
         this.data.getJourney().subscribe(function (res) {
             _this.getData = res;
         });
     };
     DatabasePage.prototype.getUserJournies = function () {
-        var user = this.data.getUser();
-        var userName = user.email;
-        for (var _i = 0, _a = this.getData; _i < _a.length; _i++) {
-            var myJournies = _a[_i];
-            if (myJournies.payload.doc._document.proto.fields.name.stringValue == userName) {
-                var startLat = myJournies.payload.doc._document.proto.fields.startlat.doubleValue;
-                var startLong = myJournies.payload.doc._document.proto.fields.startlong.doubleValue;
-                this.geoCoding(startLat, startLong);
-            }
-        }
+        this.loadDocuments();
     };
-    DatabasePage.prototype.geoCoding = function (x, y) {
-        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
-            position: { "lat": x,
-                "lng": y
-            }
-        }).then(function (results) {
-            var location = results[0].country + "," + results[0].adminArea + "," + results[0].locality;
-            console.log(location);
-        });
+    DatabasePage.prototype.deleteJourney = function (x) {
+        this.data.deleteJourney(x);
     };
     DatabasePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

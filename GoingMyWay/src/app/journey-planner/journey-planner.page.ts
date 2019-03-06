@@ -102,8 +102,29 @@ export class JourneyPlannerPage implements OnInit {
 
   showPosition(x1: number, y1: number, x2: number, y2: number, user:string) 
   {
-    this.journeyService.sendJourney(x1,y1,x2,y2,user);
-    alert("Journey added");
-    this.router.navigate(['home']);
+    console.log(x1+" "+y1);
+    Geocoder.geocode
+      ({
+      position:
+      {"lat":y1,
+       "lng":x1
+              }}).then((results: GeocoderResult[])=>
+      {
+        //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
+        console.log(results)
+      })
+      Geocoder.geocode
+      ({
+      position:
+      {"lat":y2,
+       "lng":x2
+              }}).then((results: GeocoderResult[])=>
+      {
+        //let location:string = results[0].country+","+results[0].adminArea+","+results[0].locality
+        console.log(results)
+      })
+    //this.journeyService.sendJourney(x1,y1,x2,y2,user);
+    //alert("Journey added");
+    //this.router.navigate(['home']);
   }
 }
