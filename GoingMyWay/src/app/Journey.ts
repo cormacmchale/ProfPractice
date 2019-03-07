@@ -5,4 +5,6 @@ export interface dbInfo
     endlat:number;
     endlong:number;
     name:string;
+    startloc:string;
+    endloc:string;
 }

@@ -159,9 +159,11 @@ var JourneyService = /** @class */ (function () {
         this.journiesTwo = this.journies.snapshotChanges();
         return this.journiesTwo;
     };
-    JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name) {
+    JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name, startAddress, endAddress) {
+        console.log(startAddress);
+        console.log(endAddress);
         console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
-        this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name };
+        this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name, startloc: startAddress, endloc: endAddress };
         this.journies.add(this.addJourney);
     };
     JourneyService.prototype.getlocation = function () {
@@ -224,6 +226,13 @@ var JourneyService = /** @class */ (function () {
     };
     JourneyService.prototype.logUserOut = function () {
         return this.authentication.auth.signOut();
+    };
+    JourneyService.prototype.deleteJourney = function (journeyId) {
+        this.journies.doc(journeyId).delete().then(function () {
+            alert("Journey Deleted!");
+        }).catch(function (error) {
+            alert("Error removing document: " + error);
+        });
     };
     JourneyService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

@@ -13,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geocoder, GeocoderResult, BaseArrayClass } from '@ionic-native/google-maps/ngx';
 import { JourneyService } from 'src/app/journey.service';
+//hopefully will be used to fix async geodoing error
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-journey-planner',
@@ -26,10 +28,8 @@ export class JourneyPlannerPage implements OnInit {
   endJourney: Marker;
   start: ILatLng;
   end: ILatLng;
-  startAddress: string;
-  endAddress: string;
 
-  constructor(private router: Router, private journeyService: JourneyService) { }
+  constructor(private router: Router, private journeyService: JourneyService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.loadMap();
@@ -92,38 +92,54 @@ export class JourneyPlannerPage implements OnInit {
       let userName: string = user.email
       this.start = this.startJourney.getPosition();
       this.end = this.endJourney.getPosition();
-      this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName)
+      this.getJourneyInformation(this.start.lat, this.start.lng, this.end.lat, this.end.lng, userName)
+      //this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName)
     }
   }
 
-  showPosition(x1: number, y1: number, x2: number, y2: number, user: string) {
+  addToDataBase(x1: number, y1: number, x2: number, y2: number, user: string, startLoc: string, endLoc: string) {
+    this.journeyService.sendJourney(x1, y1, x2, y2, user, startLoc, endLoc);
+    alert("Journey added!")
+    this.router.navigate(['home']);
+  }
 
+  getJourneyInformation(x: number, y: number, x2: number, y2: number, user: string) {
+    let waitForAddress: string = null
+    let checkAddress: string[]
     Geocoder.geocode
       ({
         position:
-          [{
-            "lat": y1,
-            "lng": x1
-          },
           {
-          "lat": y2,
-          "lng": x2
-          }]
-          }).then((results: BaseArrayClass<GeocoderResult[]>) => {
-        // let startAddress: any = results[0]
-        // let endAddress:any= results[1]
-        // console.log(startAddress)
-        // console.log(endAddress)
+            "lat": x,
+            "lng": y
+          }
+      }).then((results: GeocoderResult[]) => {
         console.log(results)
-        // for (let i in endAddress) {
-        //   this.endAddress += i + ","
-        // }
-        // console.log(endAddress)
-        // console.log(this.endAddress)
+        checkAddress = results[0].extra.lines
+        waitForAddress =
+          checkAddress[0] + ", " + checkAddress[1] + ", " + checkAddress[2]
+          + ", " + checkAddress[3] + ", " + checkAddress[4]
+        this.finishGetJourneyInformation(x, y, x2, y2, user, waitForAddress)
       })
-    //this.journeyService.sendJourney(x1, y1, x2, y2, user, this.startAddress, this.endAddress);
-    alert("Journey added");
-    this.router.navigate(['home']);
+  }
+  finishGetJourneyInformation(x: number, y: number, x2: number, y2: number, user: string, startLoc: string) {
+    let waitForAddress: string = null
+    let checkAddress: string[];
+    Geocoder.geocode
+      ({
+        position:
+          {
+            "lat": x2,
+            "lng": y2
+          }
+      }).then((results: GeocoderResult[]) => {
+        console.log(results)
+        checkAddress = results[0].extra.lines
+        waitForAddress =
+          checkAddress[0] + ", " + checkAddress[1] + ", " + checkAddress[2]
+          + ", " + checkAddress[3] + ", " + checkAddress[4]
+        this.addToDataBase(y, x, y2, x2, user, startLoc, waitForAddress)
+      })
   }
 
 }

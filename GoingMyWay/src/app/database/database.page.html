@@ -1,21 +1,21 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>   
-      </ion-buttons>
-      <ion-row>
-    <ion-col text-start padding-top>
-    <ion-title>
-      Going My Way/RideShare
-    </ion-title>
-  </ion-col>
-  <ion-col text-end>
-    <ion-button (click)="getUserJournies()" shape="round" fill="outline">
-        <ion-icon slot="start" name="locate"></ion-icon>
-        Show Journies
-      </ion-button>
-    </ion-col>
-  </ion-row>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col text-start padding-top>
+        <ion-title>
+          Going My Way/RideShare
+        </ion-title>
+      </ion-col>
+      <ion-col text-end>
+        <ion-button (click)="getUserJournies()" shape="round" fill="outline">
+          <ion-icon slot="start" name="locate"></ion-icon>
+          Show Journies
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -23,12 +23,17 @@
   <!-- might not be needed -->
   <!-- <ion-button (click)="getUserJournies()">Manage My Journies</ion-button> -->
 
-  <ion-card *ngFor="let info of getData">
-    <ion-card-content *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName">
-      {{info.payload.doc._document.key.path.segments[6]}}
-      <ion-button color="danger"
-      (click)="deleteJourney(info.payload.doc._document.key.path.segments[6])">Delete</ion-button>
-    </ion-card-content>
-  </ion-card>
-  
+  <div id="Center">
+    <ion-card *ngFor="let info of getData">
+      <ion-card-content *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName">
+        <b>Start of Journey:</b> {{info.payload.doc._document.proto.fields.startloc.stringValue}}
+        <br> ------->
+        <br>
+        <b>End of Journey:</b> {{info.payload.doc._document.proto.fields.endloc.stringValue}}
+        <br>
+        <ion-button color="danger" (click)="deleteJourney(info.payload.doc._document.key.path.segments[6])">Delete</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
 </ion-content>

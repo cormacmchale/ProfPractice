@@ -62,7 +62,7 @@ var JourneyPlannerPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n        <ion-menu-button></ion-menu-button>\r\n      </ion-buttons>\r\n  <ion-row>\r\n    <ion-col text-start padding-top>\r\n     \r\n      <ion-title>\r\n        Going My Way/RideShare\r\n      </ion-title>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"addJourneyToDatabase()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Add This Journey!\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-row>\r\n\r\n    <ion-col text-start padding-top>\r\n        <ion-input id=\"myInput\" [(ngModel)]=\"search_address\" placeholder=\"\" > Search location:</ion-input>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"search(search_address)\" shape=\"round\" fill=\"outline\">search</ion-button>\r\n    </ion-col>\r\n\r\n  </ion-row>\r\n\r\n  <div id=\"myMap\"></div>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n        <ion-menu-button></ion-menu-button>\r\n      </ion-buttons>\r\n  <ion-row>\r\n    <ion-col text-start padding-top>\r\n     \r\n      <ion-title>\r\n        Going My Way/RideShare\r\n      </ion-title>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"addJourneyToDatabase()\" shape=\"round\" fill=\"outline\">\r\n        <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n        Add This Journey!\r\n      </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-row>\r\n\r\n    <ion-col text-start padding-top>\r\n        <ion-input id=\"myInput\" [(ngModel)]=\"search_address\" placeholder=\"Search location:\" > </ion-input>\r\n    </ion-col>\r\n    <ion-col text-end>\r\n      <ion-button (click)=\"search(search_address)\" shape=\"round\" fill=\"outline\">search</ion-button>\r\n    </ion-col>\r\n\r\n  </ion-row>\r\n\r\n  <div id=\"myMap\"></div>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -92,6 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -106,10 +107,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+//hopefully will be used to fix async geodoing error
+
 var JourneyPlannerPage = /** @class */ (function () {
-    function JourneyPlannerPage(router, journeyService) {
+    function JourneyPlannerPage(router, journeyService, alertController) {
         this.router = router;
         this.journeyService = journeyService;
+        this.alertController = alertController;
     }
     JourneyPlannerPage.prototype.ngOnInit = function () {
         this.loadMap();
@@ -168,13 +172,50 @@ var JourneyPlannerPage = /** @class */ (function () {
             var userName = user.email;
             this.start = this.startJourney.getPosition();
             this.end = this.endJourney.getPosition();
-            this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName);
+            this.getJourneyInformation(this.start.lat, this.start.lng, this.end.lat, this.end.lng, userName);
+            //this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName)
         }
     };
-    JourneyPlannerPage.prototype.showPosition = function (x1, y1, x2, y2, user) {
-        this.journeyService.sendJourney(x1, y1, x2, y2, user);
-        alert("Journey added");
+    JourneyPlannerPage.prototype.addToDataBase = function (x1, y1, x2, y2, user, startLoc, endLoc) {
+        this.journeyService.sendJourney(x1, y1, x2, y2, user, startLoc, endLoc);
+        alert("Journey added!");
         this.router.navigate(['home']);
+    };
+    JourneyPlannerPage.prototype.getJourneyInformation = function (x, y, x2, y2, user) {
+        var _this = this;
+        var waitForAddress = null;
+        var checkAddress;
+        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
+            position: {
+                "lat": x,
+                "lng": y
+            }
+        }).then(function (results) {
+            console.log(results);
+            checkAddress = results[0].extra.lines;
+            waitForAddress =
+                checkAddress[0] + ", " + checkAddress[1] + ", " + checkAddress[2]
+                    + ", " + checkAddress[3] + ", " + checkAddress[4];
+            _this.finishGetJourneyInformation(x, y, x2, y2, user, waitForAddress);
+        });
+    };
+    JourneyPlannerPage.prototype.finishGetJourneyInformation = function (x, y, x2, y2, user, startLoc) {
+        var _this = this;
+        var waitForAddress = null;
+        var checkAddress;
+        _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
+            position: {
+                "lat": x2,
+                "lng": y2
+            }
+        }).then(function (results) {
+            console.log(results);
+            checkAddress = results[0].extra.lines;
+            waitForAddress =
+                checkAddress[0] + ", " + checkAddress[1] + ", " + checkAddress[2]
+                    + ", " + checkAddress[3] + ", " + checkAddress[4];
+            _this.addToDataBase(y, x, y2, x2, user, startLoc, waitForAddress);
+        });
     };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -182,7 +223,7 @@ var JourneyPlannerPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./journey-planner.page.html */ "./src/app/journey-planner/journey-planner.page.html"),
             styles: [__webpack_require__(/*! ./journey-planner.page.scss */ "./src/app/journey-planner/journey-planner.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__["JourneyService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__["JourneyService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]])
     ], JourneyPlannerPage);
     return JourneyPlannerPage;
 }());
