@@ -3,8 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { dbInfo } from './Journey';
 import { Observable } from 'rxjs/internal/Observable';
 import { ObservableInput } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ILatLng } from '@ionic-native/google-maps/ngx';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -18,23 +16,29 @@ export class JourneyService {
   private journies: AngularFirestoreCollection<any>;
   private journiesTwo: Observable<any[]>;
 
-  constructor(database: AngularFirestore, private geolocation: Geolocation, private authentication: AngularFireAuth) {
+  constructor(database: AngularFirestore, private authentication: AngularFireAuth) {
     this.journies = database.collection<any>('journey');
   }
   getJourney() {
     this.journiesTwo = this.journies.snapshotChanges();
     return this.journiesTwo;
   }
-  sendJourney(startlong: number, startlat: number, endlong: number, endlat: number, name: string, startAddress: string, endAddress: string) {
+  deleteJourney(journeyId: string) 
+  {
+    this.journies.doc(journeyId).delete().then(function () {
+      alert("Journey Deleted!");
+    }).catch(function (error) {
+      alert("Error removing document: " + error);
+    });
+  }
+  sendJourney(startlong: number, startlat: number, endlong: number, endlat: number, 
+              name: string, startAddress: string, endAddress: string) {
     console.log(startAddress)
     console.log(endAddress)
     console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
-    this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name, startloc: startAddress, endloc: endAddress };
+    this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, 
+                        endlat: endlat, name: name, startloc: startAddress, endloc: endAddress };
     this.journies.add(this.addJourney);
-  }
-  getlocation(): any {
-    let user: any = this.geolocation.getCurrentPosition()
-    return user;
   }
   async userAuthentication(name: string, password: string) {
     try {
@@ -70,11 +74,5 @@ export class JourneyService {
   logUserOut() {
     return this.authentication.auth.signOut();
   }
-  deleteJourney(journeyId: string) {
-    this.journies.doc(journeyId).delete().then(function () {
-      alert("Journey Deleted!");
-    }).catch(function (error) {
-      alert("Error removing document: " + error);
-    });
-  }
+
 }
