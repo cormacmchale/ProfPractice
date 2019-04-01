@@ -143,23 +143,23 @@ export class MapPage implements OnInit {
   }
 
 
-  //not working, may not implement
-  myLocation()
-  {
-    this.user = this.journies.getlocation();
-    console.log(this.user)
-    console.log(this.user.coords.latitude)
-    //console.log(this.user[0].__zone_symbol__value.coords.longitude)
-  }
-  findUser()
-  {
-    this.map.setOptions(
-      {
-        target: {
-          lat: this.user[0].__zone_symbol__value.coords.latitude,
-          lng: this.user[0].__zone_symbol__value.coords.longitude
-        }
-      }
-    )
-  }
+  // //not working, may not implement
+  // myLocation()
+  // {
+  //   this.user = this.journies.getlocation();
+  //   console.log(this.user)
+  //   console.log(this.user.coords.latitude)
+  //   //console.log(this.user[0].__zone_symbol__value.coords.longitude)
+  // }
+  // findUser()
+  // {
+  //   this.map.setOptions(
+  //     {
+  //       target: {
+  //         lat: this.user[0].__zone_symbol__value.coords.latitude,
+  //         lng: this.user[0].__zone_symbol__value.coords.longitude
+  //       }
+  //     }
+  //   )
+  // }
 }

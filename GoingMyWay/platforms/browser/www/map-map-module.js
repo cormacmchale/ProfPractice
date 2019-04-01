@@ -205,21 +205,6 @@ var MapPage = /** @class */ (function () {
         });
         console.log(this.markersToShow);
     };
-    //not working, may not implement
-    MapPage.prototype.myLocation = function () {
-        this.user = this.journies.getlocation();
-        console.log(this.user);
-        console.log(this.user.coords.latitude);
-        //console.log(this.user[0].__zone_symbol__value.coords.longitude)
-    };
-    MapPage.prototype.findUser = function () {
-        this.map.setOptions({
-            target: {
-                lat: this.user[0].__zone_symbol__value.coords.latitude,
-                lng: this.user[0].__zone_symbol__value.coords.longitude
-            }
-        });
-    };
     MapPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-map',
