@@ -17,7 +17,7 @@
     <ion-card *ngFor="let info of getData">
       <ion-card-content *ngIf="info.payload.doc._document.proto.fields.name.stringValue == userName">
         <b>Start of Journey:</b> {{info.payload.doc._document.proto.fields.startloc.stringValue}}
-        <br> ------->
+        <br>
         <br>
         <b>End of Journey:</b> {{info.payload.doc._document.proto.fields.endloc.stringValue}}
         <br>

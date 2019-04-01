@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+//google maps imports
 import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 import { Geocoder } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
