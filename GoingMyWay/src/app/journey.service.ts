@@ -23,21 +23,22 @@ export class JourneyService {
     this.journiesTwo = this.journies.snapshotChanges();
     return this.journiesTwo;
   }
-  deleteJourney(journeyId: string) 
-  {
+  deleteJourney(journeyId: string) {
     this.journies.doc(journeyId).delete().then(function () {
       alert("Journey Deleted!");
     }).catch(function (error) {
       alert("Error removing document: " + error);
     });
   }
-  sendJourney(startlong: number, startlat: number, endlong: number, endlat: number, 
-              name: string, startAddress: string, endAddress: string) {
+  sendJourney(startlong: number, startlat: number, endlong: number, endlat: number,
+    name: string, startAddress: string, endAddress: string) {
     console.log(startAddress)
     console.log(endAddress)
     console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
-    this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, 
-                        endlat: endlat, name: name, startloc: startAddress, endloc: endAddress };
+    this.addJourney = {
+      startlong: startlong, startlat: startlat, endlong: endlong,
+      endlat: endlat, name: name, startloc: startAddress, endloc: endAddress
+    };
     this.journies.add(this.addJourney);
   }
   async userAuthentication(name: string, password: string) {
