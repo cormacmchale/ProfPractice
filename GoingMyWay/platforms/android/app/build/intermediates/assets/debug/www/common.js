@@ -98,9 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
-/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angularfire2/auth */ "./node_modules/angularfire2/auth/index.js");
-/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(angularfire2_auth__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/auth */ "./node_modules/angularfire2/auth/index.js");
+/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_auth__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -148,10 +147,8 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-
 var JourneyService = /** @class */ (function () {
-    function JourneyService(database, geolocation, authentication) {
-        this.geolocation = geolocation;
+    function JourneyService(database, authentication) {
         this.authentication = authentication;
         this.journies = database.collection('journey');
     }
@@ -159,16 +156,22 @@ var JourneyService = /** @class */ (function () {
         this.journiesTwo = this.journies.snapshotChanges();
         return this.journiesTwo;
     };
+    JourneyService.prototype.deleteJourney = function (journeyId) {
+        this.journies.doc(journeyId).delete().then(function () {
+            alert("Journey Deleted!");
+        }).catch(function (error) {
+            alert("Error removing document: " + error);
+        });
+    };
     JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name, startAddress, endAddress) {
         console.log(startAddress);
         console.log(endAddress);
         console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
-        this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong, endlat: endlat, name: name, startloc: startAddress, endloc: endAddress };
+        this.addJourney = {
+            startlong: startlong, startlat: startlat, endlong: endlong,
+            endlat: endlat, name: name, startloc: startAddress, endloc: endAddress
+        };
         this.journies.add(this.addJourney);
-    };
-    JourneyService.prototype.getlocation = function () {
-        var user = this.geolocation.getCurrentPosition();
-        return user;
     };
     JourneyService.prototype.userAuthentication = function (name, password) {
         return __awaiter(this, void 0, void 0, function () {
@@ -227,18 +230,11 @@ var JourneyService = /** @class */ (function () {
     JourneyService.prototype.logUserOut = function () {
         return this.authentication.auth.signOut();
     };
-    JourneyService.prototype.deleteJourney = function (journeyId) {
-        this.journies.doc(journeyId).delete().then(function () {
-            alert("Journey Deleted!");
-        }).catch(function (error) {
-            alert("Error removing document: " + error);
-        });
-    };
     JourneyService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [angularfire2_firestore__WEBPACK_IMPORTED_MODULE_1__["AngularFirestore"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"], angularfire2_auth__WEBPACK_IMPORTED_MODULE_3__["AngularFireAuth"]])
+        __metadata("design:paramtypes", [angularfire2_firestore__WEBPACK_IMPORTED_MODULE_1__["AngularFirestore"], angularfire2_auth__WEBPACK_IMPORTED_MODULE_2__["AngularFireAuth"]])
     ], JourneyService);
     return JourneyService;
 }());

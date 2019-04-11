@@ -4,6 +4,7 @@ import { JourneyService } from 'src/app/journey.service';
 import { dbInfo } from 'src/app/Journey';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-map',
@@ -14,7 +15,7 @@ export class MapPage implements OnInit {
 
   check:number;
   user:any;
-  constructor(private journies:JourneyService, private router:Router) { }
+  constructor(private journies:JourneyService, private router:Router, private geo:Geolocation) { }
 
   map:GoogleMap; 
   markersToShow:any[];
@@ -22,17 +23,26 @@ export class MapPage implements OnInit {
   ngOnInit() 
   {
     this.loadDocuments();  
-    this.loadMap(); 
+    this.findUser(); 
   }
 
-  loadMap() {
+  findUser()
+  {
+    this.geo.getCurrentPosition().then((resp) => {
+      this.loadMap(resp.coords.latitude,resp.coords.longitude)
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });   
+  }
+
+  loadMap(lat:number, lng:number) {
     let mapOptions: GoogleMapOptions = {
       camera: {
         target: {
-          lat: 53.270962,
-          lng: -9.062691
+          lat: lat,
+          lng: lng
         },
-        zoom: 5,
+        zoom: 7,
         tilt: 30
       }
     };
@@ -141,25 +151,4 @@ export class MapPage implements OnInit {
       });
       console.log(this.markersToShow)
   }
-
-
-  // //not working, may not implement
-  // myLocation()
-  // {
-  //   this.user = this.journies.getlocation();
-  //   console.log(this.user)
-  //   console.log(this.user.coords.latitude)
-  //   //console.log(this.user[0].__zone_symbol__value.coords.longitude)
-  // }
-  // findUser()
-  // {
-  //   this.map.setOptions(
-  //     {
-  //       target: {
-  //         lat: this.user[0].__zone_symbol__value.coords.latitude,
-  //         lng: this.user[0].__zone_symbol__value.coords.longitude
-  //       }
-  //     }
-  //   )
-  // }
 }

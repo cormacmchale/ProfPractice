@@ -167,8 +167,10 @@ var JourneyService = /** @class */ (function () {
         console.log(startAddress);
         console.log(endAddress);
         console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
-        this.addJourney = { startlong: startlong, startlat: startlat, endlong: endlong,
-            endlat: endlat, name: name, startloc: startAddress, endloc: endAddress };
+        this.addJourney = {
+            startlong: startlong, startlat: startlat, endlong: endlong,
+            endlat: endlat, name: name, startloc: startAddress, endloc: endAddress
+        };
         this.journies.add(this.addJourney);
     };
     JourneyService.prototype.userAuthentication = function (name, password) {

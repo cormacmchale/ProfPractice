@@ -91,6 +91,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -104,23 +105,33 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MapPage = /** @class */ (function () {
-    function MapPage(journies, router) {
+    function MapPage(journies, router, geo) {
         this.journies = journies;
         this.router = router;
+        this.geo = geo;
     }
     MapPage.prototype.ngOnInit = function () {
         this.loadDocuments();
-        this.loadMap();
+        this.findUser();
     };
-    MapPage.prototype.loadMap = function () {
+    MapPage.prototype.findUser = function () {
+        var _this = this;
+        this.geo.getCurrentPosition().then(function (resp) {
+            _this.loadMap(resp.coords.latitude, resp.coords.longitude);
+        }).catch(function (error) {
+            console.log('Error getting location', error);
+        });
+    };
+    MapPage.prototype.loadMap = function (lat, lng) {
         var mapOptions = {
             camera: {
                 target: {
-                    lat: 53.270962,
-                    lng: -9.062691
+                    lat: lat,
+                    lng: lng
                 },
-                zoom: 5,
+                zoom: 7,
                 tilt: 30
             }
         };
@@ -205,28 +216,13 @@ var MapPage = /** @class */ (function () {
         });
         console.log(this.markersToShow);
     };
-    //not working, may not implement
-    MapPage.prototype.myLocation = function () {
-        this.user = this.journies.getlocation();
-        console.log(this.user);
-        console.log(this.user.coords.latitude);
-        //console.log(this.user[0].__zone_symbol__value.coords.longitude)
-    };
-    MapPage.prototype.findUser = function () {
-        this.map.setOptions({
-            target: {
-                lat: this.user[0].__zone_symbol__value.coords.latitude,
-                lng: this.user[0].__zone_symbol__value.coords.longitude
-            }
-        });
-    };
     MapPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-map',
             template: __webpack_require__(/*! ./map.page.html */ "./src/app/map/map.page.html"),
             styles: [__webpack_require__(/*! ./map.page.scss */ "./src/app/map/map.page.scss")]
         }),
-        __metadata("design:paramtypes", [src_app_journey_service__WEBPACK_IMPORTED_MODULE_2__["JourneyService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        __metadata("design:paramtypes", [src_app_journey_service__WEBPACK_IMPORTED_MODULE_2__["JourneyService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"]])
     ], MapPage);
     return MapPage;
 }());
