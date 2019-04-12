@@ -25,7 +25,8 @@ export class MapPage implements OnInit {
     this.loadDocuments();  
     this.findUser(); 
   }
-
+  
+  //find the users current position and then pass these
   findUser()
   {
     this.geo.getCurrentPosition().then((resp) => {
