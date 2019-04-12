@@ -42,7 +42,7 @@ export class MapPage implements OnInit {
           lat: lat,
           lng: lng
         },
-        zoom: 7,
+        zoom: 12,
         tilt: 30
       }
     };

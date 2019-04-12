@@ -131,7 +131,7 @@ var MapPage = /** @class */ (function () {
                     lat: lat,
                     lng: lng
                 },
-                zoom: 10,
+                zoom: 12,
                 tilt: 30
             }
         };
