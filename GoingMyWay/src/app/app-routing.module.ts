@@ -7,10 +7,8 @@ const routes: Routes = [
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
   { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
   { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'test-geolocation', loadChildren: './test-geolocation/test-geolocation.module#TestGeolocationPageModule' }
-
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

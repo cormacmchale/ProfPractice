@@ -860,10 +860,6 @@ var map = {
 		"./src/app/map/map.module.ts",
 		"common",
 		"map-map-module"
-	],
-	"./test-geolocation/test-geolocation.module": [
-		"./src/app/test-geolocation/test-geolocation.module.ts",
-		"test-geolocation-test-geolocation-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -914,8 +910,7 @@ var routes = [
     { path: 'map', loadChildren: './map/map.module#MapPageModule' },
     { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
     { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
-    { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-    { path: 'test-geolocation', loadChildren: './test-geolocation/test-geolocation.module#TestGeolocationPageModule' }
+    { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
