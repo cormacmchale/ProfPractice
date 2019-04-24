@@ -137,7 +137,6 @@ var MapPage = /** @class */ (function () {
             }
         };
         this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('myMap', mapOptions);
-        //setTimeout(this.showJournies(), 2000);
     }; //loadMap()
     MapPage.prototype.showJournies = function () {
         if (!this.journies.getUser()) {
