@@ -9,8 +9,9 @@ import { LoginPage } from 'src/app/login/login.page';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  //rootPage: any = HomePage;
-
+  //this functions as the sidebar menu for a tabbed layout
+  //this app menu will be displayed for the user in the sidebar using a for loop and the 
+  //variable to display information
   public appMenu = [
     { title: "Home", url: '/home', icon: 'home', pathMatch: 'full' },
     { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
@@ -18,7 +19,6 @@ export class AppComponent {
     { title: "Login/Register", url: '/login', icon: 'happy', pathMatch: 'full' },
     { title: "Manage Journies", url: '/database', icon: 'trash', pathMatch: 'full' }
   ]
-  //selectedPath = "";
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -26,7 +26,6 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
-
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

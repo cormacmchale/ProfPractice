@@ -1,19 +1,26 @@
+//margins for the google map that appears when you 
+//access the view
 #myMap
 {
     height: 90%;
     margin:2%;
     border-radius: 5%;
 }
-
-
-#myInput 
+#location 
 {  
-    border-radius: 30px !important;
-    padding-left: 30px !important;
-    font-size: 0.9em;
-    margin-bottom: 10px;
+    border-radius: 30px;
+    margin: 2%;
     border: 1px solid dodgerblue;
-    box-shadow: none !important;
+    text-align: center;
+}
+#search 
+{     
+    text-align: center;
+    
+}
+#addJourney 
+{     
+    text-align: center;
 }
   
   

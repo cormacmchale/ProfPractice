@@ -1,37 +1,34 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-  <ion-row>
-    <ion-col text-start padding-top>
-     
-      <ion-title>
-        Going My Way/RideShare
-      </ion-title>
-    </ion-col>
-    <ion-col text-end>
-      <ion-button (click)="addJourneyToDatabase()" shape="round" fill="outline">
-        <ion-icon slot="start" name="locate"></ion-icon>
-        Add This Journey!
-      </ion-button>
-    </ion-col>
-  </ion-row>
-</ion-toolbar>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Going My Way/RideShare
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-row>
-
-    <ion-col text-start padding-top>
-        <ion-input id="myInput" [(ngModel)]="search_address" placeholder="Search location:" > </ion-input>
-    </ion-col>
-    <ion-col text-end>
-      <ion-button (click)="search(search_address)" shape="round" fill="outline">search</ion-button>
-    </ion-col>
-
-  </ion-row>
-
+<ion-content>
+    <div id="location">
+        <ion-input [(ngModel)]="search_address" placeholder="Search location:"></ion-input>
+      </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+      <div id="search">
+        <ion-button (click)="search(search_address)" shape="round" fill="outline">search</ion-button>
+      </div>
+      </ion-col>
+      <ion-col>
+      <div id="addJourney">
+        <ion-button (click)="addJourneyToDatabase()" shape="round" fill="outline">
+          <ion-icon slot="start" name="locate"></ion-icon>
+          Add
+        </ion-button>
+      </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <div id="myMap"></div>
-
 </ion-content>
