@@ -7,6 +7,7 @@ Originally, the idea was to create an application out of a website www.blablacar
 It was decided that Ionic framework would suit the best to bring the idea to life. It was designed to write cross-platfrom, hybrid applications which perfectly suited for purpose. 
 
 
+
 Technologies used:
 -Ionic 4
 -Google API
