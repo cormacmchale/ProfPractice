@@ -116,6 +116,7 @@ var MapPage = /** @class */ (function () {
         this.loadDocuments();
         this.findUser();
     };
+    //find the users current position and then pass these
     MapPage.prototype.findUser = function () {
         var _this = this;
         this.geo.getCurrentPosition().then(function (resp) {

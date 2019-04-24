@@ -48,7 +48,6 @@ export class MapPage implements OnInit {
       }
     };
     this.map = GoogleMaps.create('myMap', mapOptions);
-    //setTimeout(this.showJournies(), 2000);
   }//loadMap()
 
   showJournies()
