@@ -10,23 +10,23 @@
 </ion-header>
 
 <ion-content>
-    <div id="location">
-        <ion-input [(ngModel)]="search_address" placeholder="Search location:"></ion-input>
-      </div>
+  <div id="location">
+    <ion-input [(ngModel)]="search_address" placeholder="Search location:"></ion-input>
+  </div>
   <ion-grid>
     <ion-row>
       <ion-col>
-      <div id="search">
-        <ion-button (click)="search(search_address)" shape="round" fill="outline">search</ion-button>
-      </div>
+        <div id="search">
+          <ion-button (click)="search(search_address)" shape="round" fill="outline">search</ion-button>
+        </div>
       </ion-col>
       <ion-col>
-      <div id="addJourney">
-        <ion-button (click)="addJourneyToDatabase()" shape="round" fill="outline">
-          <ion-icon slot="start" name="locate"></ion-icon>
-          Add
-        </ion-button>
-      </div>
+        <div id="addJourney">
+          <ion-button (click)="addJourneyToDatabase()" shape="round" fill="outline">
+            <ion-icon slot="start" name="locate"></ion-icon>
+            Add
+          </ion-button>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
