@@ -1,12 +1,13 @@
 # ProfPractice
+<h3>Introduction</h3>
 An ionic App
-
 Ridesharing application.
 
-Originally, the idea was to create an application out of a website www.blablacar.ru but to make it more appealing and interactive
-It was decided that Ionic framework would suit the best to bring the idea to life. It was decided to write a cross-platfrom, hybrid application and ionic perfectly suites for purpose. 
+<p>Originally, the idea was to create an application out of a website www.blablacar.ru but to make it more visually appealing and interactive.
+By this, we mean an app that would look nice and be user friendly at the same time.  </p>
+<p>It was decided that Ionic framework would suit the best to bring the idea to life. It was decided to write a cross-platfrom, hybrid application and ionic perfectly suited for purpose. We tried to make it as close as possible to a CRUD (create-read-update-delete) application. One of the main goals while trying to use the latest modern technologies was to build a set of skills. </p>
 
-Technologies used:
+<h3>Technologies used:</h3>
 <details>
 <summary>Ionic 4</summary>
 <p>
@@ -15,8 +16,8 @@ Technologies used:
  <p> 2. Easy to adopt (as soon as you know css, html, js it wont be a problem to learn the framework).</p>
  <p> 3. Build on Angular JS (provides many functionalities, makes code more manageable).</p>
  <p> 4. Ionic Cordova plugin allows access to phone's hardware (camera, GPS, etc) which increases the performance.</p>
- <p> 5. Well-written documentation, although some tutorials are still using ionic 3 some changes need to be made.</p>
-  </p>
+ <p> 5. Well-written documentation, although some tutorials are still using ionic 3 consequently it is important to make sure the tutorial is up-to-date and if not then some changes need to be made.</p>
+ </p>
 </details>
 
 <details>
@@ -26,11 +27,22 @@ Technologies used:
 <details>
   
 <summary>Firebase database</summary>
-
- <p> 1. Stores data in json format</p>
-  <p>2. Real time updates</p>
-  <p>3. Authentication</p>
-  <p>4. Storage (files, images, videos)</p>
+<p> 1. Stores data in json (Javascript Object Notation) format. Which means no barrier between data and objects. No more realtions and   reference keys.</p>
+<p>2. Minimum set up</p>
+<p>3. Real time updates</p>
+<p>4. Authentication</p>
+<p>5. Storage (files, images, videos)</p>
  </details>
 
-
+<h3>Installation</h3>
+Download and install the APK (Android Package) file to your phone. 
+Here are the screenshots of steps you might need to follow:
+![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
+![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
+![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)
+![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/4.png)
+![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/5.png)
+<h3>API Reference</h3>
+link: https://developers.google.com/maps/documentation/javascript/get-api-key
+<h3>How to use the app</h3>
+Please follow the link to wiki 
