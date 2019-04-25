@@ -42,16 +42,15 @@ Application allows to offer a  journey in the add journey section and view all t
 Download and install the APK (Android Package) file to your phone. 
 Here are the screenshots of steps you might need to follow:
 
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
-
+<p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)</p>
   
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png=100x100)
+<p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)</p>
  
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png=100x20)
+<p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)</p>
 
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/4.png=100x20)
+<p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/4.png)</p>
  
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/5.png=100x20)
+<p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/5.png)</p>
 
 <h3>API Reference</h3>
 link: https://developers.google.com/maps/documentation/javascript/get-api-key
