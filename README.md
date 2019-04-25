@@ -12,7 +12,7 @@ Application allows to offer a  journey in the add journey section and view all t
 <h3>Technologies used:</h3>
 <details>
 <summary>Ionic 4</summary>
-  ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
+  
 <p>
   Advantages:
  <p> 1. Cross-platform (write once, run anywhere).</p>
@@ -43,8 +43,9 @@ Download and install the APK (Android Package) file to your phone.
 Here are the screenshots of steps you might need to follow:
 == Screenshots ==
 <details>
-<summary>Google Map API</summary>
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
+<summary></summary>
+  <p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)</p>
+  </details>
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/4.png)
