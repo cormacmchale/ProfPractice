@@ -43,25 +43,25 @@ Download and install the APK (Android Package) file to your phone.
 Here are the screenshots of steps you might need to follow:
 <details>
 <summary></summary>
-  <p>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)</p>
+  <p>https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png</p>
   </details>
   
 <details>
-<summary></summary>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
+<summary></summary>(https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
   </details>
   
   <details>
 <summary></summary>
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)
+(https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)
 </details>
 
 <details>
-<summary></summary>![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/4.png)
+<summary></summary>(https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/4.png)
   </details>
   
  <details>
 <summary></summary>
-![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/5.png)
+(https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/5.png)
 </details>
 <h3>API Reference</h3>
 link: https://developers.google.com/maps/documentation/javascript/get-api-key
@@ -75,9 +75,9 @@ Please follow the link to issues:https://github.com/cormacmchale/ProfPractice/is
 
 <h3>Future Improvement</h3>
 Things that can be added in future:
-<p>date and time of the journey</p>
-<p>price of the journey</p>
-<p>number of seats available</p>
-<p>email verification</p>
-<p>drivers feedback</p>
-<p>chat</p>
+<p>+  date and time of the journey</p>
+<p>+  price of the journey</p>
+<p>+  number of seats available</p>
+<p>+  email verification</p>
+<p>+  drivers feedback</p>
+<p>+  chat</p>
