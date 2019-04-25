@@ -12,6 +12,7 @@ Application allows to offer a  journey in the add journey section and view all t
 <h3>Technologies used:</h3>
 <details>
 <summary>Ionic 4</summary>
+  ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
 <p>
   Advantages:
  <p> 1. Cross-platform (write once, run anywhere).</p>
@@ -26,6 +27,7 @@ Application allows to offer a  journey in the add journey section and view all t
 <summary>Google Map API</summary>
 <p> Probably the first map API that comes to mind. Easy to use and implement. A large number of map services such as geolocation, autocomplete, markers, polylines, autocorrect, etc are available, you concentarte on what you want to do but not how to do it. Documentation is of great help as well. Map API makes app more interactive and appealing, which was one of the main goals.</p>
 </details>
+
 <details>
   
 <summary>Firebase database</summary>
@@ -40,13 +42,8 @@ Application allows to offer a  journey in the add journey section and view all t
 Download and install the APK (Android Package) file to your phone. 
 Here are the screenshots of steps you might need to follow:
 == Screenshots ==
-
-1. This is the description for the first screenshot
-2. This is the description for the second screenshot
-3. This is the description for the third screenshot
-4. This is the description for the fourth screenshot
-5. This is the description for the fifth screenshot
-
+<details>
+<summary>Google Map API</summary>
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)
