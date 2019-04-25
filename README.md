@@ -1,6 +1,6 @@
 # ProfPractice
 
-<h3>Introduction</h3>
+##Introduction##
 RideShare/GoingMyWay - a ridesharing application.
 <p>Originally, the idea was to create an application out of a website www.blablacar.ru but to make it more visually appealing and interactive.
 By this, we mean an app that would look nice and be user friendly at the same time.  </p>
@@ -43,7 +43,8 @@ Download and install the APK (Android Package) file to your phone.
 Here are the screenshots of steps you might need to follow:
 <details>
 <summary>Screenshots</summary>
-https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png
+![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
+
   
 https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png
  
