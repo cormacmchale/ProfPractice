@@ -39,6 +39,13 @@ Application allows to offer a  journey in the add journey section and view all t
 <h3>Installation</h3>
 Download and install the APK (Android Package) file to your phone. 
 Here are the screenshots of steps you might need to follow:
+== Screenshots ==
+
+1. This is the description for the first screenshot
+2. This is the description for the second screenshot
+3. This is the description for the third screenshot
+4. This is the description for the fourth screenshot
+5. This is the description for the fifth screenshot
 
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
