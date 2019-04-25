@@ -7,19 +7,6 @@ import { Router, RouterEvent } from '@angular/router';
 })
 export class HomePage {
   
-   constructor(private router:Router){   }
-
-   //add methods here
-   visitMapPage()
-   {
-     this.router.navigate(['map']);
-   }
-   navigateJourneyPlanner(){
-    this.router.navigate(['journey-planner']);
-   }
-
-   navigateTestGeolocation(){
-    this.router.navigate(['test-geolocation']);
-   }
-
+   constructor(){   }
+   //home page only used for introduction and display purposes
 }
