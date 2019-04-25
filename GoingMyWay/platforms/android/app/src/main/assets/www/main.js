@@ -860,10 +860,6 @@ var map = {
 		"./src/app/map/map.module.ts",
 		"common",
 		"map-map-module"
-	],
-	"./test-geolocation/test-geolocation.module": [
-		"./src/app/test-geolocation/test-geolocation.module.ts",
-		"test-geolocation-test-geolocation-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -908,14 +904,14 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 };
 
 
+//these are the Routes for the app to follow when encountering a url ending in the path
 var routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', loadChildren: './home/home.module#HomePageModule' },
     { path: 'map', loadChildren: './map/map.module#MapPageModule' },
     { path: 'database', loadChildren: './database/database.module#DatabasePageModule' },
     { path: 'journey-planner', loadChildren: './journey-planner/journey-planner.module#JourneyPlannerPageModule' },
-    { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-    { path: 'test-geolocation', loadChildren: './test-geolocation/test-geolocation.module#TestGeolocationPageModule' }
+    { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -940,7 +936,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n  <ion-split-pane>\r\n    <ion-menu type=\"overlay\">\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-title>\r\n            Menu\r\n          </ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appMenu\">\r\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\r\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\r\n              <ion-label>{{p.title}} </ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n        </ion-list>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <ion-router-outlet main></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>"
+module.exports = "<ion-app>\r\n  <ion-split-pane>\r\n    <ion-menu type=\"overlay\">\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-title>\r\n            Menu\r\n          </ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let page of appMenu\">\r\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[page.url]\">\r\n              <ion-icon slot=\"start\" [name]=\"page.icon\"></ion-icon>\r\n              <ion-label>{{page.title}}</ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n        </ion-list>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <ion-router-outlet main></ion-router-outlet>\r\n\r\n  </ion-split-pane>\r\n</ion-app>"
 
 /***/ }),
 
@@ -972,12 +968,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var AppComponent = /** @class */ (function () {
-    //selectedPath = "";
     function AppComponent(platform, splashScreen, statusBar) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
-        //rootPage: any = HomePage;
+        //this functions as the sidebar menu for a tabbed layout
+        //this app menu will be displayed for the user in the sidebar using a for loop and the 
+        //variable to display information
         this.appMenu = [
             { title: "Home", url: '/home', icon: 'home', pathMatch: 'full' },
             { title: "Plan a Journey", url: '/journey-planner', icon: 'add', pathMatch: 'full' },
@@ -1058,7 +1055,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-//google maps imports
+//google maps imports and plugins (Geolocation)
 
 
 
@@ -1072,10 +1069,13 @@ var AppModule = /** @class */ (function () {
             entryComponents: [],
             imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(),
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
+                //initilize the connection between the app and the database
                 angularfire2__WEBPACK_IMPORTED_MODULE_8__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].firebase),
                 angularfire2_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
+                //user login
                 angularfire2_auth__WEBPACK_IMPORTED_MODULE_11__["AngularFireAuthModule"]],
             providers: [
+                //plugins added here
                 _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_15__["NativeGeocoder"],
                 _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_13__["Geocoder"],
                 _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_14__["Geolocation"],

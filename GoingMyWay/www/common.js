@@ -148,14 +148,19 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var JourneyService = /** @class */ (function () {
+    //constructor of the service
     function JourneyService(database, authentication) {
         this.authentication = authentication;
+        //establish connection here
         this.journies = database.collection('journey');
     }
+    //CRUD METHODS
+    //method for returning all of the Journeys in the database to the page for the User
     JourneyService.prototype.getJourney = function () {
         this.journiesTwo = this.journies.snapshotChanges();
         return this.journiesTwo;
     };
+    //takes in the id of a document as a parameter and deletes it from the collection
     JourneyService.prototype.deleteJourney = function (journeyId) {
         this.journies.doc(journeyId).delete().then(function () {
             alert("Journey Deleted!");
@@ -163,35 +168,39 @@ var JourneyService = /** @class */ (function () {
             alert("Error removing document: " + error);
         });
     };
+    //takes all the parameters for Journey adds them into a Journey object
     JourneyService.prototype.sendJourney = function (startlong, startlat, endlong, endlat, name, startAddress, endAddress) {
-        console.log(startAddress);
-        console.log(endAddress);
-        console.log(startlong + " " + startlat + " " + endlong + " " + endlat);
+        //create object here - imported from Journey.ts
         this.addJourney = {
             startlong: startlong, startlat: startlat, endlong: endlong,
             endlat: endlat, name: name, startloc: startAddress, endloc: endAddress
         };
+        //adds the object as a document to the collection
         this.journies.add(this.addJourney);
     };
-    JourneyService.prototype.userAuthentication = function (name, password) {
+    //CRUD METHODS
+    //AUTHENTICATION METHODS
+    //sign in method
+    //this method takes in an email and password as parameters
+    //asynchronously returns the result
+    //if successful then alert the user of the login 
+    JourneyService.prototype.userAuthentication = function (email, password) {
         return __awaiter(this, void 0, void 0, function () {
             var result, e_1, errorforUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.authentication.auth.signInWithEmailAndPassword(name, password)];
+                        return [4 /*yield*/, this.authentication.auth.signInWithEmailAndPassword(email, password)];
                     case 1:
                         result = _a.sent();
                         if (result) {
                             alert("Login Success!");
-                            console.log(result.user.email);
                         }
                         return [3 /*break*/, 3];
                     case 2:
                         e_1 = _a.sent();
                         errorforUser = e_1.message;
-                        console.error(e_1.message);
                         alert(errorforUser + "\n Login failed");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -199,6 +208,9 @@ var JourneyService = /** @class */ (function () {
             });
         });
     };
+    //register as a user method
+    //this method takes in an email and password as parameters
+    //asynchronously returns the result 
     JourneyService.prototype.userRegister = function (name, password) {
         return __awaiter(this, void 0, void 0, function () {
             var result, e_2, errorforUser;
@@ -216,7 +228,6 @@ var JourneyService = /** @class */ (function () {
                     case 2:
                         e_2 = _a.sent();
                         errorforUser = e_2.message;
-                        console.error(e_2.message);
                         alert(errorforUser + "\n Registration failed");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -224,9 +235,13 @@ var JourneyService = /** @class */ (function () {
             });
         });
     };
+    //useful methods for the app
+    //this allows the app to get the users name and use it to identify who save the Journey
     JourneyService.prototype.getUser = function () {
         return this.authentication.auth.currentUser;
     };
+    //allow a user to logout
+    //will add a red logout button somewhere in the app for this
     JourneyService.prototype.logUserOut = function () {
         return this.authentication.auth.signOut();
     };

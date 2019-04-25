@@ -62,7 +62,7 @@ var DatabasePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <!-- might not be needed -->\r\n  <!-- <ion-button (click)=\"getUserJournies()\">Manage My Journies</ion-button> -->\r\n\r\n  <div id=\"Center\">\r\n    <ion-card *ngFor=\"let info of getData\">\r\n      <ion-card-content *ngIf=\"info.payload.doc._document.proto.fields.name.stringValue == userName\">\r\n        <b>Start of Journey:</b> {{info.payload.doc._document.proto.fields.startloc.stringValue}}\r\n        <br>\r\n        <br>\r\n        <b>End of Journey:</b> {{info.payload.doc._document.proto.fields.endloc.stringValue}}\r\n        <br>\r\n        <ion-button color=\"danger\" (click)=\"deleteJourney(info.payload.doc._document.key.path.segments[6])\">Delete</ion-button>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </div>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  <div id=\"Center\">\r\n    <ion-card *ngFor=\"let info of getData\">\r\n      <ion-card-content *ngIf=\"info.payload.doc._document.proto.fields.name.stringValue == userName\">\r\n        <b>Start of Journey:</b> {{info.payload.doc._document.proto.fields.startloc.stringValue}}\r\n        <br>\r\n        <br>\r\n        <b>End of Journey:</b> {{info.payload.doc._document.proto.fields.endloc.stringValue}}\r\n        <br>\r\n        <ion-button color=\"danger\" (click)=\"deleteJourney(info.payload.doc._document.key.path.segments[6])\">Delete</ion-button>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </div>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatabasePage", function() { return DatabasePage; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -101,28 +100,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
 var DatabasePage = /** @class */ (function () {
-    function DatabasePage(data, router) {
+    function DatabasePage(data) {
         this.data = data;
-        this.router = router;
     }
     DatabasePage.prototype.ngOnInit = function () {
         this.loadDocuments();
     };
+    //loading all the Journey Documents in from the database for the User
     DatabasePage.prototype.loadDocuments = function () {
         var _this = this;
+        //all the information required by the app for mmanagig journies is collected here
+        //onInit and manipulated in the html for the User
         this.user = this.data.getUser();
         this.userName = this.user.email;
         this.data.getJourney().subscribe(function (res) {
             _this.getData = res;
         });
     };
-    DatabasePage.prototype.getUserJournies = function () {
-        this.loadDocuments();
-    };
-    DatabasePage.prototype.deleteJourney = function (x) {
-        this.data.deleteJourney(x);
+    //function that will delete a document from the database based on the id that is passed into
+    //it
+    DatabasePage.prototype.deleteJourney = function (documentId) {
+        this.data.deleteJourney(documentId);
     };
     DatabasePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -130,7 +129,7 @@ var DatabasePage = /** @class */ (function () {
             template: __webpack_require__(/*! ./database.page.html */ "./src/app/database/database.page.html"),
             styles: [__webpack_require__(/*! ./database.page.scss */ "./src/app/database/database.page.scss")]
         }),
-        __metadata("design:paramtypes", [src_app_journey_service__WEBPACK_IMPORTED_MODULE_1__["JourneyService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [src_app_journey_service__WEBPACK_IMPORTED_MODULE_1__["JourneyService"]])
     ], DatabasePage);
     return DatabasePage;
 }());

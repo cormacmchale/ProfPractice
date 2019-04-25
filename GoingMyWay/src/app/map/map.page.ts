@@ -70,7 +70,6 @@ export class MapPage implements OnInit {
             info.payload.doc._document.proto.fields.startlat.doubleValue,
             info.payload.doc._document.proto.fields.startlong.doubleValue,
             info.payload.doc._document.proto.fields.name.stringValue)
-          //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
         } 
       }
       else
@@ -149,6 +148,5 @@ export class MapPage implements OnInit {
       {
         this.markersToShow=res;
       });
-      console.log(this.markersToShow)
   }
 }

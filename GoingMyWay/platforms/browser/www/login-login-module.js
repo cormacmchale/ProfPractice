@@ -62,7 +62,7 @@ var LoginPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-item>\r\n    <ion-label position=\"floating\">E-Mail</ion-label>\r\n    <ion-input [(ngModel)] = \"userName\" ></ion-input>\r\n  </ion-item>\r\n  \r\n  <ion-item>\r\n    <ion-label position=\"floating\">Password</ion-label>\r\n    <ion-input [(ngModel)] = \"eMail\" type=\"password\"></ion-input>\r\n  </ion-item>\r\n  <ion-button (click)=\"login()\">Login</ion-button>\r\n  <ion-button (click)=\"register()\">Register</ion-button>\r\n  <ion-button (click)=\"checkUser()\">Check User</ion-button>\r\n  <ion-button color=\"danger\" (click)=\"logOut()\">Log out</ion-button>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-item>\r\n    <ion-label position=\"floating\">E-Mail</ion-label>\r\n    <ion-input [(ngModel)]=\"userName\"></ion-input>\r\n  </ion-item>\r\n\r\n  <ion-item>\r\n    <ion-label position=\"floating\">Password</ion-label>\r\n    <ion-input [(ngModel)]=\"eMail\" type=\"password\"></ion-input>\r\n  </ion-item>\r\n\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col>\r\n        <div id=\"search\">\r\n          <ion-button (click)=\"login()\" shape=\"round\" fill=\"outline\">Login</ion-button>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col>\r\n        <div id=\"addJourney\">\r\n          <ion-button (click)=\"register()\" shape=\"round\" fill=\"outline\">\r\n            <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n            Register\r\n          </ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n  <br>\r\n  <div id=\"search\">\r\n    <ion-button color=\"danger\" (click)=\"logOut()\" shape=\"round\" fill=\"outline\">Log out</ion-button>\r\n  </div>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"sta
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyJ9 */"
+module.exports = "#search {\n  text-align: center; }\n\n#addJourney {\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vQzpcXFVzZXJzXFxDb3JtYWNcXERlc2t0b3BcXFByb2ZQcmFjdGljZVxcR29pbmdNeVdheS9zcmNcXGFwcFxcbG9naW5cXGxvZ2luLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLGtCQUFrQixFQUFBOztBQUd0QjtFQUVJLGtCQUFrQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvbG9naW4vbG9naW4ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3NlYXJjaCBcclxueyAgICAgXHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBcclxufVxyXG4jYWRkSm91cm5leSBcclxueyAgICAgXHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -103,26 +103,35 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var LoginPage = /** @class */ (function () {
+    //service and router required here
     function LoginPage(signIn, router) {
         this.signIn = signIn;
         this.router = router;
     }
     LoginPage.prototype.ngOnInit = function () {
     };
+    //the login method if it returns true with no error will log the user in
+    //alert them of this and redirect them to the home page
+    //calls methods from service
+    //trying to go back to homepage after login but not working
     LoginPage.prototype.login = function () {
-        this.signIn.userAuthentication(this.userName, this.eMail);
-        //console.log(this.signIn.result)
+        if (this.signIn.userAuthentication(this.userName, this.eMail)) {
+            this.router.navigate(['home']);
+        }
     };
+    //register the same as login with similar error handling but for registering a User
     LoginPage.prototype.register = function () {
         this.signIn.userRegister(this.userName, this.eMail);
     };
+    //allows user to logout - stops connection between user and database
     LoginPage.prototype.logOut = function () {
         this.result = this.signIn.logUserOut();
-        console.log(this.result);
     };
+    //this method can be called to see if anyone is logged in from the current device
+    //result is returned as null if no-one is logged in
+    //can be used whenever needed to get the username
     LoginPage.prototype.checkUser = function () {
         this.result = this.signIn.getUser();
-        console.log(this.result);
         if (!this.result) {
             alert("No one logged in");
         }

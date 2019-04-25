@@ -61,7 +61,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content padding>\r\n\r\n  <div id=\"outerBox\">\r\n    <div id=\"instructions\">\r\n      <p>Welcome to RideShare app</p>\r\n      <p>In order to use the app you need to be registered and logged in</p>\r\n      <p>As soon as you did that you can either search a journey or offer one</p>\r\n      <p>\r\n        In order to plan a journey click at the \"hamburger menu icon\" in the top left corner of the app\r\n        Select the tab: plan a journey.\r\n        Type in the location you are currently in in the search bar.\r\n        Press search button.\r\n        Keep pressing the marker and drag it to your destinantion\r\n        Press the \"Add This Journey\" button at the top right\r\n        Congratulations you've just added a journey :)\r\n      </p>\r\n      <p>\r\n        In order to view all the journeys go to the side menu\r\n        Click the tab \"Map\"\r\n        Click \"Show Journies\" button at the top right\r\n        Markers with all the journeys available will appear in the <map name=\"\"></map>\r\n      </p>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n\r\n  <div id=\"outerBox\">\r\n    <div id=\"instructions\">\r\n      <h1>Welcome to RideShare</h1>\r\n      <p>\r\n      A car pool inspired App!\r\n      Once you have registered an account with us you can see the Journeys that other Users are going to take.\r\n      You can also plan your own Journeys for others to see. Go to the Manage Journies section of the app to remove any Journeys you have added.\r\n      </p>\r\n      <h2>Enjoy!</h2>\r\n\r\n    </div>\r\n  </div>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -72,7 +72,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"sta
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#outerBox {\n  width: 100%;\n  height: 100%;\n  background-attachment: fixed;\n  background: url('roadsmall.jpg'); }\n\n#instructions {\n  margin: auto;\n  width: 65%;\n  height: 80%;\n  border: 3px solid dodgerblue;\n  padding: 10px;\n  text-align: center;\n  align-content: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9DOlxcVXNlcnNcXENvcm1hY1xcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxob21lXFxob21lLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osNEJBQTRCO0VBQzVCLGdDQUEwQyxFQUFBOztBQUU1QztFQUNFLFlBQVk7RUFDWixVQUFVO0VBQ1YsV0FBVztFQUNYLDRCQUE0QjtFQUM1QixhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLHFCQUFxQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNvdXRlckJveHtcclxuICB3aWR0aDogMTAwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgYmFja2dyb3VuZC1hdHRhY2htZW50OiBmaXhlZDtcclxuICBiYWNrZ3JvdW5kOiB1cmwoJy4uL2Fzc2V0cy9yb2Fkc21hbGwuanBnJyk7ICAgIFxyXG59ICAgIFxyXG4jaW5zdHJ1Y3Rpb25ze1xyXG4gIG1hcmdpbjogYXV0bztcclxuICB3aWR0aDogNjUlO1xyXG4gIGhlaWdodDogODAlO1xyXG4gIGJvcmRlcjogM3B4IHNvbGlkIGRvZGdlcmJsdWU7XHJcbiAgcGFkZGluZzogMTBweDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgYWxpZ24tY29udGVudDogY2VudGVyO1xyXG59Il19 */"
+module.exports = "#outerBox {\n  width: 100%;\n  height: 100%;\n  background: url('homePage.jpg') no-repeat;\n  background-position: 47.5%; }\n\n#instructions {\n  padding: 10px;\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9DOlxcVXNlcnNcXENvcm1hY1xcRGVza3RvcFxcUHJvZlByYWN0aWNlXFxHb2luZ015V2F5L3NyY1xcYXBwXFxob21lXFxob21lLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1oseUNBQW1EO0VBQ25ELDBCQUEwQixFQUFBOztBQUU1QjtFQUNFLGFBQWE7RUFDYixrQkFBa0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjb3V0ZXJCb3h7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG4gIGJhY2tncm91bmQ6IHVybCgnLi4vYXNzZXRzL2hvbWVQYWdlLmpwZycpIG5vLXJlcGVhdDtcclxuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiA0Ny41JTtcclxufSAgICBcclxuI2luc3RydWN0aW9uc3tcclxuICBwYWRkaW5nOiAxMHB4O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -87,7 +87,6 @@ module.exports = "#outerBox {\n  width: 100%;\n  height: 100%;\n  background-att
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -98,28 +97,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var HomePage = /** @class */ (function () {
-    function HomePage(router) {
-        this.router = router;
+    function HomePage() {
     }
-    //add methods here
-    HomePage.prototype.visitMapPage = function () {
-        this.router.navigate(['map']);
-    };
-    HomePage.prototype.navigateJourneyPlanner = function () {
-        this.router.navigate(['journey-planner']);
-    };
-    HomePage.prototype.navigateTestGeolocation = function () {
-        this.router.navigate(['test-geolocation']);
-    };
     HomePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-home',
             template: __webpack_require__(/*! ./home.page.html */ "./src/app/home/home.page.html"),
             styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/home/home.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [])
     ], HomePage);
     return HomePage;
 }());

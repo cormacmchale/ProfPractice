@@ -1,19 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JourneyService } from 'src/app/journey.service';
 import { Router } from '@angular/router';
-import { Geocoder, GeocoderResult } from '@ionic-native/google-maps/ngx';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker,
-  Environment,
-  ILatLng
-} from '@ionic-native/google-maps';
-import { ArrayType } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-database',
   templateUrl: './database.page.html',
@@ -21,25 +8,31 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
 })
 export class DatabasePage implements OnInit {
 
-  constructor(private data: JourneyService, private router: Router) { }
-  getData: any[];
+  constructor(private data: JourneyService) { }
+  //variables required by this page
+  //Journeys from database stored
+  getData: any[]
+  //these variables are used to distinguish what user is using the app at the moment
   user: any
   userName: string
+
   ngOnInit() {
     this.loadDocuments();
   }
 
+  //loading all the Journey Documents in from the database for the User
   loadDocuments() {
+    //all the information required by the app for mmanagig journies is collected here
+    //onInit and manipulated in the html for the User
     this.user = this.data.getUser();
     this.userName = this.user.email
     this.data.getJourney().subscribe(res => {
       this.getData = res
     });
   }
-  getUserJournies() {
-    this.loadDocuments();
-  }
-  deleteJourney(x: string) {
-    this.data.deleteJourney(x)
+  //function that will delete a document from the database based on the id that is passed into
+  //it
+  deleteJourney(documentId: string) {
+    this.data.deleteJourney(documentId)
   }
 }
