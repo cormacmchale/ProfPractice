@@ -17,12 +17,13 @@ export class DatabasePage implements OnInit {
   userName: string
 
   ngOnInit() {
+    //get the Journey documnet from the database first
     this.loadDocuments();
   }
 
   //loading all the Journey Documents in from the database for the User
   loadDocuments() {
-    //all the information required by the app for mmanagig journies is collected here
+    //all the information required by the app for mmanaging journies is collected here
     //onInit and manipulated in the html for the User
     this.user = this.data.getUser();
     this.userName = this.user.email

@@ -33,10 +33,11 @@ export class JourneyPlannerPage implements OnInit {
   constructor(private router: Router, private journeyService: JourneyService) { }
 
   ngOnInit() {
+    //first thing the page must do is load the app in for the User
     this.loadMap();
   }
 
-  //loads the map above ireland - will be changes in future builds for improved functionality
+  //loads the Google map above ireland - will be changes in future builds for improved functionality
   loadMap() {
     let mapOptions: GoogleMapOptions = {
       camera: {
