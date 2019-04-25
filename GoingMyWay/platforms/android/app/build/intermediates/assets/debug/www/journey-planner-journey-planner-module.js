@@ -62,7 +62,7 @@ var JourneyPlannerPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n    <div id=\"location\">\r\n        <ion-input [(ngModel)]=\"search_address\" placeholder=\"Search location:\"></ion-input>\r\n      </div>\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col>\r\n      <div id=\"search\">\r\n        <ion-button (click)=\"search(search_address)\" shape=\"round\" fill=\"outline\">search</ion-button>\r\n      </div>\r\n      </ion-col>\r\n      <ion-col>\r\n      <div id=\"addJourney\">\r\n        <ion-button (click)=\"addJourneyToDatabase()\" shape=\"round\" fill=\"outline\">\r\n          <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n          Add\r\n        </ion-button>\r\n      </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Going My Way/RideShare\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div id=\"location\">\r\n    <ion-input [(ngModel)]=\"search_address\" placeholder=\"Search location:\"></ion-input>\r\n  </div>\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col>\r\n        <div id=\"search\">\r\n          <ion-button (click)=\"search(search_address)\" shape=\"round\" fill=\"outline\">search</ion-button>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col>\r\n        <div id=\"addJourney\">\r\n          <ion-button (click)=\"addJourneyToDatabase()\" shape=\"round\" fill=\"outline\">\r\n            <ion-icon slot=\"start\" name=\"locate\"></ion-icon>\r\n            Add\r\n          </ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <div id=\"myMap\"></div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -92,7 +92,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -107,17 +106,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-//hopefully will be used to fix async geodoing error
-
 var JourneyPlannerPage = /** @class */ (function () {
-    function JourneyPlannerPage(router, journeyService, alertController) {
+    function JourneyPlannerPage(router, journeyService) {
         this.router = router;
         this.journeyService = journeyService;
-        this.alertController = alertController;
     }
     JourneyPlannerPage.prototype.ngOnInit = function () {
+        //first thing the page must do is load the app in for the User
         this.loadMap();
     };
+    //loads the Google map above ireland - will be changes in future builds for improved functionality
     JourneyPlannerPage.prototype.loadMap = function () {
         var mapOptions = {
             camera: {
@@ -130,25 +128,21 @@ var JourneyPlannerPage = /** @class */ (function () {
             }
         };
         this.map = _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_0__["GoogleMaps"].create('myMap', mapOptions);
-    }; //loadMap()
-    JourneyPlannerPage.prototype.visitMapPage = function () {
-        this.router.navigate(['map']);
-    };
-    JourneyPlannerPage.prototype.navigateJourneyPlanner = function () {
-        this.router.navigate(['journey-planner']);
     };
     JourneyPlannerPage.prototype.search = function (location) {
         var _this = this;
+        //clear the markers from the Map if the user decides to do a second search
+        //so as not to confuse the data that will be sent to the database
         this.map.clear();
-        console.log(location);
+        //the location typed in by the User is converted to latlng co-ordinates by the Geocoder Object
+        //the map is then sent to focus on this location
+        //the user is then given two markers to drag to a start location and end location
         _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_3__["Geocoder"].geocode({
             "address": location
         })
             .then(function (results) {
-            console.log(results[0].position);
             _this.map.setCameraTarget(results[0].position);
             _this.map.setCameraZoom(10);
-            var mark = results[0].position.lat;
             _this.endJourney = _this.map.addMarkerSync({
                 title: "End Journey",
                 icon: 'Red',
@@ -163,24 +157,27 @@ var JourneyPlannerPage = /** @class */ (function () {
             });
         });
     };
+    //this is the beginning of the largest set of function calls in the app
+    //its setup in a cascading way as to handle the asynchrounous nature of the Geocoding
     JourneyPlannerPage.prototype.addJourneyToDatabase = function () {
+        //first check that someone is logged in
+        //if not found then alert the User as a user is required for a Journey
         if (!this.journeyService.getUser()) {
             alert("Please Log in to add a Journey");
         }
         else {
+            //first gather the required information from the user that is logged on from the device
             var user = this.journeyService.getUser();
             var userName = user.email;
+            //get the positions of where they have dragged the start and end of journey markers
             this.start = this.startJourney.getPosition();
             this.end = this.endJourney.getPosition();
+            //all this information is passed here for formatting to be sent to that database as a document
             this.getJourneyInformation(this.start.lat, this.start.lng, this.end.lat, this.end.lng, userName);
-            //this.showPosition(this.start.lng, this.start.lat, this.end.lng, this.end.lat, userName)
         }
     };
-    JourneyPlannerPage.prototype.addToDataBase = function (x1, y1, x2, y2, user, startLoc, endLoc) {
-        this.journeyService.sendJourney(x1, y1, x2, y2, user, startLoc, endLoc);
-        alert("Journey added!");
-        this.router.navigate(['home']);
-    };
+    //this function reverse Geocodes a latlng for the start address
+    //this information is used to delete a Journey in the databasePage
     JourneyPlannerPage.prototype.getJourneyInformation = function (x, y, x2, y2, user) {
         var _this = this;
         var waitForAddress = null;
@@ -190,15 +187,17 @@ var JourneyPlannerPage = /** @class */ (function () {
                 "lat": x,
                 "lng": y
             }
+            //this is asynchronous so all of the information must be handled here for consistancy
         }).then(function (results) {
-            console.log(results);
             checkAddress = results[0].extra.lines;
             waitForAddress =
                 checkAddress[0] + ", " + checkAddress[1] + ", " + checkAddress[2]
                     + ", " + checkAddress[3] + ", " + checkAddress[4];
+            //the same logic is then used to geocode the end address
             _this.finishGetJourneyInformation(x, y, x2, y2, user, waitForAddress);
         });
     };
+    //the same as the above function for the other street addess of the end loaction
     JourneyPlannerPage.prototype.finishGetJourneyInformation = function (x, y, x2, y2, user, startLoc) {
         var _this = this;
         var waitForAddress = null;
@@ -209,7 +208,6 @@ var JourneyPlannerPage = /** @class */ (function () {
                 "lng": y2
             }
         }).then(function (results) {
-            console.log(results);
             checkAddress = results[0].extra.lines;
             waitForAddress =
                 checkAddress[0] + ", " + checkAddress[1] + ", " + checkAddress[2]
@@ -217,13 +215,21 @@ var JourneyPlannerPage = /** @class */ (function () {
             _this.addToDataBase(y, x, y2, x2, user, startLoc, waitForAddress);
         });
     };
+    //finally after the street addresses have been obtained from the co-ordinates of where the markers are then
+    //send all of the information to the service to be stored on firebase as a document
+    JourneyPlannerPage.prototype.addToDataBase = function (x1, y1, x2, y2, user, startLoc, endLoc) {
+        this.journeyService.sendJourney(x1, y1, x2, y2, user, startLoc, endLoc);
+        //alert the user and return them to the homepage
+        alert("Journey added!");
+        this.router.navigate(['home']);
+    };
     JourneyPlannerPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-journey-planner',
             template: __webpack_require__(/*! ./journey-planner.page.html */ "./src/app/journey-planner/journey-planner.page.html"),
             styles: [__webpack_require__(/*! ./journey-planner.page.scss */ "./src/app/journey-planner/journey-planner.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__["JourneyService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_journey_service__WEBPACK_IMPORTED_MODULE_4__["JourneyService"]])
     ], JourneyPlannerPage);
     return JourneyPlannerPage;
 }());

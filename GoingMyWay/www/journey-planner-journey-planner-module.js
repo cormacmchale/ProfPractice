@@ -112,9 +112,10 @@ var JourneyPlannerPage = /** @class */ (function () {
         this.journeyService = journeyService;
     }
     JourneyPlannerPage.prototype.ngOnInit = function () {
+        //first thing the page must do is load the app in for the User
         this.loadMap();
     };
-    //loads the map above ireland - will be changes in future builds for improved functionality
+    //loads the Google map above ireland - will be changes in future builds for improved functionality
     JourneyPlannerPage.prototype.loadMap = function () {
         var mapOptions = {
             camera: {

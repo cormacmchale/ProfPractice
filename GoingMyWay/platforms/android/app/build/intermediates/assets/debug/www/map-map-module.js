@@ -90,8 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
 /* harmony import */ var src_app_journey_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/journey.service */ "./src/app/journey.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -105,18 +104,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var MapPage = /** @class */ (function () {
-    function MapPage(journies, router, geo) {
-        this.journies = journies;
-        this.router = router;
+    function MapPage(Journey, geo) {
+        this.Journey = Journey;
         this.geo = geo;
     }
     MapPage.prototype.ngOnInit = function () {
+        //first get the Journey documents from the database
         this.loadDocuments();
+        //get the location of the device
         this.findUser();
     };
-    //find the users current position and then pass these
+    //find the users current position and then pass these into the load map function
+    //this will error handle the wait time for getting the users position
+    //log an error if neccessary
     MapPage.prototype.findUser = function () {
         var _this = this;
         this.geo.getCurrentPosition().then(function (resp) {
@@ -125,6 +126,7 @@ var MapPage = /** @class */ (function () {
             console.log('Error getting location', error);
         });
     };
+    //load map waits for the Geolcation of the user and then centers the map on that location
     MapPage.prototype.loadMap = function (lat, lng) {
         var mapOptions = {
             camera: {
@@ -136,33 +138,39 @@ var MapPage = /** @class */ (function () {
                 tilt: 30
             }
         };
+        //create the map for the view
         this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('myMap', mapOptions);
-    }; //loadMap()
+    };
     MapPage.prototype.showJournies = function () {
-        if (!this.journies.getUser()) {
+        //first check for a user
+        if (!this.Journey.getUser()) {
             alert("Please Log in to view Journies");
         }
+        //if a valid user is found
         else {
-            //this.loadDocuments();
             if (this.markersToShow != null) {
-                console.log(this.markersToShow);
                 for (var _i = 0, _a = this.markersToShow; _i < _a.length; _i++) {
                     var info = _a[_i];
+                    //loop through all of the documents from the database
+                    //and one by one paint the Journeys from the database onto the map for the user
+                    //by adding the required information from the document into the function to do so
                     this.addMarkerFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue, info.payload.doc._document.proto.fields.endlong.doubleValue, info.payload.doc._document.proto.fields.startlat.doubleValue, info.payload.doc._document.proto.fields.startlong.doubleValue, info.payload.doc._document.proto.fields.name.stringValue);
-                    //this.addPolylinesFromDatabase(info.payload.doc._document.proto.fields.endlat.doubleValue,info.payload.doc._document.proto.fields.endlong.doubleValue,info.payload.doc._document.proto.fields.startlat.doubleValue,info.payload.doc._document.proto.fields.startlong.doubleValue);
                 }
             }
+            //if empty
             else {
-                console.log("No Data");
+                alert("No Journeys in Database");
             }
         }
     };
     //add markers from database
     MapPage.prototype.addMarkerFromDatabase = function (x, y, x1, y1, title) {
+        //initially this get a random vaild RGB colour based on the unique co-ordinates of the Journey
         var r = this.convertRgb(x);
         var g = this.convertRgb(y);
         var b = this.convertRgb(x1);
-        //adding different logic
+        //add the markers to the map
+        //title is name of the user who added the Journey so the other Users can see who is driving
         var startMarker = this.map.addMarkerSync({
             title: title,
             icon: 'rgb(' + r + ',' + g + ',' + b + ')',
@@ -172,7 +180,9 @@ var MapPage = /** @class */ (function () {
                 lng: y
             }
         });
+        //this allows the title to be viewed
         startMarker.showInfoWindow();
+        //add the end point of the journey
         var endMarker = this.map.addMarkerSync({
             title: title,
             icon: 'rgb(' + r + ',' + g + ',' + b + ')',
@@ -185,10 +195,12 @@ var MapPage = /** @class */ (function () {
         endMarker.showInfoWindow();
         var pointA = startMarker.getPosition();
         var pointB = endMarker.getPosition();
+        //add a polyline between these two points to distinguish Journeys on the view
         this.map.addPolyline({
             points: [pointA, pointB]
         });
     };
+    //function that returns a valid rgb value based on latlng
     MapPage.prototype.convertRgb = function (x) {
         //keep in range
         if (x < 0) {
@@ -203,18 +215,13 @@ var MapPage = /** @class */ (function () {
         }
         return x;
     };
-    MapPage.prototype.visitMapPage = function () {
-        this.router.navigate(['map']);
-    };
-    MapPage.prototype.navigateJourneyPlanner = function () {
-        this.router.navigate(['journey-planner']);
-    };
+    //retrieves the information from the database
+    //and stores it into an array for manipulation
     MapPage.prototype.loadDocuments = function () {
         var _this = this;
-        this.journies.getJourney().subscribe(function (res) {
+        this.Journey.getJourney().subscribe(function (res) {
             _this.markersToShow = res;
         });
-        console.log(this.markersToShow);
     };
     MapPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -222,7 +229,7 @@ var MapPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./map.page.html */ "./src/app/map/map.page.html"),
             styles: [__webpack_require__(/*! ./map.page.scss */ "./src/app/map/map.page.scss")]
         }),
-        __metadata("design:paramtypes", [src_app_journey_service__WEBPACK_IMPORTED_MODULE_2__["JourneyService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"]])
+        __metadata("design:paramtypes", [src_app_journey_service__WEBPACK_IMPORTED_MODULE_2__["JourneyService"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"]])
     ], MapPage);
     return MapPage;
 }());
