@@ -37,6 +37,7 @@ By this, we mean an app that would look nice and be user friendly at the same ti
 <h3>Installation</h3>
 Download and install the APK (Android Package) file to your phone. 
 Here are the screenshots of steps you might need to follow:
+
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/1.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/2.png)
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/3.png)
