@@ -1,11 +1,13 @@
 # ProfPractice
-<h3>Introduction</h3>
-An ionic App
-Ridesharing application.
 
+<h3>Introduction</h3>
+RideShare/GoingMyWay - a ridesharing application.
 <p>Originally, the idea was to create an application out of a website www.blablacar.ru but to make it more visually appealing and interactive.
 By this, we mean an app that would look nice and be user friendly at the same time.  </p>
 <p>It was decided that Ionic framework would suit the best to bring the idea to life. It was decided to write a cross-platfrom, hybrid application and ionic perfectly suited for purpose. We tried to make it as close as possible to a CRUD (create-read-update-delete) application. One of the main goals while trying to use the latest modern technologies was to build a set of skills. </p>
+
+<h3>Description</h3>
+Application allows to offer a  journey in the add journey section and view all the journeys offered in the map section. Consequently, 2 or more users can cooperate and plan a journey together if they agree on source and target destination as well as date and time(and probably even finance). A user can also delete journeys if a journey is completed or cancelled in manage journeys section.
 
 <h3>Technologies used:</h3>
 <details>
@@ -45,5 +47,19 @@ Here are the screenshots of steps you might need to follow:
 ![](https://github.com/cormacmchale/ProfPractice/blob/master/WikiImages/5.png)
 <h3>API Reference</h3>
 link: https://developers.google.com/maps/documentation/javascript/get-api-key
+
 <h3>How to use the app</h3>
-Please follow the link to wiki 
+Please follow the link to wiki:
+https://github.com/cormacmchale/ProfPractice/wiki
+
+<h3>Bugs and Issues</h3>
+Please follow the link to issues:https://github.com/cormacmchale/ProfPractice/issues
+
+<h3>Future Improvement</h3>
+Things that can be added in future:
+<p>date and time of the journey</p>
+<p>price of the journey</p>
+<p>number of seats available</p>
+<p>email verification</p>
+<p>drivers feedback</p>
+<p>chat</p>
