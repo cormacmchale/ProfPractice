@@ -22,8 +22,8 @@ export class LoginPage implements OnInit {
   //alert them of this and redirect them to the home page
   //calls methods from service
   //trying to go back to homepage after login but not working
-  async login() {
-    if (await this.signIn.userAuthentication(this.userName, this.eMail))
+  login() {
+    if (this.signIn.userAuthentication(this.userName, this.eMail))
     {
       this.router.navigate(['home']);
     }
